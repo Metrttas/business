@@ -1,10 +1,11 @@
 # Gig 4 – KI-Chatbot für Websites
 
 > **Für dich (Deutsch):** Ich baue ein Chat-Fenster für die Website des Kunden plus einen kleinen
-> Server, der eine KI (z. B. die Claude-API) fragt. Die KI-Kosten pro Nachricht zahlt der Kunde
-> über seinen eigenen API-Key. Das steht so auch in der FAQ.
-> **Basic** ist ein FAQ-Bot ohne KI, also ohne laufende Kosten für den Kunden. So einer läuft in
-> der Demo `portfolio/demos/ironleaf-fitness-chatbot/`.
+> Server, der eine KI (z. B. Claude, GPT oder Gemini) fragt. **Für dich entstehen keine laufenden
+> Kosten:** Der Kunde legt sein eigenes KI-Konto an und zahlt die Nutzung selbst (meist ein paar
+> Dollar im Monat). Der Server läuft kostenlos auf einem Cloudflare-Konto **des Kunden**. Das steht
+> so auch in der FAQ. Die Demo `portfolio/demos/ironleaf-fitness-chatbot/` nutzt feste Antworten
+> statt KI.
 
 **Kategorie:** `Programming & Tech` → `AI Development`
 > Falls es weiter unten in der Liste etwas mit „Chatbot“ oder „AI Agents“ gibt, nimm das. Sonst gilt die Auswahl unten.
@@ -39,18 +40,33 @@ ai chatbot, website chatbot, customer support bot, lead generation, chatbot deve
 
 | | Basic | Standard | Premium |
 |---|---|---|---|
-| **Name** | FAQ Bot | AI Assistant | AI Sales Assistant |
-| **Beschreibung** | Branded chat widget with up to 20 FAQ answers. No AI costs. Installed on your site. | AI chatbot trained on your website/FAQ content, branded widget, installed on your site. | AI Assistant + lead capture (name/email) sent to your email or Google Sheets, booking link handoff. |
+| **Name** | AI FAQ Bot | AI Assistant | AI Sales Assistant |
+| **Beschreibung** | AI chat widget that answers from up to 20 of your FAQs. Branded and installed on your site. | AI chatbot trained on your website/FAQ content, branded widget, installed on your site. | AI Assistant + lead capture (name/email) sent to your email or Google Sheets, booking link handoff. |
 | **Lieferzeit** | 3 Tage | 5 Tage | 7 Tage |
 | **Revisionen** | 2 | 3 | 4 |
 | **Preis (Start)** | $99 | $249 | $449 |
 | **Eigenes Design** | ✔ | ✔ | ✔ |
-| **Antwortet mit KI** | – | ✔ | ✔ |
+| **Antwortet mit KI** | ✔ | ✔ | ✔ |
 | **Lernt aus deinen Inhalten** | FAQ-Liste | ✔ | ✔ |
 | **Erfasst Leads** | – | – | ✔ |
 | **Installation auf der Website** | ✔ | ✔ | ✔ |
 
 > Nach 5–10 guten Bewertungen erhöhen auf ca. $199 / $449 / $799.
+
+### Fiverr-Pakettabelle (Häkchen und Auswahlfelder)
+| Feld | Basic | Standard | Premium |
+|---|---|---|---|
+| AI LLM model integration | ✔ | ✔ | ✔ |
+| Retrieval-Augmented Generation (RAG) | – | ✔ | ✔ |
+| Pre-set conversational journey | – | – | ✔ |
+| Integration with CRM / database | – | – | ✔ |
+| User authentication | – | – | – |
+| Multi-language support | – | ✔ | ✔ |
+| Source Code | ✔ | ✔ | ✔ |
+| Revisions | 2 | 3 | 4 |
+
+„RAG“ heißt: Der Bot liest die Inhalte der Kunden-Website und antwortet daraus. „Pre-set conversational journey“
+ist der feste Ablauf zur Lead-Erfassung (Name → E-Mail → Wunschtermin) aus Premium.
 
 ### Beschreibung (max. 1.200 Zeichen)
 ```
@@ -79,13 +95,13 @@ Try the live chatbot demo in my portfolio. Message me before ordering if you hav
 ### FAQ
 ```
 Q: Are there monthly costs?
-A: The FAQ Bot has none. AI bots use an AI provider that charges per message, usually a few dollars a month for a small business. You create the account and the cost goes to your own card, so you stay in full control.
+A: The bot uses an AI provider (Claude, OpenAI or Gemini) that charges per message, usually a few dollars a month for a small business. You create the account and the cost goes to your own card, so you stay in full control. Hosting runs on a free plan in your own account.
 
 Q: Can the bot give wrong answers?
 A: I limit the AI to your own information and tell it to offer contact with a human when unsure. We test it together before launch.
 
 Q: Which languages does it speak?
-A: The AI bots answer in your customers' language automatically. The FAQ Bot is set up in one language (more languages are available as an extra).
+A: The bot answers in your customers' language automatically. Your FAQ only needs to be in one language.
 
 Q: Does it work with WordPress, Shopify or Wix?
 A: Yes. The widget is one small code snippet that works on almost any website.
@@ -108,11 +124,11 @@ A: To your email, or to a Google Sheet (Premium). Other tools are available on r
 | Extra (Englisch, zum Kopieren) | Was es ist | Preis | Lieferzeit |
 |---|---|---|---|
 | 10 extra FAQ answers | 10 zusätzliche FAQ-Antworten | +$30 | +1 Tag |
-| Additional language for the FAQ bot | Zusätzliche Sprache (FAQ Bot) | +$40 | +1 Tag |
+| Lead capture (name and email sent to you) | Lead-Erfassung für Basic/Standard | +$80 | +2 Tage |
 | 1 month of bot maintenance and answer tuning | Ein Monat Pflege und Antworten verbessern | $49 | keine |
 
 ---
 
 ## Was du tun musst / was ich tue
-- **Du:** Infos vom Kunden holen, den Server einmal einrichten (z. B. Cloudflare oder Vercel, kostenlos) nach meiner Anleitung, das Snippet einbauen bzw. dem Kunden schicken.
+- **Du:** Infos vom Kunden holen. Der Kunde legt ein KI-Konto (API-Key) und ein kostenloses Cloudflare-Konto an, du richtest dort nach meiner Anleitung den Server ein und baust das Snippet ein bzw. schickst es dem Kunden. Für dich: 0 € laufende Kosten.
 - **Ich:** Widget-Code, Server-Code, Bot-Anweisungen (Prompt), FAQ-Wissen, Anleitung, Tests, alle Nachrichten.
