@@ -11,10 +11,11 @@
 
 **Service type & Metadaten** (genaue Namen können leicht abweichen, nimm das Ähnlichste):
 - Service type: **AI Integrations** (wir bauen einen KI-Chatbot in eine bestehende Website ein). Nicht „AI Technology Consulting“, „Custom GPT Apps“ oder „AI Mobile Apps“.
-- Plattform / Kanal: **Website** (Webchat). Nicht WhatsApp, Messenger, Telegram oder Discord, das bieten wir (noch) nicht an.
-- Bot-Zweck / Type: Customer Support, FAQ, Lead Generation
-- Technical expertise (falls gefragt): Claude / Anthropic, OpenAI API, JavaScript, Node.js, Prompt Engineering, API Integration. Nur auswählen, was in der Liste steht.
-- Programming language: JavaScript, Node.js (falls gelistet), HTML, CSS. Nichts ankreuzen, was wir nicht nutzen (z. B. PHP).
+- AI engine: **Claude.ai, Open AI GPT, Gemini**. Nicht Bild-KIs (DALL·E, MidJourney, Stable Diffusion), Sprach-Bots (Vapi, Retell) oder ManyChat.
+- Tools & frameworks: Node.js, REST API / API Integration, Vercel oder Cloudflare Workers (was davon in der Liste steht)
+- Bot type: Customer Support, FAQ, Lead Generation (Text-Chat, keine Voice-Bots)
+- Platforms: Website, dazu WordPress, Shopify, Wix, Webflow, falls gelistet (das Widget läuft dort überall). Nicht WhatsApp, Messenger, Telegram oder Discord.
+- Programming language: **JavaScript** (dazu TypeScript oder Node.js, falls gelistet). Nicht PHP, Java, C++ usw.
 - Industry (bis zu 8): E-Commerce, Health & Wellness, Fitness, Beauty, Real Estate, Education, Marketing, Hospitality / Restaurants (oder das Ähnlichste aus der Liste)
 
 **Galerie-Bilder:** `fiverr/gig-bilder/04-ai-chatbot-*.png`
