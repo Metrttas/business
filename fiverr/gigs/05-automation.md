@@ -102,11 +102,11 @@ A: Most apps with an API or webhooks can be connected. Message me the app name a
 ```
 
 ### Gig Extras
-| Extra | Preis | Lieferzeit |
-|---|---|---|
-| Zusätzlicher Workflow | +$60 | +1 Tag |
-| KI-Schritt (Klassifizieren, Zusammenfassen, Antworten) | +$50 | +1 Tag |
-| Monatliche Wartung/Überwachung | $49 | – |
+| Extra (Englisch, zum Kopieren) | Was es ist | Preis | Lieferzeit |
+|---|---|---|---|
+| Additional workflow | Zusätzlicher Workflow | +$60 | +1 Tag |
+| AI step (classify, summarize or reply) | KI-Schritt | +$50 | +1 Tag |
+| 1 month of monitoring and maintenance | Ein Monat Überwachung und Wartung | $49 | keine |
 
 ---
 

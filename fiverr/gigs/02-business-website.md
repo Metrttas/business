@@ -122,13 +122,13 @@ A: Standard and Premium include SEO basics (titles, descriptions, sitemap, speed
 ```
 
 ### Gig Extras
-| Extra | Preis | Lieferzeit |
-|---|---|---|
-| Zusätzliche Seite | +$40 | +1 Tag |
-| Extra-schnelle Lieferung | +$80 | –2 Tage |
-| Texte schreiben (für Basic/Standard) | +$90 | +2 Tage |
-| Zweite Sprache | +$80 | +2 Tage |
-| Monatliche Pflege (Änderungen, bis 2 h/Monat) | $59 | – |
+| Extra (Englisch, zum Kopieren) | Was es ist | Preis | Lieferzeit |
+|---|---|---|---|
+| Extra fast delivery | Fiverr-eigene Option „Extra fast delivery“, pro Paket | +$80 | 2 Tage schneller |
+| Additional page | Zusätzliche Seite | +$40 | +1 Tag |
+| Copywriting for all pages | Texte schreiben (für Basic/Standard) | +$90 | +2 Tage |
+| Second language version | Zweite Sprache | +$80 | +2 Tage |
+| 1 month of maintenance (up to 2 hours of edits) | Ein Monat Pflege | $59 | keine |
 
 ---
 

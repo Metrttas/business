@@ -125,12 +125,12 @@ A: Launch and Pro include payment and shipping setup. Things only you can do, li
 ```
 
 ### Gig Extras
-| Extra | Preis | Lieferzeit |
-|---|---|---|
-| +10 Produkte hochladen | +$30 | +1 Tag |
-| Produkttexte (pro 10 Produkte) | +$40 | +1 Tag |
-| Extra-schnelle Lieferung | +$60 | –2 Tage |
-| Logo-Text-Wortmarke | +$40 | +1 Tag |
+| Extra (Englisch, zum Kopieren) | Was es ist | Preis | Lieferzeit |
+|---|---|---|---|
+| Extra fast delivery | Fiverr-eigene Option „Extra fast delivery“, pro Paket | +$60 | 2 Tage schneller |
+| Upload 10 more products | +10 Produkte hochladen | +$30 | +1 Tag |
+| Product descriptions for 10 products | Produkttexte für 10 Produkte | +$40 | +1 Tag |
+| Simple text logo (wordmark) | Einfaches Schriftzug-Logo | +$40 | +1 Tag |
 
 ---
 

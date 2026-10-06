@@ -104,11 +104,11 @@ A: To your email, or to a Google Sheet (Premium). Other tools are available on r
 ```
 
 ### Gig Extras
-| Extra | Preis | Lieferzeit |
-|---|---|---|
-| Zusätzliche Sprache (FAQ Bot) | +$40 | +1 Tag |
-| Installation in WordPress/Shopify durch mich | +$30 | – |
-| Monatliche Pflege und Optimierung der Antworten | $49 | – |
+| Extra (Englisch, zum Kopieren) | Was es ist | Preis | Lieferzeit |
+|---|---|---|---|
+| 10 extra FAQ answers | 10 zusätzliche FAQ-Antworten | +$30 | +1 Tag |
+| Additional language for the FAQ bot | Zusätzliche Sprache (FAQ Bot) | +$40 | +1 Tag |
+| 1 month of bot maintenance and answer tuning | Ein Monat Pflege und Antworten verbessern | $49 | keine |
 
 ---
 

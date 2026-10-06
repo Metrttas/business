@@ -123,12 +123,12 @@ A: Your goal, logo, brand colors, and any text or images you have. If something 
 ```
 
 ### Gig Extras
-| Extra | Preis | Lieferzeit |
-|---|---|---|
-| Extra-schnelle Lieferung | +$50 | –2 Tage |
-| Zusätzliche Sektion | +$25 | +1 Tag |
-| Texte schreiben (für Basic/Standard) | +$60 | +1 Tag |
-| Monatliche Pflege (Änderungen, bis 1 h/Monat) | $39 | – |
+| Extra (Englisch, zum Kopieren) | Was es ist | Preis | Lieferzeit |
+|---|---|---|---|
+| Extra fast delivery | Fiverr-eigene Option „Extra fast delivery“, pro Paket | +$50 | 2 Tage schneller |
+| Additional section | Zusätzliche Sektion | +$25 | +1 Tag |
+| Copywriting for your page | Texte schreiben (für Basic/Standard) | +$60 | +1 Tag |
+| 1 month of maintenance (up to 1 hour of edits) | Ein Monat Pflege | $39 | keine |
 
 ---
 
