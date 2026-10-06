@@ -9,6 +9,14 @@
 
 **Kategorie:** `Programming & Tech` → `Website Development`. Wenn nach einer Plattform gefragt wird: Shopify.
 > Schlägt Fiverr bei diesem Titel eine eigene E-Commerce-/Shopify-Unterkategorie vor, nimm die.
+
+**Service type & Metadaten** (genaue Namen können leicht abweichen, nimm das Ähnlichste):
+- Service type: neuen Shop aufsetzen („Full Website Creation“ / „E-Commerce Store“), nicht Bug Fixes oder Migration
+- Plattform (falls gefragt): **Shopify**
+- Website type (nur 1 erlaubt): **E-Commerce / Online Store**
+- Website features: Payment, Shopping Cart, Product Catalog / Product Upload, Contact Form, Email Signup
+- Industry: Fashion & Apparel, Beauty & Cosmetics, Food & Beverage, Home & Garden, Jewelry, Pets, Health & Wellness
+
 **Galerie-Bilder:** `fiverr/gig-bilder/03-shopify-store-*.png`
 **Demo:** `portfolio/demos/saltgrain-bakery-shop/` (Design-Konzept, kein echter Shopify-Shop)
 

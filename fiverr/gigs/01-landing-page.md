@@ -5,6 +5,13 @@
 
 **Kategorie:** `Programming & Tech` → `Website Development`. Wenn danach ein „Service Type“ abgefragt wird: Landing Page.
 > Nicht „Graphics & Design → Landing Page Design“ nehmen: Dort erwarten Käufer nur eine Design-Datei, keine fertige Seite.
+
+**Service type & Metadaten** (genaue Namen können leicht abweichen, nimm das Ähnlichste):
+- Service type: neue Seite bauen („Landing Page“ / „Full Website Creation“), nicht Bug Fixes, Customization oder Migration
+- Website type (nur 1 erlaubt): **Landing Page**
+- Website features: Contact Form, Email Signup / Newsletter, Analytics, Social Media
+- Industry: so viele wie erlaubt, z. B. Technology, Software, Marketing, Business, Health & Wellness, Education, Real Estate, Beauty
+
 **Galerie-Bilder:** `fiverr/gig-bilder/01-landing-page-*.png`
 **Demo:** `portfolio/demos/lumora-saas-landing/`
 

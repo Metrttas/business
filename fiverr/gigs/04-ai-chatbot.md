@@ -8,6 +8,14 @@
 
 **Kategorie:** `Programming & Tech` → die Unterkategorie mit **„Chatbot“** im Namen (z. B. „Chatbot Development“ oder „AI Development“ → AI Chatbot).
 > Tipp: Erst den Titel eintragen, dann nimmt man am besten die passende Kategorie aus den Vorschlägen darunter.
+
+**Service type & Metadaten** (genaue Namen können leicht abweichen, nimm das Ähnlichste):
+- Service type: neuen Chatbot bauen („Custom Chatbot“ / „Chatbot Development“), nicht nur „Consultation“
+- Plattform / Kanal: **Website** (Webchat). Nicht WhatsApp, Messenger, Telegram oder Discord, das bieten wir (noch) nicht an.
+- Bot-Zweck / Type: Customer Support, FAQ, Lead Generation
+- Technologie (falls gefragt): AI / LLM, JavaScript
+- Industry: Health & Wellness, Fitness, Beauty, Real Estate, Education, E-Commerce, Professional Services
+
 **Galerie-Bilder:** `fiverr/gig-bilder/04-ai-chatbot-*.png`
 **Demo:** `portfolio/demos/ironleaf-fitness-chatbot/`
 

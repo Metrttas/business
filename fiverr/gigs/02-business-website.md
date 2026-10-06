@@ -4,6 +4,13 @@
 > Auch hier baue ich fast alles. Die Aufträge sind größer als beim Landing-Page-Gig.
 
 **Kategorie:** `Programming & Tech` → `Website Development`. Wenn danach ein „Service Type“ abgefragt wird: Business Website.
+
+**Service type & Metadaten** (genaue Namen können leicht abweichen, nimm das Ähnlichste):
+- Service type: neue Website bauen („Business Website“ / „Full Website Creation“)
+- Website type (nur 1 erlaubt): **Business**
+- Website features: Contact Form, Booking / Appointments, Map / Location, Analytics, Social Media
+- Industry: Healthcare / Medical, Restaurants & Food, Beauty, Fitness, Real Estate, Construction / Trades, Legal, Professional Services
+
 **Galerie-Bilder:** `fiverr/gig-bilder/02-business-website-*.png`
 **Demo:** `portfolio/demos/harborview-dental/`
 

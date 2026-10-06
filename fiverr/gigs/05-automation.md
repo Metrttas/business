@@ -8,6 +8,14 @@
 
 **Kategorie:** `Programming & Tech` → die Unterkategorie mit **„Automation“** bzw. **„Integrations“** im Namen.
 > Tipp: Erst den Titel eintragen, dann nimmt man am besten die passende Kategorie aus den Vorschlägen darunter.
+
+**Service type & Metadaten** (genaue Namen können leicht abweichen, nimm das Ähnlichste):
+- Service type: Workflow bauen („Workflow Automation“ / „Integration“ / „Custom Automation“)
+- Tool / Plattform: **Make, Zapier, n8n** (alle drei, wenn mehrere erlaubt sind)
+- Apps / Integrationen: Google Sheets, Gmail, Slack, Notion, Airtable, HubSpot, Shopify, Calendly, Webhooks
+- Use case (falls gefragt): Lead Management / CRM, Email Automation, Data Sync, Notifications
+- Industry: Marketing, E-Commerce, Real Estate, Professional Services, Education, Business
+
 **Galerie-Bilder:** `fiverr/gig-bilder/05-automation-*.png`
 **Demo:** `portfolio/demos/lead-automation-workflow/`
 
