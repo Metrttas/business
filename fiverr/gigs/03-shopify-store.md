@@ -15,6 +15,7 @@
 - Plattform (falls gefragt): **Shopify**
 - Website type (nur 1 erlaubt): **E-Commerce / Online Store**
 - Website features: Payment, Shopping Cart, Product Catalog / Product Upload, Contact Form, Email Signup
+- Programming language: Liquid, HTML, CSS, JavaScript. Nichts ankreuzen, was wir nicht nutzen (z. B. PHP).
 - Industry: Fashion & Apparel, Beauty & Cosmetics, Food & Beverage, Home & Garden, Jewelry, Pets, Health & Wellness
 
 **Galerie-Bilder:** `fiverr/gig-bilder/03-shopify-store-*.png`

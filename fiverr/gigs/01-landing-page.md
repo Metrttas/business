@@ -10,6 +10,7 @@
 - Service type: neue Seite bauen („Landing Page“ / „Full Website Creation“), nicht Bug Fixes, Customization oder Migration
 - Website type (nur 1 erlaubt): **Landing Page**
 - Website features: Contact Form, Email Signup / Newsletter, Analytics, Social Media
+- Programming language: HTML, CSS, JavaScript. Nichts ankreuzen, was wir nicht nutzen (z. B. PHP).
 - Industry: so viele wie erlaubt, z. B. Technology, Software, Marketing, Business, Health & Wellness, Education, Real Estate, Beauty
 
 **Galerie-Bilder:** `fiverr/gig-bilder/01-landing-page-*.png`

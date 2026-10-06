@@ -14,6 +14,7 @@
 - Plattform / Kanal: **Website** (Webchat). Nicht WhatsApp, Messenger, Telegram oder Discord, das bieten wir (noch) nicht an.
 - Bot-Zweck / Type: Customer Support, FAQ, Lead Generation
 - Technologie (falls gefragt): AI / LLM, JavaScript
+- Programming language: JavaScript, Node.js (falls gelistet), HTML, CSS. Nichts ankreuzen, was wir nicht nutzen (z. B. PHP).
 - Industry: Health & Wellness, Fitness, Beauty, Real Estate, Education, E-Commerce, Professional Services
 
 **Galerie-Bilder:** `fiverr/gig-bilder/04-ai-chatbot-*.png`

@@ -14,6 +14,7 @@
 - Tool / Plattform: **Make, Zapier, n8n** (alle drei, wenn mehrere erlaubt sind)
 - Apps / Integrationen: Google Sheets, Gmail, Slack, Notion, Airtable, HubSpot, Shopify, Calendly, Webhooks
 - Use case (falls gefragt): Lead Management / CRM, Email Automation, Data Sync, Notifications
+- Programming language: JavaScript, Python (für Code-Schritte in n8n, Make oder Zapier)
 - Industry: Marketing, E-Commerce, Real Estate, Professional Services, Education, Business
 
 **Galerie-Bilder:** `fiverr/gig-bilder/05-automation-*.png`

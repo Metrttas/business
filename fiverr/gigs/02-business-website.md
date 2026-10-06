@@ -9,6 +9,7 @@
 - Service type: neue Website bauen („Business Website“ / „Full Website Creation“)
 - Website type (nur 1 erlaubt): **Business**
 - Website features: Contact Form, Booking / Appointments, Map / Location, Analytics, Social Media
+- Programming language: HTML, CSS, JavaScript. Nichts ankreuzen, was wir nicht nutzen (z. B. PHP).
 - Industry: Healthcare / Medical, Restaurants & Food, Beauty, Fitness, Real Estate, Construction / Trades, Legal, Professional Services
 
 **Galerie-Bilder:** `fiverr/gig-bilder/02-business-website-*.png`
