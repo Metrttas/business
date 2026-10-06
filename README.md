@@ -90,9 +90,20 @@ Zahl Gigs haben, 5 passen aber.
 
 ### Schritt 4: Portfolio online stellen (optional, aber hilfreich)
 Damit kannst du Kunden die Demos live zeigen, vor allem den Chatbot zum Ausprobieren.
-1. Kostenloses Konto bei **Netlify** anlegen.
-2. Auf `app.netlify.com/drop` den ganzen Ordner `portfolio/` ins Fenster ziehen.
-3. Du bekommst einen Link wie `dein-name.netlify.app`. Fertig.
+1. **Ordner auf deinen Computer holen.** Am einfachsten lässt du dir von mir die fertige
+   `portfolio.zip` schicken. Alternativ auf GitHub: Branch auswählen → grüner Button **„Code“** →
+   **„Download ZIP“**.
+2. Die ZIP-Datei **entpacken** (Rechtsklick → „Alle extrahieren“ unter Windows, Doppelklick am Mac).
+3. Kostenloses Konto bei **Netlify** anlegen (am Computer, nicht am Handy).
+4. `app.netlify.com/drop` öffnen und den entpackten Ordner **`portfolio`** ins Fenster ziehen.
+   Wichtig: den Ordner, in dem direkt die `index.html` liegt.
+5. Du bekommst einen Link wie `zufallsname.netlify.app`. Unter „Site configuration“ →
+   „Change site name“ kannst du den Namen ändern.
+
+> **Für später (optional):** Statt Drag & Drop kannst du Netlify auch direkt mit GitHub verbinden:
+> „Add new site“ → „Import an existing project“ → GitHub → dieses Repository und diesen Branch wählen.
+> Build command leer lassen, Publish directory `portfolio` eintragen. Dann aktualisiert sich die Seite
+> automatisch, sobald ich etwas ändere.
 
 Auf Fiverr selbst nutzt du die **Portfolio-Funktion** im Profil (Bilder + Beschreibung).
 
