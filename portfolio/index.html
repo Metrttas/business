@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Web &amp; Automation Portfolio</title>
+<meta name="description" content="Concept projects: landing pages, business websites, online store design, AI chatbots and workflow automations.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23111827'/%3E%3Cpath d='M18 22l-8 10 8 10M46 22l8 10-8 10M36 16L28 48' stroke='%23f97316' stroke-width='5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f6f3;
+    --surface: #ffffff;
+    --text: #111827;
+    --muted: #5b6270;
+    --line: #e4e2dc;
+    --accent: #ea580c;
+    --accent-soft: #fff1e8;
+    --shadow: 0 1px 2px rgba(17,24,39,.06), 0 12px 32px -12px rgba(17,24,39,.18);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0f1115; --surface: #171a21; --text: #f3f4f6; --muted: #a0a7b4;
+      --line: #2a2f3a; --accent: #fb923c; --accent-soft: #2a1b12;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 12px 32px -12px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0f1115; --surface: #171a21; --text: #f3f4f6; --muted: #a0a7b4;
+    --line: #2a2f3a; --accent: #fb923c; --accent-soft: #2a1b12;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 12px 32px -12px rgba(0,0,0,.6);
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 16px/1.6 Inter, system-ui, -apple-system, Segoe UI, sans-serif;
+  }
+  a { color: inherit; }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+  .wrap { max-width: 1160px; margin: 0 auto; padding: 0 16px; }
+  @media (min-width: 720px) { .wrap { padding: 0 32px; } }
+
+  header { padding: 72px 0 40px; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 13px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase;
+    color: var(--accent); background: var(--accent-soft); padding: 6px 12px; border-radius: 999px;
+  }
+  h1 {
+    font-family: "Space Grotesk", Inter, sans-serif; font-weight: 700;
+    font-size: clamp(36px, 6vw, 64px); line-height: 1.05; letter-spacing: -.03em;
+    margin: 20px 0 16px; max-width: 16ch;
+  }
+  .lead { font-size: clamp(17px, 2vw, 20px); color: var(--muted); max-width: 60ch; margin: 0; }
+  .services { display: flex; flex-wrap: wrap; gap: 8px; margin: 28px 0 0; padding: 0; list-style: none; }
+  .services li {
+    border: 1px solid var(--line); background: var(--surface); border-radius: 999px;
+    padding: 6px 14px; font-size: 14px; font-weight: 500;
+  }
+
+  main { padding-bottom: 64px; }
+  .grid { display: grid; gap: 28px; grid-template-columns: 1fr; }
+  @media (min-width: 820px) { .grid { grid-template-columns: 1fr 1fr; } .card.wide { grid-column: 1 / -1; } }
+
+  .card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 20px;
+    overflow: hidden; box-shadow: var(--shadow); display: flex; flex-direction: column;
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .card:hover { transform: translateY(-3px); }
+  .shot { display: block; aspect-ratio: 16 / 10; background: var(--line); overflow: hidden; border-bottom: 1px solid var(--line); }
+  .card.wide .shot { aspect-ratio: 16 / 7; }
+  .shot img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; transition: transform .6s ease; }
+  .card:hover .shot img { transform: scale(1.02); }
+  .body { padding: 22px 22px 24px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+  .kind { font-size: 13px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: .05em; margin: 0; }
+  h2 { font-family: "Space Grotesk", Inter, sans-serif; font-size: 24px; line-height: 1.2; margin: 0; letter-spacing: -.01em; }
+  .body p.desc { margin: 0; color: var(--muted); }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0; margin: 4px 0 0; }
+  .tags li { font-size: 12.5px; background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 2px 8px; color: var(--muted); }
+  .actions { margin-top: auto; padding-top: 10px; display: flex; flex-wrap: wrap; gap: 10px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-weight: 600; font-size: 15px;
+    padding: 10px 16px; border-radius: 10px; background: var(--text); color: var(--bg);
+  }
+  .btn.ghost { background: transparent; color: var(--text); border: 1px solid var(--line); }
+  .btn svg { width: 16px; height: 16px; }
+
+  .process { margin: 72px 0 0; }
+  .process h3 { font-family: "Space Grotesk", Inter, sans-serif; font-size: 28px; margin: 0 0 20px; letter-spacing: -.01em; }
+  .steps { display: grid; gap: 16px; grid-template-columns: 1fr; counter-reset: s; list-style: none; padding: 0; margin: 0; }
+  @media (min-width: 720px) { .steps { grid-template-columns: repeat(4, 1fr); } }
+  .steps li { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px; counter-increment: s; }
+  .steps li::before {
+    content: counter(s); display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%;
+    background: var(--accent-soft); color: var(--accent); font-weight: 700; margin-bottom: 10px;
+  }
+  .steps strong { display: block; margin-bottom: 4px; }
+  .steps span { color: var(--muted); font-size: 15px; }
+
+  footer { border-top: 1px solid var(--line); padding: 28px 0 40px; color: var(--muted); font-size: 14px; }
+  @media (prefers-reduced-motion: reduce) { .card, .shot img { transition: none; } .card:hover { transform: none; } .card:hover .shot img { transform: none; } }
+</style>
+</head>
+<body>
+<header class="wrap">
+  <span class="eyebrow">Portfolio · Concept projects</span>
+  <h1>Websites, stores, chatbots and automations that work.</h1>
+  <p class="lead">A selection of demo projects showing how I design and build for small businesses: fast, mobile-first and focused on turning visitors into customers. Open any project to try it live.</p>
+  <ul class="services" aria-label="Services">
+    <li>Landing pages</li><li>Business websites</li><li>Online stores</li><li>AI chatbots</li><li>Workflow automation</li>
+  </ul>
+</header>
+
+<main class="wrap">
+  <div class="grid">
+    <article class="card wide">
+      <a class="shot" href="demos/lumora-saas-landing/" tabindex="-1" aria-hidden="true"><img src="assets/lumora-saas-landing.jpg" alt="" loading="lazy" width="1440" height="900"></a>
+      <div class="body">
+        <p class="kind">Landing page</p>
+        <h2>Lumora: AI meeting notes app</h2>
+        <p class="desc">Conversion-focused SaaS landing page with an email signup, product mockup, interactive pricing toggle and FAQ.</p>
+        <ul class="tags"><li>Responsive</li><li>Signup form</li><li>Pricing toggle</li><li>Animations</li></ul>
+        <div class="actions"><a class="btn" href="demos/lumora-saas-landing/">View live demo <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></a></div>
+      </div>
+    </article>
+
+    <article class="card">
+      <a class="shot" href="demos/harborview-dental/" tabindex="-1" aria-hidden="true"><img src="assets/harborview-dental.jpg" alt="" loading="lazy" width="1440" height="900"></a>
+      <div class="body">
+        <p class="kind">Business website</p>
+        <h2>Harborview Dental Studio</h2>
+        <p class="desc">Warm, trustworthy website for a local practice, with services, team, opening hours and an online booking form.</p>
+        <ul class="tags"><li>Local business</li><li>Booking form</li><li>Mobile call bar</li></ul>
+        <div class="actions"><a class="btn" href="demos/harborview-dental/">View live demo <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></a></div>
+      </div>
+    </article>
+
+    <article class="card">
+      <a class="shot" href="demos/saltgrain-bakery-shop/" tabindex="-1" aria-hidden="true"><img src="assets/saltgrain-bakery-shop.jpg" alt="" loading="lazy" width="1440" height="900"></a>
+      <div class="body">
+        <p class="kind">Online store design</p>
+        <h2>Saltgrain Bakery shop</h2>
+        <p class="desc">Storefront concept with category filters, product quick view and a slide-out cart with a free-delivery progress bar.</p>
+        <ul class="tags"><li>E-commerce</li><li>Cart drawer</li><li>Filters</li></ul>
+        <div class="actions"><a class="btn" href="demos/saltgrain-bakery-shop/">View live demo <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></a></div>
+      </div>
+    </article>
+
+    <article class="card">
+      <a class="shot" href="demos/ironleaf-fitness-chatbot/" tabindex="-1" aria-hidden="true"><img src="assets/ironleaf-fitness-chatbot.jpg" alt="" loading="lazy" width="1440" height="900"></a>
+      <div class="body">
+        <p class="kind">Website chatbot</p>
+        <h2>Ironleaf Fitness assistant</h2>
+        <p class="desc">Gym website with a support chatbot that answers common questions and collects trial sign-ups right in the chat.</p>
+        <ul class="tags"><li>Chat widget</li><li>Lead capture</li><li>Quick replies</li></ul>
+        <div class="actions"><a class="btn" href="demos/ironleaf-fitness-chatbot/">Try the chatbot <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></a></div>
+      </div>
+    </article>
+
+    <article class="card">
+      <a class="shot" href="demos/lead-automation-workflow/" tabindex="-1" aria-hidden="true"><img src="assets/lead-automation-workflow.jpg" alt="" loading="lazy" width="1440" height="900"></a>
+      <div class="body">
+        <p class="kind">Workflow automation</p>
+        <h2>Lead → CRM → follow-up</h2>
+        <p class="desc">Example automation that files every new lead, sends a welcome email, alerts the team and follows up. Includes a downloadable n8n workflow.</p>
+        <ul class="tags"><li>n8n</li><li>Make</li><li>Zapier</li><li>Google Sheets</li></ul>
+        <div class="actions">
+          <a class="btn" href="demos/lead-automation-workflow/">See the workflow <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></a>
+          <a class="btn ghost" href="demos/lead-automation-workflow/lead-to-crm-workflow.n8n.json" download>Download n8n file</a>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <section class="process" aria-labelledby="process-title">
+    <h3 id="process-title">How we work together</h3>
+    <ol class="steps">
+      <li><strong>Brief</strong><span>You tell me your goal and send what you have. Bullet points are fine.</span></li>
+      <li><strong>First preview</strong><span>You get a live preview link early, so you see progress right away.</span></li>
+      <li><strong>Polish</strong><span>We refine it with your feedback until it is right.</span></li>
+      <li><strong>Launch</strong><span>Final files and step-by-step help to put it live.</span></li>
+    </ol>
+  </section>
+</main>
+
+<footer class="wrap">
+  All projects shown are concept demos for fictional businesses, built to show design and development skills.
+</footer>
+</body>
+</html>
