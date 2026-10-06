@@ -1,0 +1,1390 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lumora — AI meeting notes that write themselves</title>
+<meta name="description" content="Lumora records your meetings, writes crisp summaries and turns every decision into an owned action item — before you've closed the tab. Fictional brand, concept demo.">
+<meta name="theme-color" content="#F3F0E8">
+<meta property="og:title" content="Lumora — Every meeting, remembered.">
+<meta property="og:description" content="AI meeting notes: summaries, decisions and action items in under a minute. Fictional concept demo.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%230E1C17'/%3E%3Ccircle cx='16' cy='15' r='8.5' fill='%23D6F25C'/%3E%3Crect x='5' y='15.6' width='22' height='1.3' fill='%230E1C17'/%3E%3Crect x='5' y='18.4' width='22' height='1.9' fill='%230E1C17'/%3E%3Crect x='5' y='21.3' width='22' height='2.8' fill='%230E1C17'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap">
+<style>
+/* ===================================================================
+   Lumora — concept landing page
+   Palette: warm paper + deep forest ink + "lumen" chartreuse
+   =================================================================== */
+:root{
+  --paper:#F3F0E8;
+  --paper-2:#EAE5D8;
+  --card:#FBFAF6;
+  --white:#FFFFFF;
+  --ink:#0E1C17;
+  --ink-2:#26352F;
+  --muted:#56635D;
+  --line:rgba(14,28,23,.11);
+  --line-2:rgba(14,28,23,.2);
+  --lumen:#D6F25C;
+  --lumen-2:#BEDD3C;
+  --moss:#1F4A3D;
+  --ember:#E0552C;
+  --error:#A3260F;
+  --on-dark:#F3F0E8;
+  --on-dark-muted:#A8B6AF;
+  --serif:"Instrument Serif","Iowan Old Style","Palatino Linotype",Georgia,serif;
+  --sans:"Geist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --container:1240px;
+  --gutter:clamp(16px,4vw,40px);
+  --header-h:72px;
+  --ease:cubic-bezier(.2,.75,.2,1);
+}
+
+/* ---------- Base ---------- */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:calc(var(--header-h) + 16px)}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+body.no-scroll{overflow:hidden}
+h1,h2,h3,h4,p,figure,blockquote{margin:0}
+ul,ol{margin:0;padding:0}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit;color:inherit}
+img,svg{display:block;max-width:100%}
+::selection{background:var(--lumen);color:var(--ink)}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:6px}
+.on-dark :focus-visible,.dark :focus-visible,.site-footer :focus-visible{outline-color:var(--lumen)}
+[hidden]{display:none!important}
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.skip{position:absolute;left:16px;top:-60px;z-index:100;background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:999px;font-weight:500;transition:top .2s}
+.skip:focus{top:12px}
+.wrap{max-width:var(--container);margin-inline:auto;padding-inline:var(--gutter)}
+.ic{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.mono{font-family:var(--mono)}
+
+/* ---------- Type ---------- */
+.display{font-family:var(--serif);font-weight:400;font-size:clamp(3.9rem,1.5rem + 6vw,6.6rem);line-height:.93;letter-spacing:-.028em}
+.h2{font-family:var(--serif);font-weight:400;font-size:clamp(2.45rem,1.35rem + 3.4vw,4.4rem);line-height:1;letter-spacing:-.022em;text-wrap:balance}
+.display em,.h2 em{font-style:italic}
+.eyebrow{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:12.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.eyebrow-num{display:inline-grid;place-items:center;min-width:34px;height:24px;padding:0 8px;border:1px solid var(--line-2);border-radius:999px;letter-spacing:.02em;color:var(--ink)}
+.dark .eyebrow{color:var(--on-dark-muted)}
+.dark .eyebrow-num{border-color:rgba(243,240,232,.25);color:var(--lumen)}
+.lede{font-size:clamp(1.05rem,.98rem + .3vw,1.2rem);line-height:1.55;color:var(--ink-2);max-width:40ch}
+
+/* ---------- Buttons ---------- */
+.btn{--h:48px;display:inline-flex;align-items:center;justify-content:center;gap:10px;height:var(--h);padding:0 22px;border-radius:999px;border:1px solid transparent;font-weight:500;font-size:15.5px;letter-spacing:-.005em;white-space:nowrap;cursor:pointer;transition:background-color .25s var(--ease),color .25s var(--ease),border-color .25s var(--ease),transform .25s var(--ease),box-shadow .25s var(--ease)}
+.btn .ic{width:18px;height:18px;transition:transform .3s var(--ease)}
+.btn:hover .ic{transform:translateX(3px)}
+.btn:active{transform:translateY(1px)}
+.btn-ink{background:var(--ink);color:var(--paper)}
+.btn-ink:hover{background:var(--moss)}
+.btn-lumen{background:var(--lumen);color:var(--ink)}
+.btn-lumen:hover{background:#E4FA7E;box-shadow:0 10px 30px -10px rgba(214,242,92,.6)}
+.btn-ghost{border-color:var(--line-2);color:var(--ink);background:transparent}
+.btn-ghost:hover{border-color:var(--ink);background:rgba(14,28,23,.04)}
+.btn-sm{--h:40px;padding:0 18px;font-size:14.5px}
+.btn-block{width:100%}
+
+/* ---------- Header ---------- */
+.site-header{position:sticky;top:0;z-index:50;height:var(--header-h);transition:background-color .3s,box-shadow .3s,backdrop-filter .3s}
+.site-header.is-scrolled,.site-header.menu-open{background:rgba(243,240,232,.94);-webkit-backdrop-filter:saturate(1.4) blur(14px);backdrop-filter:saturate(1.4) blur(14px);box-shadow:0 1px 0 var(--line)}
+.site-header.menu-open{background:var(--paper)}
+.header-inner{height:100%;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px}
+.brand{display:inline-flex;align-items:center;gap:10px;justify-self:start;border-radius:10px}
+.brand-mark{width:30px;height:30px;flex:none}
+.brand-name{font-family:var(--serif);font-size:28px;line-height:1;letter-spacing:-.02em;padding-bottom:2px}
+.nav-list{display:flex;gap:4px;list-style:none}
+.nav-list a{display:block;padding:8px 14px;border-radius:999px;font-size:15px;color:var(--ink-2);transition:background-color .2s,color .2s}
+.nav-list a:hover{background:rgba(14,28,23,.06);color:var(--ink)}
+.header-actions{justify-self:end;display:flex;align-items:center;gap:8px}
+.link-quiet{padding:8px 14px;border-radius:999px;font-size:15px;color:var(--ink-2)}
+.link-quiet:hover{color:var(--ink);background:rgba(14,28,23,.06)}
+.nav-toggle{display:none;width:44px;height:44px;border-radius:12px;border:1px solid var(--line-2);background:transparent;cursor:pointer;place-items:center;padding:0}
+.nav-toggle .bars{position:relative;width:18px;height:12px}
+.nav-toggle .bars i{position:absolute;left:0;right:0;height:1.8px;border-radius:2px;background:var(--ink);transition:transform .3s var(--ease),top .3s var(--ease),opacity .2s}
+.nav-toggle .bars i:nth-child(1){top:0}
+.nav-toggle .bars i:nth-child(2){top:5px}
+.nav-toggle .bars i:nth-child(3){top:10px}
+.menu-open .nav-toggle .bars i:nth-child(1){top:5px;transform:rotate(45deg)}
+.menu-open .nav-toggle .bars i:nth-child(2){opacity:0}
+.menu-open .nav-toggle .bars i:nth-child(3){top:5px;transform:rotate(-45deg)}
+
+.mobile-menu{position:fixed;inset:var(--header-h) 0 0 0;z-index:45;background:var(--paper);padding:24px var(--gutter) 32px;display:flex;flex-direction:column;gap:24px;overflow-y:auto;visibility:hidden;opacity:0;transform:translateY(-8px);transition:opacity .3s var(--ease),transform .3s var(--ease),visibility 0s linear .3s}
+.mobile-menu.is-open{visibility:visible;opacity:1;transform:none;transition:opacity .3s var(--ease),transform .3s var(--ease),visibility 0s}
+.mobile-menu ul{list-style:none;border-top:1px solid var(--line)}
+.mobile-menu li a{display:flex;align-items:center;justify-content:space-between;padding:16px 4px;border-bottom:1px solid var(--line);font-family:var(--serif);font-size:34px;line-height:1.1;letter-spacing:-.015em}
+.mobile-menu li a .ic{width:22px;height:22px;color:var(--muted)}
+.mobile-menu .menu-ctas{display:grid;gap:10px;margin-top:auto}
+.mobile-menu .menu-note{font-family:var(--mono);font-size:12px;color:var(--muted);text-align:center;letter-spacing:.04em}
+
+@media (max-width:960px){
+  .header-inner{grid-template-columns:1fr auto}
+  .site-nav,.header-actions .link-quiet{display:none}
+  .nav-toggle{display:grid}
+}
+@media (min-width:961px){.mobile-menu{display:none}}
+@media (max-width:420px){.header-actions .btn{display:none}}
+
+/* ---------- Reveal ---------- */
+.js .reveal{opacity:0;transform:translateY(22px);transition:opacity .9s var(--ease),transform .9s var(--ease);transition-delay:calc(var(--d,0) * 90ms)}
+.js .reveal.is-in{opacity:1;transform:none}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;padding-top:clamp(40px,6vw,80px);padding-bottom:clamp(64px,8vw,112px);overflow-x:clip}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background-image:repeating-linear-gradient(180deg,transparent 0 43px,rgba(14,28,23,.065) 43px 44px);-webkit-mask-image:radial-gradient(ellipse 75% 55% at 50% 22%,#000 20%,transparent 72%);mask-image:radial-gradient(ellipse 75% 55% at 50% 22%,#000 20%,transparent 72%)}
+.hero-top{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:40px 72px;align-items:end}
+.pill{display:inline-flex;align-items:center;gap:10px;padding:5px 14px 5px 5px;margin-bottom:28px;border-radius:999px;background:var(--card);border:1px solid var(--line);font-size:14px;color:var(--ink-2);box-shadow:0 1px 2px rgba(14,28,23,.04);transition:border-color .2s}
+.pill:hover{border-color:var(--line-2)}
+.pill-tag{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;background:var(--ink);color:var(--lumen);padding:3px 9px;border-radius:999px}
+.pill .ic{width:16px;height:16px;color:var(--muted);transition:transform .3s var(--ease)}
+.pill:hover .ic{transform:translateX(3px)}
+.marker{font-style:italic;background-image:linear-gradient(var(--lumen),var(--lumen));background-repeat:no-repeat;background-size:100% .3em;background-position:0 74%;padding:0 .08em;margin:0 -.08em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.js .marker{background-size:0% .3em;animation:marker 1.1s .55s cubic-bezier(.6,.05,.2,1) forwards}
+@keyframes marker{to{background-size:100% .3em}}
+.hero-side{display:grid;gap:26px;padding-bottom:10px}
+
+/* Email capture */
+.capture{display:grid;grid-template-columns:minmax(0,1fr);gap:8px;max-width:500px}
+.capture-field{display:flex;align-items:center;gap:6px;padding:6px;border-radius:999px;background:var(--white);border:1px solid var(--line-2);box-shadow:0 1px 2px rgba(14,28,23,.05),0 12px 30px -18px rgba(14,28,23,.3);transition:border-color .2s,box-shadow .2s}
+.capture-field:focus-within{border-color:var(--ink);box-shadow:0 0 0 4px rgba(14,28,23,.08),0 12px 30px -18px rgba(14,28,23,.3)}
+.capture-field input{flex:1 1 0;width:100%;min-width:0;height:44px;border:0;background:transparent;padding:0 8px 0 16px;font-size:16px;outline:none}
+.capture-field input::placeholder{color:#7B8781}
+.capture-field .btn{--h:44px;flex:none}
+.capture.has-error .capture-field{border-color:var(--error);box-shadow:0 0 0 4px rgba(163,38,15,.1)}
+.capture-msg{min-height:1.3em;font-size:14px;color:var(--error);padding-left:18px;font-weight:500}
+.capture-msg:empty{min-height:0}
+.btn.is-loading{pointer-events:none}
+.btn.is-loading .ic{animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.capture-success{display:flex;align-items:flex-start;gap:14px;max-width:500px;padding:16px 18px;border-radius:20px;background:var(--white);border:1px solid var(--line);box-shadow:0 12px 30px -18px rgba(14,28,23,.3);outline:none}
+.capture-success[hidden]{display:none}
+.capture-success:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.success-ic{width:36px;height:36px;border-radius:50%;background:var(--lumen);display:grid;place-items:center;flex:none}
+.success-ic .ic{width:18px;height:18px;stroke-width:2.2}
+.capture-success strong{display:block;font-weight:600;font-size:16px}
+.capture-success p{font-size:15px;color:var(--ink-2);overflow-wrap:anywhere}
+.js .capture-success:not([hidden]){animation:pop .5s var(--ease)}
+@keyframes pop{from{opacity:0;transform:translateY(8px) scale(.98)}to{opacity:1;transform:none}}
+
+.trust{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px}
+.trust-people{display:flex;align-items:center;gap:12px;font-size:14px;color:var(--muted)}
+.stars{display:flex;gap:2px;color:var(--ink)}
+.stars svg{width:13px;height:13px;fill:currentColor}
+.trust-points{display:flex;flex-wrap:wrap;gap:6px 16px;list-style:none;font-size:14px;color:var(--muted)}
+.trust-points li{display:flex;align-items:center;gap:6px}
+.trust-points .ic{width:15px;height:15px;color:var(--moss);stroke-width:2.2}
+
+/* Avatars */
+.av{width:22px;height:22px;border-radius:50%;display:inline-grid;place-items:center;font-size:9px;font-weight:600;font-style:normal;color:var(--ink);flex:none;letter-spacing:.02em;line-height:1}
+.av1{background:#EBCF9C}.av2{background:#BFD6E6}.av3{background:var(--lumen)}.av4{background:#F2BBA6}.av5{background:#CFC4EE}.av-more{background:var(--paper-2);color:var(--muted)}
+.avatars{display:inline-flex}
+.avatars .av{margin-left:-2px;box-shadow:0 0 0 1.5px var(--card)}
+.avatars .av:first-child{margin-left:0}
+.avatars.lg .av{width:34px;height:34px;font-size:11px;margin-left:-5px;box-shadow:0 0 0 2.5px var(--paper)}
+.avatars.lg .av:first-child{margin-left:0}
+
+/* ---------- Product mockup ---------- */
+.hero-visual{position:relative;margin-top:clamp(56px,7vw,92px)}
+.hero-visual::before{content:"";position:absolute;left:8%;right:8%;top:-6%;height:70%;z-index:-1;border-radius:50%;background:radial-gradient(closest-side,rgba(214,242,92,.6),rgba(214,242,92,0));filter:blur(30px);pointer-events:none}
+.app{position:relative;background:var(--card);border:1px solid var(--line-2);border-radius:22px;overflow:hidden;font-size:13px;line-height:1.45;color:var(--ink);box-shadow:0 0 0 7px rgba(255,255,255,.5),0 60px 110px -50px rgba(14,28,23,.55),0 22px 40px -22px rgba(14,28,23,.25)}
+.app-bar{display:flex;align-items:center;gap:16px;height:44px;padding:0 16px;border-bottom:1px solid var(--line);background:#F5F2EA}
+.dots{display:flex;gap:7px}
+.dots i{width:11px;height:11px;border-radius:50%;background:#D8D2C3}
+.app-title{flex:1;min-width:0;text-align:center;font-size:12.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.app-bar-actions{display:flex;gap:8px}
+.chip-sm{font-size:12px;padding:4px 11px;border-radius:999px;border:1px solid var(--line-2);font-weight:500;white-space:nowrap}
+.chip-sm.ink{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.app-body{display:grid;grid-template-columns:216px minmax(0,1fr) 316px;min-height:540px}
+
+.app-side{background:#F5F2EA;border-right:1px solid var(--line);padding:16px 12px;display:flex;flex-direction:column;gap:14px}
+.ws{display:flex;align-items:center;gap:10px;font-weight:600;padding:2px 6px}
+.ws-logo{width:24px;height:24px;border-radius:7px;background:var(--moss);color:var(--lumen);display:grid;place-items:center;font-size:12px;font-weight:700}
+.ws .ic{margin-left:auto;width:14px;height:14px;color:var(--muted)}
+.side-search{display:flex;align-items:center;gap:8px;padding:7px 10px;border:1px solid var(--line);border-radius:9px;background:var(--card);color:var(--muted)}
+.side-search .ic{width:14px;height:14px}
+.side-search kbd{margin-left:auto;font-family:var(--mono);font-size:10.5px;border:1px solid var(--line);border-radius:5px;padding:0 5px;background:#F5F2EA}
+.side-nav{list-style:none;display:grid;gap:2px}
+.side-nav li{display:flex;align-items:center;gap:10px;padding:7px 10px;border-radius:8px;color:var(--ink-2)}
+.side-nav li.is-active{background:rgba(14,28,23,.07);color:var(--ink);font-weight:500}
+.side-nav .ic{width:16px;height:16px}
+.side-nav .count{margin-left:auto;font-family:var(--mono);font-size:10.5px;background:var(--ink);color:var(--paper);border-radius:999px;padding:1px 7px}
+.side-label{font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);padding:6px 10px 0}
+.side-meets{list-style:none;display:grid;gap:2px}
+.side-meets li{position:relative;display:flex;gap:10px;padding:7px 10px;border-radius:8px}
+.side-meets .t{font-family:var(--mono);font-size:11px;color:var(--muted);padding-top:1px}
+.side-meets li.is-active{background:var(--card);box-shadow:0 1px 2px rgba(14,28,23,.06),inset 0 0 0 1px var(--line)}
+.side-meets li.is-active::before{content:"";position:absolute;left:0;top:8px;bottom:8px;width:3px;border-radius:3px;background:var(--ember)}
+.side-meets li.is-done .n{color:var(--muted)}
+.side-usage{margin-top:auto;padding:12px;border-radius:12px;background:var(--card);border:1px solid var(--line);font-size:11.5px}
+.usage-top{display:flex;justify-content:space-between;color:var(--muted);margin-bottom:8px}
+.usage-top b{color:var(--ink);font-weight:600}
+.meter{height:6px;border-radius:6px;background:var(--paper-2);overflow:hidden}
+.meter i{display:block;height:100%;width:43%;background:var(--moss);border-radius:inherit}
+
+.app-main{padding:24px 30px;min-width:0;display:flex;flex-direction:column;gap:16px}
+.crumbs{font-size:12px;color:var(--muted)}
+.crumbs span{margin:0 6px;opacity:.5}
+.m-title{font-family:var(--serif);font-size:36px;line-height:1;letter-spacing:-.015em}
+.m-meta{display:flex;align-items:center;flex-wrap:wrap;gap:8px;color:var(--muted);font-size:12.5px}
+.m-meta .sep{opacity:.5}
+.tabs{display:flex;gap:22px;border-bottom:1px solid var(--line);font-size:13px;color:var(--muted)}
+.tabs span{position:relative;padding:0 0 10px;white-space:nowrap}
+.tabs .is-active{color:var(--ink);font-weight:500}
+.tabs .is-active::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--ink);border-radius:2px}
+.tabs b{font-family:var(--mono);font-weight:500;font-size:10.5px;background:var(--paper-2);border-radius:999px;padding:1px 6px;margin-left:4px}
+.summary{display:grid;gap:12px}
+.summary-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.ai-tag{display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:12.5px}
+.ai-tag .ic{width:15px;height:15px;color:var(--moss)}
+.gen{font-family:var(--mono);font-size:11px;color:var(--moss);background:rgba(214,242,92,.5);padding:2px 9px;border-radius:999px;white-space:nowrap}
+.summary p{font-size:14.5px;line-height:1.6;color:var(--ink-2);max-width:58ch}
+.summary mark{background:linear-gradient(transparent 14%,rgba(214,242,92,.8) 14% 90%,transparent 90%);color:var(--ink);padding:0 2px}
+.mini-label{font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.decisions{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.decisions li{display:flex;align-items:flex-start;gap:8px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--white);font-size:12.5px;line-height:1.35;text-wrap:balance}
+.decisions .ic{width:15px;height:15px;color:var(--moss);stroke-width:2.2;margin-top:1px}
+.wave-card{margin-top:auto;display:flex;align-items:center;gap:14px;padding:10px 14px;border-radius:14px;background:#F5F2EA;border:1px solid var(--line)}
+.play{width:30px;height:30px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;flex:none}
+.play svg{width:11px;height:11px;fill:currentColor;margin-left:2px}
+.wave{flex:1;height:28px;display:flex;align-items:center;gap:2px;min-width:0}
+.wave i{flex:1 1 0;min-width:1px;border-radius:2px;background:rgba(14,28,23,.2)}
+.wave i.p{background:var(--ink)}
+.wave i.mk{background:var(--ember)}
+.wave-time{font-family:var(--mono);font-size:11px;color:var(--muted);white-space:nowrap}
+
+.app-aside{border-left:1px solid var(--line);padding:20px;display:flex;flex-direction:column;gap:14px;background:linear-gradient(var(--card),#F6F3EC)}
+.aside-head{display:flex;justify-content:space-between;align-items:center;font-weight:600;font-size:13.5px}
+.synced{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;color:var(--moss);font-weight:400}
+.synced i{width:6px;height:6px;border-radius:50%;background:#3B9C5A}
+.todos{list-style:none;display:grid;gap:8px}
+.todo{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 10px;padding:10px 12px;border-radius:12px;background:var(--white);border:1px solid var(--line)}
+.box{width:16px;height:16px;border-radius:5px;border:1.5px solid rgba(14,28,23,.32);margin-top:1px;display:grid;place-items:center;grid-row:span 2}
+.box::after{content:"";width:8px;height:4px;margin-top:-2px;border-left:1.8px solid var(--ink);border-bottom:1.8px solid var(--ink);transform:rotate(-45deg) scale(0)}
+.todo-text{font-weight:500;font-size:13px;background:linear-gradient(currentColor,currentColor) no-repeat 0 58%/0 1px}
+.todo-meta{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--muted)}
+.todo-meta .av{width:18px;height:18px;font-size:7.5px}
+.due-hot{color:var(--ember);font-weight:500}
+.todo.is-done .box{background:var(--lumen);border-color:var(--lumen-2)}
+.todo.is-done .box::after{transform:rotate(-45deg) scale(1)}
+.todo.is-done .todo-text{color:var(--muted);background-size:100% 1px}
+.js .todo-anim .box{animation:boxFill .3s 2.4s forwards}
+.js .todo-anim .box::after{animation:tick .35s 2.55s var(--ease) forwards}
+.js .todo-anim .todo-text{animation:strike .45s 2.6s var(--ease) forwards}
+@keyframes boxFill{to{background:var(--lumen);border-color:var(--lumen-2)}}
+@keyframes tick{to{transform:rotate(-45deg) scale(1)}}
+@keyframes strike{to{background-size:100% 1px;color:var(--muted)}}
+.followup{margin-top:auto;border-radius:14px;padding:14px;background:var(--ink);color:var(--paper);display:grid;gap:10px}
+.fu-top{display:flex;align-items:center;gap:8px;font-weight:600;font-size:12.5px}
+.fu-top .ic{width:16px;height:16px;color:var(--lumen)}
+.fu-badge{margin-left:auto;font-family:var(--mono);font-size:10.5px;background:var(--lumen);color:var(--ink);border-radius:999px;padding:1px 8px;font-weight:500}
+.followup p{color:#C9D3CE;font-size:12.5px;line-height:1.5}
+.fu-actions{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:11.5px;color:var(--on-dark-muted)}
+.mini-btn{background:var(--paper);color:var(--ink);border-radius:999px;padding:5px 11px;font-weight:600;font-size:11.5px;white-space:nowrap}
+
+.float{position:absolute;z-index:2;display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 14px;font-size:13px;box-shadow:0 24px 40px -24px rgba(14,28,23,.45),0 2px 6px rgba(14,28,23,.06)}
+.float-rec{top:-34px;left:-24px;font-weight:500;border-radius:999px;padding:9px 16px 9px 14px}
+.float-rec .mono{color:var(--muted);font-size:12px}
+.float-sent{bottom:-30px;right:-30px;padding:12px 16px 12px 12px}
+.float-sent .f-ic{width:34px;height:34px;border-radius:10px;background:var(--lumen);display:grid;place-items:center;flex:none}
+.float-sent .f-ic .ic{width:17px;height:17px;stroke-width:2.2}
+.float-sent strong{display:block;font-weight:600;font-size:13px}
+.float-sent span{font-size:12px;color:var(--muted)}
+.rec-dot{width:8px;height:8px;border-radius:50%;background:var(--ember);flex:none;box-shadow:0 0 0 0 rgba(224,85,44,.55);animation:pulse 1.8s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(224,85,44,.5)}70%{box-shadow:0 0 0 8px rgba(224,85,44,0)}100%{box-shadow:0 0 0 0 rgba(224,85,44,0)}}
+@media (prefers-reduced-motion:no-preference){
+  .float-rec{animation:bob 7s ease-in-out infinite}
+  .float-sent{animation:bob 8s ease-in-out -3s infinite}
+}
+@keyframes bob{0%,100%{translate:0 0}50%{translate:0 -7px}}
+
+@media (min-width:781px){.app-aside{padding-bottom:48px}}
+@media (max-width:1100px){
+  .app-body{grid-template-columns:minmax(0,1fr) 300px}
+  .app-side{display:none}
+  .decisions{grid-template-columns:1fr}
+  .decisions li{padding:9px 12px}
+}
+@media (max-width:960px){
+  .hero-top{grid-template-columns:minmax(0,1fr);gap:32px}
+  .hero-side{padding-bottom:0}
+  .lede{max-width:52ch}
+}
+@media (max-width:780px){
+  .app-body{grid-template-columns:1fr;min-height:0}
+  .app-aside{border-left:0;border-top:1px solid var(--line)}
+  .float{display:none}
+  .decisions{grid-template-columns:1fr}
+  .followup{margin-top:0}
+}
+@media (max-width:520px){
+  .app{border-radius:18px;box-shadow:0 0 0 5px rgba(255,255,255,.5),0 40px 70px -40px rgba(14,28,23,.5)}
+  .app-bar{height:38px;padding:0 12px}
+  .app-bar-actions .chip-sm:not(.ink){display:none}
+  .app-main{padding:18px 16px;gap:14px}
+  .app-aside{padding:16px}
+  .crumbs{display:none}
+  .m-title{font-size:28px}
+  .tabs{gap:16px}
+  .summary p{font-size:14px}
+  .wave-time{display:none}
+  .todo:nth-child(4){display:none}
+  .capture-field .btn{padding:0 16px}
+}
+
+/* ---------- Logo strip ---------- */
+.logos{border-block:1px solid var(--line);padding-block:30px}
+.logos-inner{display:flex;align-items:center;gap:40px}
+.logos-label{flex:none;max-width:200px;font-family:var(--mono);font-size:12px;line-height:1.5;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.logo-list{flex:1;display:flex;align-items:center;justify-content:space-between;gap:28px;list-style:none}
+.wm{display:flex;align-items:center;gap:8px;color:#4A5751;white-space:nowrap;transition:color .25s;line-height:1}
+.wm:hover{color:var(--ink)}
+.wm svg{flex:none}
+.wm-1{font-family:var(--serif);font-style:italic;font-size:30px;letter-spacing:-.02em}
+.wm-2{font-family:var(--mono);font-weight:500;font-size:16px;letter-spacing:.3em}
+.wm-3{font-weight:700;font-size:22px;letter-spacing:-.05em}
+.wm-3 i{font-family:var(--serif);font-weight:400;font-size:26px;letter-spacing:0;margin:0 1px}
+.wm-4{font-weight:600;font-size:17px;letter-spacing:.14em;text-transform:uppercase}
+.wm-5{font-weight:500;font-size:23px;letter-spacing:-.03em}
+.wm-6{font-family:var(--serif);font-size:27px;letter-spacing:-.01em}
+.wm-6 small{font-family:var(--mono);font-size:10px;letter-spacing:.18em;border:1px solid currentColor;border-radius:4px;padding:3px 4px 2px;margin-left:2px}
+@media (max-width:1100px){
+  .logos-inner{flex-direction:column;align-items:flex-start;gap:22px}
+  .logos-label{max-width:none}
+  .logo-list{width:100%}
+}
+@media (max-width:1100px){
+  .logo-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px 16px;justify-items:start}
+}
+@media (max-width:520px){
+  .logo-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .wm{transform-origin:left center;font-size:.92em}
+  .wm-1{font-size:27px}.wm-2{font-size:14px;letter-spacing:.24em}.wm-3{font-size:20px}.wm-4{font-size:15px}.wm-5{font-size:20px}.wm-6{font-size:24px}
+}
+
+/* ---------- Sections ---------- */
+.section{padding-block:clamp(84px,10vw,144px)}
+.sec-head{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:22px 72px;align-items:end;margin-bottom:clamp(44px,6vw,76px)}
+.sec-head .eyebrow{grid-column:1/-1}
+.sec-lede{color:var(--muted);font-size:18px;line-height:1.55;max-width:42ch;padding-bottom:6px}
+.dark .sec-lede{color:var(--on-dark-muted)}
+@media (max-width:860px){.sec-head{grid-template-columns:1fr}}
+
+/* ---------- Features (bento) ---------- */
+.bento{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.feat{position:relative;display:flex;flex-direction:column;gap:14px;padding:30px;border-radius:26px;background:var(--card);border:1px solid var(--line);overflow:hidden;transition:transform .5s var(--ease),box-shadow .5s var(--ease)}
+.feat:hover{box-shadow:0 30px 60px -40px rgba(14,28,23,.35)}
+.feat h3{font-size:21px;font-weight:600;line-height:1.25;letter-spacing:-.018em;max-width:30ch;text-wrap:balance}
+.feat p{color:var(--muted);font-size:16px;line-height:1.55;max-width:46ch}
+.feat-icon{width:44px;height:44px;border-radius:13px;background:var(--paper-2);display:grid;place-items:center;margin-bottom:6px;color:var(--ink)}
+.feat-icon .ic{width:21px;height:21px}
+.feat-a{grid-column:span 2}
+.feat-f{grid-column:1/-1}
+.feat-visual{margin-top:auto;padding-top:14px}
+.feat-dark{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.feat-dark p{color:var(--on-dark-muted)}
+.feat-dark .feat-icon{background:rgba(214,242,92,.14);color:var(--lumen)}
+
+/* A: transcript → summary */
+.xform{display:grid;grid-template-columns:minmax(0,1.15fr) auto minmax(0,1fr);gap:16px;align-items:center}
+.xform-in{display:grid;gap:10px;padding:16px;border-radius:18px;background:var(--paper);border:1px dashed var(--line-2)}
+.tl{display:flex;gap:10px;font-size:13.5px;line-height:1.45;color:var(--muted)}
+.tl .av{width:24px;height:24px;font-size:9px;margin-top:-1px}
+.tl u{text-decoration:none;color:var(--ink);background:linear-gradient(transparent 60%,rgba(214,242,92,.85) 60%)}
+.xform-arrow{width:40px;height:40px;border-radius:50%;background:var(--ink);color:var(--lumen);display:grid;place-items:center}
+.xform-arrow .ic{width:18px;height:18px}
+.xform-out{padding:16px 18px;border-radius:18px;background:var(--white);border:1px solid var(--line);box-shadow:0 20px 40px -30px rgba(14,28,23,.4)}
+.xform-out .ai-tag{margin-bottom:10px}
+.xform-out ul{list-style:none;display:grid;gap:8px}
+.xform-out li{display:flex;gap:9px;font-size:14px;font-weight:500;line-height:1.35}
+.xform-out li::before{content:"";width:6px;height:6px;margin-top:7px;border-radius:50%;background:var(--moss);flex:none}
+
+/* B: assignment */
+.assign{display:grid;gap:10px}
+.bubble{position:relative;padding:14px 16px;border-radius:16px 16px 16px 4px;background:rgba(243,240,232,.08);border:1px solid rgba(243,240,232,.14);font-size:14.5px;line-height:1.45;color:var(--paper)}
+.bubble span{display:block;margin-top:6px;font-family:var(--mono);font-size:11px;color:var(--on-dark-muted)}
+.assigned{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:14px;background:var(--paper);color:var(--ink);font-size:14px;font-weight:500}
+.assigned .box{grid-row:auto;background:var(--lumen);border-color:var(--lumen-2);margin:0}
+.assigned .box::after{transform:rotate(-45deg) scale(1)}
+.assigned .due{margin-left:auto;display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);font-weight:400;white-space:nowrap}
+.assigned .av{width:22px;height:22px}
+.assign-flow{display:flex;align-items:center;gap:8px;padding-left:4px;font-family:var(--mono);font-size:11px;color:var(--lumen);letter-spacing:.04em}
+.assign-flow .ic{width:14px;height:14px}
+
+/* C: ask */
+.ask{display:grid;gap:10px}
+.ask-q{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:14px;background:var(--white);border:1px solid var(--line-2);font-size:14px;font-weight:500}
+.ask-q .ic{width:16px;height:16px;color:var(--muted)}
+.caret{width:1.5px;height:16px;background:var(--ink);margin-left:-6px;animation:blink 1.1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.ask-a{padding:14px;border-radius:14px;background:var(--paper);font-size:14px;line-height:1.5;color:var(--ink-2)}
+.ask-a .ai-tag{margin-bottom:6px}
+.src{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.src span{font-family:var(--mono);font-size:10.5px;padding:3px 8px;border-radius:999px;background:var(--white);border:1px solid var(--line);color:var(--muted)}
+
+/* D: languages */
+.langs{display:flex;flex-wrap:wrap;gap:8px}
+.langs span{padding:6px 12px;border-radius:999px;border:1px solid var(--line-2);font-size:13.5px;background:var(--white)}
+.langs span.is-on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.langs span.more{background:transparent;border-style:dashed;color:var(--muted)}
+
+/* E: privacy */
+.priv{list-style:none;display:grid;gap:2px}
+.priv li{display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px solid var(--line);font-size:14.5px;font-weight:500}
+.priv li:first-child{border-top:0}
+.priv .ic{width:16px;height:16px;color:var(--moss);stroke-width:2.2}
+
+/* F: integrations */
+.feat-f{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:32px;align-items:center}
+.feat-f .feat-copy{display:grid;gap:14px;align-content:start}
+.integr{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.integr li{display:flex;align-items:center;gap:12px;padding:14px;border-radius:16px;background:var(--white);border:1px solid var(--line);font-size:14.5px;font-weight:500}
+.integr .i-ic{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;flex:none}
+.integr .i-ic .ic{width:18px;height:18px}
+.integr small{display:block;font-size:12px;color:var(--muted);font-weight:400}
+.t1{background:#E6F0D0}.t2{background:#DDE8F0}.t3{background:#F3E2CC}.t4{background:#E8E2F3}.t5{background:#F5D9CF}.t6{background:#D9ECE3}
+
+@media (max-width:1024px){
+  .bento{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .feat-a,.feat-f{grid-column:1/-1}
+  .feat-f{grid-template-columns:1fr}
+}
+@media (max-width:680px){
+  .bento{grid-template-columns:1fr;gap:16px}
+  .feat{padding:24px;border-radius:22px}
+  .xform{grid-template-columns:1fr}
+  .xform-arrow{justify-self:center;transform:rotate(90deg)}
+  .integr{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .integr li{flex-direction:column;align-items:flex-start;padding:14px;gap:12px;font-size:14.5px}
+  .integr .i-ic{width:34px;height:34px}
+}
+
+/* ---------- How it works (dark) ---------- */
+.dark{background:var(--ink);color:var(--on-dark);position:relative;overflow-x:clip}
+.dark::before{content:"";position:absolute;right:-12%;top:-30%;width:60vw;max-width:820px;aspect-ratio:1;border-radius:50%;background:radial-gradient(closest-side,rgba(214,242,92,.13),rgba(214,242,92,0));pointer-events:none}
+.dark .wrap{position:relative}
+.steps{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;counter-reset:step}
+.step{display:flex;flex-direction:column;gap:14px}
+.step-visual{height:228px;border-radius:22px;background:rgba(243,240,232,.045);border:1px solid rgba(243,240,232,.1);padding:22px;display:flex;flex-direction:column;justify-content:center;gap:10px;margin-bottom:12px;overflow:hidden}
+.step-num{display:flex;align-items:center;gap:14px;font-family:var(--mono);font-size:13px;color:var(--lumen);letter-spacing:.06em}
+.step-num::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(243,240,232,.25),rgba(243,240,232,0))}
+.step h3{font-family:var(--serif);font-weight:400;font-size:32px;line-height:1.05;letter-spacing:-.015em}
+.step p{color:var(--on-dark-muted);font-size:16px;max-width:36ch}
+
+.cal-row{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:14px;background:rgba(243,240,232,.06);font-size:14px}
+.cal-row.is-hl{background:var(--paper);color:var(--ink);box-shadow:0 20px 40px -20px rgba(0,0,0,.6)}
+.cal-time{font-family:var(--mono);font-size:12px;opacity:.7}
+.cal-name{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:500}
+.tgl{width:32px;height:18px;border-radius:999px;background:rgba(243,240,232,.2);position:relative;flex:none}
+.tgl::after{content:"";position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:var(--paper);transition:transform .3s}
+.tgl.is-on{background:var(--lumen-2)}
+.tgl.is-on::after{transform:translateX(14px);background:var(--ink)}
+.cal-row.is-hl .tgl:not(.is-on){background:rgba(14,28,23,.2)}
+
+.live-top{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--on-dark-muted)}
+.live-line{font-size:15px;line-height:1.45;display:flex;gap:10px}
+.live-line .av{width:24px;height:24px;font-size:9px}
+.detect{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:999px;background:var(--lumen);color:var(--ink);font-size:12.5px;font-weight:600;margin-left:34px}
+.detect .ic{width:14px;height:14px}
+.wave-dark{height:34px;margin-top:4px}
+.wave-dark i{background:rgba(243,240,232,.22)}
+.wave-dark i.p{background:var(--lumen)}
+
+.notif{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:16px;background:var(--paper);color:var(--ink);box-shadow:0 20px 40px -20px rgba(0,0,0,.6)}
+.notif .brand-mark{width:30px;height:30px}
+.notif-body{flex:1;min-width:0}
+.notif strong{display:block;font-size:13.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.notif span{display:block;font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.notif-time{font-family:var(--mono);font-size:11px;color:var(--muted);align-self:flex-start}
+.notif-2{transform:scale(.94);opacity:.55;background:rgba(243,240,232,.9)}
+.recap-tags{display:flex;gap:6px;flex-wrap:wrap;padding-left:2px}
+.recap-tags span{font-family:var(--mono);font-size:11px;padding:3px 9px;border-radius:999px;border:1px solid rgba(243,240,232,.2);color:var(--on-dark-muted)}
+
+@media (max-width:960px){
+  .steps{grid-template-columns:1fr;gap:56px;max-width:560px}
+}
+
+/* ---------- Pricing ---------- */
+.pricing-head{display:flex;flex-direction:column;align-items:center;text-align:center;gap:22px;margin-bottom:clamp(44px,6vw,64px)}
+.pricing-head .h2{max-width:16ch}
+.pricing-head .sec-lede{max-width:46ch;padding:0}
+.seg{position:relative;display:inline-grid;grid-template-columns:1fr 1fr;padding:4px;border-radius:999px;background:var(--paper-2);border:1px solid var(--line);margin-top:6px}
+.seg button{position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;background:none;padding:10px 22px;border-radius:999px;font-weight:500;font-size:15px;color:var(--ink-2);cursor:pointer;transition:color .3s var(--ease);white-space:nowrap}
+.seg button[aria-pressed="true"]{color:var(--paper)}
+.seg-thumb{position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);border-radius:999px;background:var(--ink);transition:transform .45s var(--ease);box-shadow:0 6px 16px -8px rgba(14,28,23,.6)}
+.seg[data-period="yearly"] .seg-thumb{transform:translateX(100%)}
+.save{font-family:var(--mono);font-size:11px;font-weight:500;background:var(--lumen);color:var(--ink);padding:2px 7px;border-radius:999px}
+.plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:stretch}
+.plan{position:relative;display:flex;flex-direction:column;gap:22px;padding:34px 30px 30px;border-radius:28px;background:var(--card);border:1px solid var(--line)}
+.plan-name{display:flex;align-items:center;justify-content:space-between;gap:12px;font-weight:600;font-size:18px}
+.plan-desc{color:var(--muted);font-size:15.5px;line-height:1.5;min-height:3em}
+.price{display:flex;align-items:flex-end;gap:4px;line-height:1}
+.price .cur{font-family:var(--serif);font-size:34px;align-self:flex-start;margin-top:8px}
+.amount{display:inline-block;font-family:var(--serif);font-size:84px;letter-spacing:-.03em;line-height:.85}
+.amount.flip{animation:flip .5s var(--ease)}
+@keyframes flip{0%{opacity:0;transform:translateY(-14px)}100%{opacity:1;transform:none}}
+.price .per{font-size:14px;color:var(--muted);padding-bottom:6px;margin-left:10px;line-height:1.3}
+.price-note{font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:-10px;min-height:1.4em}
+.plan-feats{list-style:none;display:grid;gap:12px;padding-top:22px;border-top:1px solid var(--line);font-size:15px}
+.plan-feats li{display:flex;gap:10px;line-height:1.4}
+.plan-feats .ic{width:17px;height:17px;margin-top:1px;color:var(--moss);stroke-width:2.2}
+.plan-featured{background:var(--ink);color:var(--paper);border-color:var(--ink);box-shadow:0 40px 80px -40px rgba(14,28,23,.6);transform:translateY(-14px)}
+.plan-featured .plan-desc,.plan-featured .price .per,.plan-featured .price-note{color:var(--on-dark-muted)}
+.plan-featured .plan-feats{border-top-color:rgba(243,240,232,.15)}
+.plan-featured .plan-feats .ic{color:var(--lumen)}
+.plan-featured :focus-visible{outline-color:var(--lumen)}
+.badge{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:999px;background:var(--lumen);color:var(--ink)}
+.plan-featured::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(120% 60% at 100% 0%,rgba(214,242,92,.16),transparent 55%)}
+.pricing-foot{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 28px;margin-top:40px;font-size:15px;color:var(--muted)}
+.pricing-foot a{color:var(--ink);font-weight:500;text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--line-2)}
+.pricing-foot a:hover{text-decoration-color:var(--ink)}
+@media (min-width:1025px){.js .plan-featured.reveal.is-in{transform:translateY(-14px)}}
+@media (max-width:1024px){
+  .plans{grid-template-columns:1fr;max-width:520px;margin-inline:auto}
+  .plan-featured{transform:none;order:-1}
+  .plan-desc{min-height:0}
+}
+
+/* ---------- Testimonials ---------- */
+.testi{background:var(--paper-2)}
+.quotes{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:20px}
+.quote{display:flex;flex-direction:column;gap:24px;padding:32px;border-radius:26px;background:var(--card);border:1px solid var(--line)}
+.quote blockquote p{font-size:18px;line-height:1.55;color:var(--ink-2)}
+.quote-main{grid-row:span 2;background:var(--moss);color:var(--paper);border-color:var(--moss);padding:clamp(28px,4vw,48px);justify-content:space-between;position:relative;overflow:hidden}
+.quote-main blockquote p{font-family:var(--serif);font-size:clamp(1.8rem,1.2rem + 1.6vw,2.7rem);line-height:1.12;letter-spacing:-.015em;color:var(--paper);text-wrap:pretty}
+.quote-mark{font-family:var(--serif);font-size:120px;line-height:.6;color:var(--lumen);height:48px}
+.quote-main::after{content:"";position:absolute;right:-80px;bottom:-80px;width:260px;height:260px;border-radius:50%;border:1px solid rgba(214,242,92,.25);box-shadow:0 0 0 40px rgba(214,242,92,.04),0 0 0 80px rgba(214,242,92,.03);pointer-events:none}
+.who{display:flex;align-items:center;gap:14px;position:relative;z-index:1}
+.who .av{width:44px;height:44px;font-size:14px}
+.who strong{display:block;font-weight:600;font-size:15.5px}
+.who span{font-size:14px;color:var(--muted)}
+.quote-main .who span{color:#B9CCC3}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:56px;border-top:1px solid var(--line-2)}
+.stat{padding:28px 28px 0 0}
+.stat + .stat{padding-left:28px;border-left:1px solid var(--line-2)}
+.stat b{display:block;font-family:var(--serif);font-weight:400;font-size:clamp(3rem,2rem + 2.6vw,4.6rem);line-height:1;letter-spacing:-.03em}
+.stat b small{font-size:.45em;letter-spacing:0;margin-left:4px}
+.stat span{display:block;margin-top:8px;color:var(--muted);font-size:15.5px;max-width:30ch}
+.footnote{margin-top:28px;font-family:var(--mono);font-size:11.5px;color:var(--muted);letter-spacing:.03em}
+@media (max-width:960px){
+  .quotes{grid-template-columns:1fr}
+  .quote-main{grid-row:auto}
+}
+@media (max-width:680px){
+  .quote{padding:26px}
+  .quote-mark{font-size:88px;height:34px}
+  .stats{grid-template-columns:1fr}
+  .stat,.stat + .stat{padding:22px 0;border-left:0;border-bottom:1px solid var(--line-2)}
+  .stat:last-child{border-bottom:0}
+}
+
+/* ---------- FAQ ---------- */
+.faq-grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.3fr);gap:48px 88px;align-items:start}
+.faq-aside{position:sticky;top:calc(var(--header-h) + 32px);display:grid;gap:22px}
+.faq-aside > p:not(.eyebrow){color:var(--muted);font-size:17px;max-width:34ch}
+.faq-contact{display:flex;align-items:center;gap:14px;padding:16px;border-radius:20px;background:var(--card);border:1px solid var(--line);max-width:360px}
+.faq-contact .avatars.lg .av{box-shadow:0 0 0 2.5px var(--card)}
+.faq-contact strong{display:block;font-size:15px;font-weight:600}
+.faq-contact a{font-size:14px;color:var(--muted);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--line-2)}
+.faq-contact a:hover{color:var(--ink);text-decoration-color:var(--ink)}
+.faq-list{border-bottom:1px solid var(--line-2)}
+.faq-list details{border-top:1px solid var(--line-2)}
+.faq-list summary{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:24px 2px;cursor:pointer;list-style:none;font-size:19px;font-weight:500;letter-spacing:-.012em;line-height:1.35;border-radius:8px}
+.faq-list summary::-webkit-details-marker{display:none}
+.faq-list summary:hover .faq-ic{border-color:var(--ink)}
+.faq-ic{width:34px;height:34px;border-radius:50%;border:1px solid var(--line-2);display:grid;place-items:center;flex:none;transition:transform .35s var(--ease),background-color .3s,color .3s,border-color .3s}
+.faq-ic .ic{width:16px;height:16px}
+.faq-list details[open] .faq-ic{transform:rotate(45deg);background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.faq-body{padding:0 64px 26px 2px;color:var(--muted);font-size:16.5px;line-height:1.6}
+.faq-body p + p{margin-top:10px}
+@media (prefers-reduced-motion:no-preference){.faq-list details[open] .faq-body{animation:faqIn .45s var(--ease)}}
+@keyframes faqIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+@media (max-width:960px){
+  .faq-grid{grid-template-columns:1fr}
+  .faq-aside{position:static}
+}
+@media (max-width:520px){
+  .faq-list summary{font-size:17px;padding:20px 0;gap:16px}
+  .faq-body{padding:0 0 22px}
+}
+
+/* ---------- Final CTA ---------- */
+.cta{position:relative;background:var(--lumen);overflow:hidden;padding-block:clamp(88px,11vw,150px)}
+.cta::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:repeating-linear-gradient(180deg,transparent 0 43px,rgba(14,28,23,.08) 43px 44px);-webkit-mask-image:linear-gradient(90deg,transparent,#000 30%,#000 70%,transparent);mask-image:linear-gradient(90deg,transparent,#000 30%,#000 70%,transparent)}
+.cta-sun{position:absolute;right:-110px;bottom:-150px;width:440px;height:440px;pointer-events:none;opacity:.95}
+.cta-inner{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:26px}
+.cta .h2{font-size:clamp(2.7rem,1.3rem + 4.6vw,5.6rem);max-width:none}
+.cta .h2 em{display:block}
+.cta .lede{max-width:46ch;color:var(--ink-2)}
+.cta .capture{width:100%;margin-inline:auto}
+.cta .capture-field{border-color:var(--ink);box-shadow:0 20px 40px -24px rgba(14,28,23,.5)}
+.cta .capture-msg{text-align:left}
+.cta .capture-success{text-align:left;margin-inline:auto}
+.cta-points{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 22px;list-style:none;font-size:14.5px;color:var(--ink-2)}
+.cta-points li{display:flex;align-items:center;gap:7px}
+.cta-points .ic{width:15px;height:15px;stroke-width:2.2}
+@media (max-width:680px){
+  .cta-sun{width:240px;height:240px;right:-80px;bottom:-180px}
+}
+
+/* ---------- Footer ---------- */
+.site-footer{background:var(--ink);color:var(--on-dark);padding-top:clamp(64px,8vw,96px);overflow:hidden}
+.foot-top{display:grid;grid-template-columns:minmax(0,1.4fr) repeat(3,minmax(0,1fr));gap:40px}
+.foot-brand{display:grid;gap:18px;align-content:start}
+.foot-brand .brand-name{color:var(--paper)}
+.foot-brand p{color:var(--on-dark-muted);font-size:15.5px;max-width:30ch}
+.foot-col h3{font-family:var(--mono);font-weight:500;font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--on-dark-muted);margin-bottom:16px}
+.foot-col ul{list-style:none;display:grid;gap:10px}
+.foot-col a{font-size:15.5px;color:var(--paper);opacity:.88;border-radius:4px}
+.foot-col a:hover{opacity:1;color:var(--lumen)}
+.foot-bottom{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px 28px;margin-top:64px;padding-block:24px;border-top:1px solid rgba(243,240,232,.12);font-size:14px;color:var(--on-dark-muted)}
+.fictional{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;letter-spacing:.04em;padding:5px 12px;border-radius:999px;border:1px solid rgba(243,240,232,.2);color:var(--paper)}
+.fictional::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--lumen)}
+.foot-giant{display:block;font-family:var(--serif);font-size:clamp(5rem,23.5vw,22rem);line-height:.78;letter-spacing:-.045em;color:rgba(243,240,232,.07);text-align:center;white-space:nowrap;margin-top:8px;margin-bottom:-.12em;user-select:none}
+@media (max-width:860px){
+  .foot-top{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .foot-brand{grid-column:1/-1}
+}
+@media (max-width:520px){
+  .foot-top{grid-template-columns:repeat(3,minmax(0,1fr));gap:36px 16px}
+  .foot-col a{font-size:15px}
+  .foot-bottom{flex-direction:column;align-items:flex-start}
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.001ms!important;transition-delay:0s!important}
+  .js .reveal{opacity:1;transform:none}
+  .js .marker{background-size:100% .3em;animation:none}
+  .rec-dot,.caret{animation:none!important}
+}
+</style>
+</head>
+<body>
+<!-- SVG icon sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3.5l1.9 5.1 5.1 1.9-5.1 1.9L12 17.5l-1.9-5.1L5 10.5l5.1-1.9z"/><path d="M18.5 15.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z"/></symbol>
+  <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 10.5L12 4l8 6.5V19a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1z"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M4 7l2 2 3.5-3.5M4 15.5l2 2 3.5-3.5M13 8h7M13 16.5h7"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.4 2.6 3.7 5.6 3.7 9s-1.3 6.4-3.7 9c-2.4-2.6-3.7-5.6-3.7-9S9.6 5.6 12 3z"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 2.8V11c0 4.6-2.9 8-7 10-4.1-2-7-5.4-7-10V5.8z"/><path d="M9 12l2 2 4-4"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><path d="M7 3h7l5 5v12a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M14 3v5h5M9.5 13h5M9.5 16.5h3.5"/></symbol>
+  <symbol id="i-plug" viewBox="0 0 24 24"><path d="M9 3v4.5M15 3v4.5M6.5 7.5h11V11a5.5 5.5 0 0 1-11 0zM12 16.5V21"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4.5 5.5h15a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H10l-4.5 3.5v-3.5h-1a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1z"/></symbol>
+  <symbol id="i-video" viewBox="0 0 24 24"><rect x="3" y="6.5" width="12.5" height="11" rx="2.5"/><path d="M15.5 10.5l5-3v9l-5-3"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M4 7l8 6 8-6"/></symbol>
+  <symbol id="i-board" viewBox="0 0 24 24"><rect x="3.5" y="4" width="17" height="16" rx="3"/><path d="M9.5 4v16M15 4v16M5.5 8h2M11.5 8h2M11.5 11.5h2M17 8h1.5"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.6 3.2-5.5 6.5-5.5s5.9 1.9 6.5 5.5"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8M18 14.8c1.9.7 3.1 2.4 3.5 5.2"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="M8 10l4 4 4-4"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 5v14M6 13l6 6 6-6"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4.5" y="10.5" width="15" height="10" rx="2.5"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></symbol>
+  <symbol id="i-loader" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4-4.7-4.4 6.4-.8z"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.5v15l12.5-7.5z"/></symbol>
+  <symbol id="i-mark" viewBox="0 0 32 32"><rect width="32" height="32" rx="9" fill="#0E1C17"/><circle cx="16" cy="15" r="8.5" fill="#D6F25C"/><rect x="5" y="15.6" width="22" height="1.3" fill="#0E1C17"/><rect x="5" y="18.4" width="22" height="1.9" fill="#0E1C17"/><rect x="5" y="21.3" width="22" height="2.8" fill="#0E1C17"/></symbol>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header" id="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="#top" aria-label="Lumora — back to top">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><use href="#i-mark"/></svg>
+      <span class="brand-name">Lumora</span>
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <ul class="nav-list">
+        <li><a href="#features">Product</a></li>
+        <li><a href="#how">How it works</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#customers">Customers</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a class="link-quiet" href="#">Sign in</a>
+      <a class="btn btn-ink btn-sm" href="#top" data-start>Start free</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+        <span class="bars" aria-hidden="true"><i></i><i></i><i></i></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobile-menu">
+  <nav aria-label="Mobile">
+    <ul>
+      <li><a href="#features">Product <svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+      <li><a href="#how">How it works <svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+      <li><a href="#pricing">Pricing <svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+      <li><a href="#customers">Customers <svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+      <li><a href="#faq">FAQ <svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+    </ul>
+  </nav>
+  <div class="menu-ctas">
+    <a class="btn btn-ink btn-block" href="#top" data-start>Start free — 14 days</a>
+    <a class="btn btn-ghost btn-block" href="#">Sign in</a>
+    <p class="menu-note">No credit card required</p>
+  </div>
+</div>
+
+<main id="main">
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="top" aria-labelledby="hero-title">
+    <div class="wrap">
+      <div class="hero-top">
+        <div class="hero-head">
+          <a class="pill reveal" href="#features"><span class="pill-tag">New</span> Lumora 3.0 drafts your follow-ups <svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <h1 class="display reveal" id="hero-title" style="--d:1">Every meeting, <span class="marker">remembered.</span></h1>
+        </div>
+        <div class="hero-side">
+          <p class="lede reveal" style="--d:2">Lumora joins your calls, writes the summary, and turns every “let’s follow up” into an owned action item — before you’ve closed the tab.</p>
+          <div class="reveal" style="--d:3">
+            <form class="capture" novalidate data-capture aria-label="Start your free trial">
+              <label class="sr-only" for="hero-email">Work email</label>
+              <div class="capture-field">
+                <input id="hero-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@company.com" required aria-describedby="hero-email-msg">
+                <button class="btn btn-ink" type="submit"><span>Start free</span><svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+              </div>
+              <p class="capture-msg" id="hero-email-msg" aria-live="polite"></p>
+            </form>
+            <div class="capture-success" role="status" tabindex="-1" hidden>
+              <span class="success-ic"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg></span>
+              <div><strong>You’re in — check your inbox.</strong><p>We sent a setup link to <b data-email></b>. Your first recap is one meeting away.</p></div>
+            </div>
+          </div>
+          <div class="trust reveal" style="--d:4">
+            <div class="trust-people">
+              <span class="avatars lg" aria-hidden="true"><i class="av av1">MO</i><i class="av av2">JB</i><i class="av av4">PL</i><i class="av av5">AK</i></span>
+              <div>
+                <span class="stars" aria-hidden="true"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span>
+                <span><b style="color:var(--ink)">4.9/5</b> from 1,200+ teams</span>
+              </div>
+            </div>
+            <ul class="trust-points">
+              <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>14-day free trial</li>
+              <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>No credit card</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product mockup -->
+      <div class="hero-visual reveal" style="--d:3">
+        <div class="float float-rec" aria-hidden="true"><span class="rec-dot"></span> Lumora is taking notes <span class="mono">42:18</span></div>
+        <div class="float float-sent" aria-hidden="true">
+          <span class="f-ic"><svg class="ic"><use href="#i-check"/></svg></span>
+          <div><strong>Recap sent to #product</strong><span>38 seconds after the call</span></div>
+        </div>
+
+        <div class="app" role="img" aria-label="Lumora app window showing the AI summary of a 42-minute “Q4 Roadmap Sync” meeting: three key decisions, a playback waveform, and a synced list of action items with owners and due dates.">
+          <div class="app-bar">
+            <span class="dots"><i></i><i></i><i></i></span>
+            <span class="app-title">Q4 Roadmap Sync — Lumora</span>
+            <span class="app-bar-actions"><span class="chip-sm">Share</span><span class="chip-sm ink">Send recap</span></span>
+          </div>
+          <div class="app-body">
+            <div class="app-side">
+              <div class="ws"><span class="ws-logo">T</span>Tidewell<svg class="ic"><use href="#i-chev"/></svg></div>
+              <div class="side-search"><svg class="ic"><use href="#i-search"/></svg>Search<kbd>⌘K</kbd></div>
+              <ul class="side-nav">
+                <li><svg class="ic"><use href="#i-home"/></svg>Home</li>
+                <li class="is-active"><svg class="ic"><use href="#i-mic"/></svg>Meetings</li>
+                <li><svg class="ic"><use href="#i-list"/></svg>Action items<span class="count">7</span></li>
+                <li><svg class="ic"><use href="#i-spark"/></svg>Ask Lumora</li>
+              </ul>
+              <div class="side-label">Today</div>
+              <ul class="side-meets">
+                <li class="is-done"><span class="t">09:00</span><span class="n">Daily standup</span></li>
+                <li class="is-active"><span class="t">10:00</span><span class="n">Q4 Roadmap Sync</span></li>
+                <li><span class="t">13:30</span><span class="n">Design critique</span></li>
+                <li><span class="t">15:00</span><span class="n">Hiring loop · PM</span></li>
+              </ul>
+              <div class="side-usage">
+                <div class="usage-top"><span>Minutes</span><span><b>1,284</b> / 3,000</span></div>
+                <div class="meter"><i></i></div>
+              </div>
+            </div>
+
+            <div class="app-main">
+              <div class="crumbs">Meetings<span>/</span>Product<span>/</span>Roadmap</div>
+              <div class="m-title">Q4 Roadmap Sync</div>
+              <div class="m-meta">
+                <span>Tue, Oct 6</span><span class="sep">·</span><span>42 min</span><span class="sep">·</span>
+                <span class="avatars"><i class="av av1">MO</i><i class="av av2">JB</i><i class="av av3">PL</i><i class="av av-more">+3</i></span>
+              </div>
+              <div class="tabs"><span class="is-active">Summary</span><span>Transcript</span><span>Highlights<b>4</b></span></div>
+              <div class="summary">
+                <div class="summary-head">
+                  <span class="ai-tag"><svg class="ic"><use href="#i-spark"/></svg>AI summary</span>
+                  <span class="gen">Generated in 38s</span>
+                </div>
+                <p>The team agreed to ship <mark>offline mode in v3.2</mark> and move <mark>workspace analytics to Q1</mark>. Biggest risk is the sync-engine migration — Jonas will scope it by Friday so sales can be briefed this week.</p>
+                <div class="mini-label">Key decisions</div>
+                <ul class="decisions">
+                  <li><svg class="ic"><use href="#i-check"/></svg>Offline mode ships Nov 18</li>
+                  <li><svg class="ic"><use href="#i-check"/></svg>Analytics moves to January</li>
+                  <li><svg class="ic"><use href="#i-check"/></svg>Risk review every Thursday</li>
+                </ul>
+              </div>
+              <div class="wave-card">
+                <span class="play"><svg><use href="#i-play"/></svg></span>
+                <div class="wave" data-wave="72"></div>
+                <span class="wave-time">12:04 / 42:18</span>
+              </div>
+            </div>
+
+            <div class="app-aside">
+              <div class="aside-head"><span>Action items · 5</span><span class="synced"><i></i>Synced</span></div>
+              <ul class="todos">
+                <li class="todo todo-anim"><span class="box"></span><span class="todo-text">Scope sync-engine migration</span><span class="todo-meta"><i class="av av2">JB</i>Jonas · Fri</span></li>
+                <li class="todo"><span class="box"></span><span class="todo-text">Brief sales on analytics move</span><span class="todo-meta"><i class="av av3">PL</i>Priya · <span class="due-hot">Today</span></span></li>
+                <li class="todo"><span class="box"></span><span class="todo-text">Draft v3.2 release notes</span><span class="todo-meta"><i class="av av1">MO</i>Maya · Nov 4</span></li>
+                <li class="todo is-done"><span class="box"></span><span class="todo-text">Book Thursday risk review</span><span class="todo-meta"><i class="av av4">AK</i>Done by Lumora</span></li>
+              </ul>
+              <div class="followup">
+                <div class="fu-top"><svg class="ic"><use href="#i-mail"/></svg>Follow-up email<span class="fu-badge">Draft</span></div>
+                <p>“Thanks all — here’s what we decided today and who owns what before Friday…”</p>
+                <div class="fu-actions"><span>To 6 attendees</span><span class="mini-btn">Review &amp; send</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LOGO STRIP ============ -->
+  <section class="logos" aria-label="Teams using Lumora">
+    <div class="wrap logos-inner">
+      <p class="logos-label">Trusted by 2,400+ teams who’d rather decide than transcribe</p>
+      <ul class="logo-list">
+        <li class="wm wm-1">Tidewell</li>
+        <li class="wm wm-2">ORREVO</li>
+        <li class="wm wm-3">fennick<i>&amp;</i>hale</li>
+        <li class="wm wm-4"><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2l8 15H2z" fill="currentColor"/><path d="M10 9l3.5 6.5h-7z" fill="var(--paper)"/></svg>Brasswing</li>
+        <li class="wm wm-5"><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="9" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="11" cy="11" r="3.4" fill="currentColor"/></svg>kelpine</li>
+        <li class="wm wm-6">Nordale<small>LABS</small></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ FEATURES ============ -->
+  <section class="section" id="features" aria-labelledby="features-title">
+    <div class="wrap">
+      <header class="sec-head">
+        <p class="eyebrow reveal"><span class="eyebrow-num">01</span>Features</p>
+        <h2 class="h2 reveal" id="features-title">Everything you’d write down, <em>without writing anything.</em></h2>
+        <p class="sec-lede reveal" style="--d:1">Lumora listens for what matters — decisions, owners, deadlines, risks — and quietly files it where your team already works.</p>
+      </header>
+
+      <div class="bento">
+        <article class="feat feat-a reveal">
+          <span class="feat-icon"><svg class="ic" aria-hidden="true"><use href="#i-doc"/></svg></span>
+          <h3>Summaries your team will actually read</h3>
+          <p>Sixty minutes becomes a ninety-second read: decisions, context and open questions, in the format your team already likes.</p>
+          <div class="feat-visual" aria-hidden="true">
+            <div class="xform">
+              <div class="xform-in">
+                <div class="tl"><i class="av av2">JB</i><span>…if the migration isn’t scoped first, <u>offline mode slips again</u>.</span></div>
+                <div class="tl"><i class="av av1">MO</i><span>Okay — so <u>offline ships in 3.2</u> and analytics waits?</span></div>
+                <div class="tl"><i class="av av3">PL</i><span>Sales can live with <u>January</u> if we tell them this week.</span></div>
+              </div>
+              <span class="xform-arrow"><svg class="ic"><use href="#i-arrow"/></svg></span>
+              <div class="xform-out">
+                <span class="ai-tag"><svg class="ic"><use href="#i-spark"/></svg>Summary</span>
+                <ul><li>Offline mode ships in v3.2</li><li>Analytics moves to January</li><li>Sales briefed this week</li></ul>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="feat feat-dark reveal" style="--d:1">
+          <span class="feat-icon"><svg class="ic" aria-hidden="true"><use href="#i-list"/></svg></span>
+          <h3>Action items that assign themselves</h3>
+          <p>Every “I’ll take that” gets an owner, a due date and a home in your task tracker.</p>
+          <div class="feat-visual" aria-hidden="true">
+            <div class="assign">
+              <div class="bubble">“I’ll get the release notes drafted by Tuesday.”<span>Maya · 23:41</span></div>
+              <div class="assign-flow"><svg class="ic"><use href="#i-down"/></svg>Captured automatically</div>
+              <div class="assigned"><span class="box"></span>Draft release notes<span class="due"><i class="av av1">MO</i>Tue</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="feat reveal">
+          <span class="feat-icon"><svg class="ic" aria-hidden="true"><use href="#i-search"/></svg></span>
+          <h3>Ask across every meeting</h3>
+          <p>Search your team’s memory in plain English — answers come with sources.</p>
+          <div class="feat-visual" aria-hidden="true">
+            <div class="ask">
+              <div class="ask-q"><svg class="ic"><use href="#i-search"/></svg>What did we promise Orrevo?<span class="caret"></span></div>
+              <div class="ask-a">
+                <span class="ai-tag"><svg class="ic"><use href="#i-spark"/></svg>Lumora</span>
+                <p>A 12% discount above 200 seats, pending legal review.</p>
+                <div class="src"><span>Sales sync · Sep 28</span><span>QBR · Sep 30</span></div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="feat reveal" style="--d:1">
+          <span class="feat-icon"><svg class="ic" aria-hidden="true"><use href="#i-globe"/></svg></span>
+          <h3>Fluent in 40+ languages</h3>
+          <p>Transcribe in one language, summarize in another. Accents and crosstalk included.</p>
+          <div class="feat-visual langs" aria-hidden="true">
+            <span class="is-on">English</span><span>Español</span><span>Deutsch</span><span>Français</span><span>Português</span><span>Italiano</span><span>Nederlands</span><span class="more">+34 more</span>
+          </div>
+        </article>
+
+        <article class="feat reveal" style="--d:2">
+          <span class="feat-icon"><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg></span>
+          <h3>Private by default</h3>
+          <p>Your conversations stay yours. Admins control who sees what, and for how long.</p>
+          <ul class="feat-visual priv">
+            <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Never used to train AI models</li>
+            <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Encrypted in transit and at rest</li>
+            <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Auto-redacts sensitive details</li>
+          </ul>
+        </article>
+
+        <article class="feat feat-f reveal">
+          <div class="feat-copy">
+            <span class="feat-icon"><svg class="ic" aria-hidden="true"><use href="#i-plug"/></svg></span>
+            <h3>Fits the tools you already use</h3>
+            <p>Lumora joins video calls, reads your calendar and sends recaps to chat, docs and task boards. No new tab to babysit.</p>
+          </div>
+          <ul class="integr">
+            <li><span class="i-ic t1"><svg class="ic" aria-hidden="true"><use href="#i-video"/></svg></span><span>Video calls<small>Auto-join</small></span></li>
+            <li><span class="i-ic t2"><svg class="ic" aria-hidden="true"><use href="#i-cal"/></svg></span><span>Calendars<small>Two-way sync</small></span></li>
+            <li><span class="i-ic t3"><svg class="ic" aria-hidden="true"><use href="#i-chat"/></svg></span><span>Team chat<small>Recaps to channels</small></span></li>
+            <li><span class="i-ic t4"><svg class="ic" aria-hidden="true"><use href="#i-doc"/></svg></span><span>Docs &amp; wikis<small>Notes, filed</small></span></li>
+            <li><span class="i-ic t5"><svg class="ic" aria-hidden="true"><use href="#i-board"/></svg></span><span>Task boards<small>Owners &amp; dates</small></span></li>
+            <li><span class="i-ic t6"><svg class="ic" aria-hidden="true"><use href="#i-users"/></svg></span><span>CRMs<small>Deal notes</small></span></li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HOW IT WORKS ============ -->
+  <section class="section dark" id="how" aria-labelledby="how-title">
+    <div class="wrap">
+      <header class="sec-head">
+        <p class="eyebrow reveal"><span class="eyebrow-num">02</span>How it works</p>
+        <h2 class="h2 reveal" id="how-title">From “hi everyone” to <em>handled</em> — in three steps.</h2>
+        <p class="sec-lede reveal" style="--d:1">Set it up once in about two minutes. After that, Lumora simply shows up — and nobody has to be the note-taker again.</p>
+      </header>
+      <ol class="steps">
+        <li class="step reveal">
+          <div class="step-visual" aria-hidden="true">
+            <div class="cal-row"><span class="cal-time">09:00</span><span class="cal-name">Daily standup</span><span class="tgl is-on"></span></div>
+            <div class="cal-row is-hl"><span class="cal-time">10:00</span><span class="cal-name">Q4 Roadmap Sync</span><span class="tgl is-on"></span></div>
+            <div class="cal-row"><span class="cal-time">12:30</span><span class="cal-name">1:1 · Priya</span><span class="tgl"></span></div>
+          </div>
+          <span class="step-num">01</span>
+          <h3>Connect your calendar</h3>
+          <p>Pick which meetings Lumora joins. It always announces itself, and anyone can pause it.</p>
+        </li>
+        <li class="step reveal" style="--d:1">
+          <div class="step-visual" aria-hidden="true">
+            <div class="live-top"><span class="rec-dot"></span>Live transcript</div>
+            <p class="live-line"><i class="av av1">MO</i><span>“Let’s commit — offline ships in 3.2.”</span></p>
+            <span class="detect"><svg class="ic"><use href="#i-spark"/></svg>Decision detected</span>
+            <div class="wave wave-dark" data-wave="54" data-seed="3"></div>
+          </div>
+          <span class="step-num">02</span>
+          <h3>Meet like you normally do</h3>
+          <p>Lumora transcribes in real time and flags decisions, owners and risks as they happen.</p>
+        </li>
+        <li class="step reveal" style="--d:2">
+          <div class="step-visual" aria-hidden="true">
+            <div class="notif">
+              <svg class="brand-mark" viewBox="0 0 32 32"><use href="#i-mark"/></svg>
+              <div class="notif-body"><strong>Recap · Q4 Roadmap Sync</strong><span>Summary, owners, follow-up draft</span></div>
+              <span class="notif-time">now</span>
+            </div>
+            <div class="notif notif-2">
+              <svg class="brand-mark" viewBox="0 0 32 32"><use href="#i-mark"/></svg>
+              <div class="notif-body"><strong>Recap · Daily standup</strong><span>2 blockers · 4 updates</span></div>
+              <span class="notif-time">9:16</span>
+            </div>
+            <div class="recap-tags"><span>3 decisions</span><span>5 action items</span><span>1 risk</span></div>
+          </div>
+          <span class="step-num">03</span>
+          <h3>Get the recap in under a minute</h3>
+          <p>Summary, action items and a ready-to-send follow-up land in your inbox and team chat.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ PRICING ============ -->
+  <section class="section" id="pricing" aria-labelledby="pricing-title">
+    <div class="wrap">
+      <header class="pricing-head">
+        <p class="eyebrow reveal"><span class="eyebrow-num">03</span>Pricing</p>
+        <h2 class="h2 reveal" id="pricing-title">Simple pricing that <em>pays for itself</em> by Thursday.</h2>
+        <p class="sec-lede reveal" style="--d:1">Start free, upgrade when your team is hooked. Every paid plan includes a 14-day trial.</p>
+        <div class="seg reveal" style="--d:2" role="group" aria-label="Billing period" data-period="monthly">
+          <span class="seg-thumb" aria-hidden="true"></span>
+          <button type="button" data-period="monthly" aria-pressed="true">Monthly</button>
+          <button type="button" data-period="yearly" aria-pressed="false">Yearly <span class="save">−20%</span></button>
+        </div>
+        <p class="sr-only" id="billing-status" aria-live="polite"></p>
+      </header>
+
+      <div class="plans">
+        <article class="plan reveal" aria-labelledby="plan-starter">
+          <h3 class="plan-name" id="plan-starter">Starter</h3>
+          <p class="plan-desc">For individuals who want better notes on their own calls.</p>
+          <div>
+            <div class="price"><span class="cur">$</span><span class="amount" data-monthly="0" data-yearly="0">0</span><span class="per">forever</span></div>
+          </div>
+          <p class="price-note" data-note-monthly="No credit card needed" data-note-yearly="No credit card needed">No credit card needed</p>
+          <a class="btn btn-ghost" href="#top" data-start>Start for free</a>
+          <ul class="plan-feats">
+            <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>10 recorded meetings a month</li>
+            <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>AI summaries &amp; full transcripts</li>
+            <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>30-day meeting history</li>
+            <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Calendar auto-join</li>
+          </ul>
+        </article>
+
+        <article class="plan plan-featured reveal" style="--d:1" aria-labelledby="plan-team">
+          <div class="plan-name"><h3 id="plan-team" style="font:inherit">Team</h3><span class="badge">Most popular</span></div>
+          <p class="plan-desc">For teams that want every meeting to turn into momentum.</p>
+          <div>
+            <div class="price"><span class="cur">$</span><span class="amount" data-monthly="15" data-yearly="12">15</span><span class="per">per seat<br>/ month</span></div>
+          </div>
+          <p class="price-note" data-note-monthly="Billed monthly" data-note-yearly="$144 per seat, billed yearly">Billed monthly</p>
+          <a class="btn btn-lumen" href="#top" data-start>Start 14-day trial <svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <ul class="plan-feats">
+            <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Unlimited meetings &amp; history</li>
+            <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Action items synced to task boards</li>
+            <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Ask Lumora across your workspace</li>
+            <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Custom summary templates</li>
+            <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Follow-up email drafts</li>
+          </ul>
+        </article>
+
+        <article class="plan reveal" style="--d:2" aria-labelledby="plan-business">
+          <h3 class="plan-name" id="plan-business">Business</h3>
+          <p class="plan-desc">For organizations with security, admin and compliance needs.</p>
+          <div>
+            <div class="price"><span class="cur">$</span><span class="amount" data-monthly="29" data-yearly="23">29</span><span class="per">per seat<br>/ month</span></div>
+          </div>
+          <p class="price-note" data-note-monthly="Billed monthly" data-note-yearly="$276 per seat, billed yearly">Billed monthly</p>
+          <a class="btn btn-ghost" href="#">Talk to sales</a>
+          <ul class="plan-feats">
+            <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Everything in Team</li>
+            <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>SSO, SCIM &amp; audit logs</li>
+            <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Custom data retention rules</li>
+            <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>EU or US data residency</li>
+            <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Dedicated success manager</li>
+          </ul>
+        </article>
+      </div>
+      <div class="pricing-foot reveal">
+        <span>Prices in USD, taxes excluded.</span>
+        <span>Over 200 seats? <a href="#">Let’s talk volume pricing</a></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TESTIMONIALS ============ -->
+  <section class="section testi" id="customers" aria-labelledby="customers-title">
+    <div class="wrap">
+      <header class="sec-head">
+        <p class="eyebrow reveal"><span class="eyebrow-num">04</span>Customers</p>
+        <h2 class="h2 reveal" id="customers-title">Teams that stopped <em>taking notes</em> — and started finishing things.</h2>
+        <p class="sec-lede reveal" style="--d:1">From four-person studios to 2,000-seat product orgs, Lumora is the quiet teammate in every room.</p>
+      </header>
+      <div class="quotes">
+        <figure class="quote quote-main reveal">
+          <div class="quote-mark" aria-hidden="true">“</div>
+          <blockquote><p>We cut our weekly status meeting from an hour to twenty minutes. Nobody misses the old notes doc — everyone just reads the Lumora recap.</p></blockquote>
+          <figcaption class="who"><i class="av av3" aria-hidden="true">MO</i><div><strong>Maya Okonkwo</strong><span>VP Product, Tidewell</span></div></figcaption>
+        </figure>
+        <figure class="quote reveal" style="--d:1">
+          <blockquote><p>“Action items used to die in someone’s notebook. Now they’re in our board with an owner before the call even ends.”</p></blockquote>
+          <figcaption class="who"><i class="av av2" aria-hidden="true">JB</i><div><strong>Jonas Brekke</strong><span>Engineering Manager, Orrevo</span></div></figcaption>
+        </figure>
+        <figure class="quote reveal" style="--d:2">
+          <blockquote><p>“I run back-to-back client calls. Lumora means I’m actually present — and my follow-ups go out the same afternoon.”</p></blockquote>
+          <figcaption class="who"><i class="av av4" aria-hidden="true">PL</i><div><strong>Priya Lindqvist</strong><span>Partner, Fennick &amp; Hale</span></div></figcaption>
+        </figure>
+      </div>
+      <div class="stats">
+        <div class="stat reveal"><b>5.2<small>hrs</small></b><span>saved per person, every single week</span></div>
+        <div class="stat reveal" style="--d:1"><b>93<small>%</small></b><span>of action items closed by their due date</span></div>
+        <div class="stat reveal" style="--d:2"><b>38<small>sec</small></b><span>from “bye everyone” to a full recap</span></div>
+      </div>
+      <p class="footnote">Names, companies and figures are fictional — illustrative content for a concept demo.</p>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="section" id="faq" aria-labelledby="faq-title">
+    <div class="wrap faq-grid">
+      <div class="faq-aside">
+        <p class="eyebrow reveal"><span class="eyebrow-num">05</span>FAQ</p>
+        <h2 class="h2 reveal" id="faq-title">Questions, <em>answered.</em></h2>
+        <p class="reveal" style="--d:1">Everything you need to know before your first recap. Still unsure? A real human replies within two hours on weekdays.</p>
+        <div class="faq-contact reveal" style="--d:2">
+          <span class="avatars lg" aria-hidden="true"><i class="av av5">RS</i><i class="av av1">EN</i></span>
+          <div><strong>Talk to the team</strong><a href="#">support@lumora.example</a></div>
+        </div>
+      </div>
+      <div class="faq-list reveal">
+        <details name="faq" open>
+          <summary>How does Lumora join my meetings?<span class="faq-ic" aria-hidden="true"><svg class="ic"><use href="#i-plus"/></svg></span></summary>
+          <div class="faq-body"><p>Connect your calendar and choose which meetings Lumora should attend. It joins as a clearly named participant, announces that it’s taking notes, and leaves when the meeting ends. For in-person meetings, just tap record in the mobile or desktop app.</p></div>
+        </details>
+        <details name="faq">
+          <summary>Is my meeting data used to train AI models?<span class="faq-ic" aria-hidden="true"><svg class="ic"><use href="#i-plus"/></svg></span></summary>
+          <div class="faq-body"><p>No. Your recordings, transcripts and summaries are never used to train models — ours or anyone else’s. Data is encrypted in transit and at rest, and you can delete any meeting permanently at any time.</p></div>
+        </details>
+        <details name="faq">
+          <summary>Which languages does Lumora support?<span class="faq-ic" aria-hidden="true"><svg class="ic"><use href="#i-plus"/></svg></span></summary>
+          <div class="faq-body"><p>Lumora transcribes more than 40 languages and can summarize in a different language than the one spoken — handy for distributed teams. It also handles mixed-language meetings.</p></div>
+        </details>
+        <details name="faq">
+          <summary>Do participants know they’re being recorded?<span class="faq-ic" aria-hidden="true"><svg class="ic"><use href="#i-plus"/></svg></span></summary>
+          <div class="faq-body"><p>Always. Lumora introduces itself when it joins, shows a visible recording indicator, and lets any participant pause or remove it. Admins can also require consent prompts for external guests.</p></div>
+        </details>
+        <details name="faq">
+          <summary>How does the free trial work?<span class="faq-ic" aria-hidden="true"><svg class="ic"><use href="#i-plus"/></svg></span></summary>
+          <div class="faq-body"><p>You get every Team feature for 14 days, no credit card required. At the end of the trial you can pick a paid plan or drop to Starter — your notes stay either way.</p></div>
+        </details>
+        <details name="faq">
+          <summary>Can I change plans or cancel anytime?<span class="faq-ic" aria-hidden="true"><svg class="ic"><use href="#i-plus"/></svg></span></summary>
+          <div class="faq-body"><p>Yes. Upgrade, downgrade or cancel from your workspace settings in two clicks. Yearly plans are prorated, and you can export all of your notes whenever you like.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FINAL CTA ============ -->
+  <section class="cta" id="get-started" aria-labelledby="cta-title">
+    <svg class="cta-sun" viewBox="0 0 200 200" aria-hidden="true" focusable="false">
+      <defs><clipPath id="sunclip"><circle cx="100" cy="100" r="96"/></clipPath></defs>
+      <g clip-path="url(#sunclip)">
+        <circle cx="100" cy="100" r="96" fill="#0E1C17"/>
+        <rect x="0" y="104" width="200" height="6" fill="#D6F25C"/>
+        <rect x="0" y="124" width="200" height="9" fill="#D6F25C"/>
+        <rect x="0" y="148" width="200" height="13" fill="#D6F25C"/>
+        <rect x="0" y="176" width="200" height="18" fill="#D6F25C"/>
+      </g>
+    </svg>
+    <div class="wrap cta-inner">
+      <h2 class="h2 reveal" id="cta-title">Your next meeting can <em>write its own notes.</em></h2>
+      <p class="lede reveal" style="--d:1">Join 40,000+ people who walk out of every call with a summary, a plan and zero homework.</p>
+      <div class="reveal" style="--d:2;width:100%;max-width:500px">
+        <form class="capture" novalidate data-capture aria-label="Start your free trial">
+          <label class="sr-only" for="cta-email">Work email</label>
+          <div class="capture-field">
+            <input id="cta-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@company.com" required aria-describedby="cta-email-msg">
+            <button class="btn btn-ink" type="submit"><span>Get started</span><svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+          </div>
+          <p class="capture-msg" id="cta-email-msg" aria-live="polite"></p>
+        </form>
+        <div class="capture-success" role="status" tabindex="-1" hidden>
+          <span class="success-ic" style="background:var(--ink);color:var(--lumen)"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg></span>
+          <div><strong>You’re in — check your inbox.</strong><p>We sent a setup link to <b data-email></b>. See you after your next meeting.</p></div>
+        </div>
+      </div>
+      <ul class="cta-points reveal" style="--d:3">
+        <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Set up in 2 minutes</li>
+        <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>14-day free trial</li>
+        <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Cancel anytime</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a class="brand" href="#top" aria-label="Lumora — back to top">
+          <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><use href="#i-mark"/></svg>
+          <span class="brand-name">Lumora</span>
+        </a>
+        <p>AI meeting notes for teams who’d rather be in the conversation than typing it up.</p>
+      </div>
+      <nav class="foot-col" aria-labelledby="fc-product">
+        <h3 id="fc-product">Product</h3>
+        <ul><li><a href="#features">Features</a></li><li><a href="#how">How it works</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#">Changelog</a></li></ul>
+      </nav>
+      <nav class="foot-col" aria-labelledby="fc-company">
+        <h3 id="fc-company">Company</h3>
+        <ul><li><a href="#customers">Customers</a></li><li><a href="#">About</a></li><li><a href="#">Careers</a></li><li><a href="#">Press kit</a></li></ul>
+      </nav>
+      <nav class="foot-col" aria-labelledby="fc-legal">
+        <h3 id="fc-legal">Trust</h3>
+        <ul><li><a href="#">Security</a></li><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li><li><a href="#faq">FAQ</a></li></ul>
+      </nav>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Lumora. Made for people who hate taking notes.</span>
+      <span class="fictional">Fictional brand · Concept demo</span>
+    </div>
+  </div>
+  <span class="foot-giant" aria-hidden="true">Lumora</span>
+</footer>
+
+<script>
+(() => {
+  'use strict';
+  const root = document.documentElement;
+  root.classList.add('js');
+  const reduceMQ = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  /* Sticky header state */
+  const header = document.getElementById('site-header');
+  const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 8);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  /* Mobile navigation */
+  const toggle = header.querySelector('.nav-toggle');
+  const menu = document.getElementById('mobile-menu');
+  const setMenu = (open) => {
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    header.classList.toggle('menu-open', open);
+    menu.classList.toggle('is-open', open);
+    document.body.classList.toggle('no-scroll', open);
+  };
+  toggle.addEventListener('click', () => {
+    const open = toggle.getAttribute('aria-expanded') !== 'true';
+    setMenu(open);
+    if (open) { const first = menu.querySelector('a'); if (first) setTimeout(() => first.focus(), 60); }
+  });
+  menu.addEventListener('click', (e) => { if (e.target.closest('a')) setMenu(false); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && header.classList.contains('menu-open')) { setMenu(false); toggle.focus(); }
+  });
+  window.matchMedia('(min-width: 961px)').addEventListener('change', (e) => { if (e.matches) setMenu(false); });
+
+  /* "Start free" links focus the hero email field */
+  const heroInput = document.getElementById('hero-email');
+  document.querySelectorAll('[data-start]').forEach((a) => {
+    a.addEventListener('click', (e) => {
+      if (!heroInput || heroInput.closest('form').hidden) return;
+      e.preventDefault();
+      setMenu(false);
+      heroInput.scrollIntoView({ behavior: reduceMQ.matches ? 'auto' : 'smooth', block: 'center' });
+      setTimeout(() => heroInput.focus({ preventScroll: true }), reduceMQ.matches ? 0 : 450);
+    });
+  });
+
+  /* Scroll reveal */
+  const revealEls = document.querySelectorAll('.reveal');
+  if (reduceMQ.matches || !('IntersectionObserver' in window)) {
+    revealEls.forEach((el) => el.classList.add('is-in'));
+  } else {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) { entry.target.classList.add('is-in'); io.unobserve(entry.target); }
+      });
+    }, { rootMargin: '0px 0px -6% 0px', threshold: 0.08 });
+    revealEls.forEach((el) => io.observe(el));
+  }
+
+  /* Decorative waveforms (deterministic) */
+  document.querySelectorAll('[data-wave]').forEach((wave) => {
+    const n = parseInt(wave.dataset.wave, 10) || 60;
+    let seed = parseInt(wave.dataset.seed, 10) || 11;
+    const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
+    const played = Math.round(n * 0.29);
+    const marks = new Set([Math.round(n * 0.18), Math.round(n * 0.52), Math.round(n * 0.77)]);
+    const frag = document.createDocumentFragment();
+    for (let i = 0; i < n; i++) {
+      const bar = document.createElement('i');
+      const env = 0.45 + 0.55 * Math.abs(Math.sin((i / n) * Math.PI * 2.3));
+      bar.style.height = Math.round((0.16 + rnd() * 0.84 * env) * 100) + '%';
+      if (i < played) bar.className = 'p';
+      if (marks.has(i) && !wave.classList.contains('wave-dark')) bar.className = 'mk';
+      frag.appendChild(bar);
+    }
+    wave.appendChild(frag);
+  });
+
+  /* Email capture: client-side validation + success state */
+  const EMAIL_RE = /^[^\s@]+@[^\s@.]+(\.[^\s@.]+)*\.[a-z]{2,}$/i;
+  document.querySelectorAll('[data-capture]').forEach((form) => {
+    const input = form.querySelector('input[type="email"]');
+    const msg = form.querySelector('.capture-msg');
+    const btn = form.querySelector('button[type="submit"]');
+    const success = form.parentElement.querySelector('.capture-success');
+    const showError = (text) => {
+      form.classList.add('has-error');
+      input.setAttribute('aria-invalid', 'true');
+      msg.textContent = text;
+      input.focus();
+    };
+    const clearError = () => {
+      form.classList.remove('has-error');
+      input.removeAttribute('aria-invalid');
+      msg.textContent = '';
+    };
+    input.addEventListener('input', () => { if (form.classList.contains('has-error')) clearError(); });
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const value = input.value.trim();
+      if (!value) return showError('Please enter your work email to get started.');
+      if (!EMAIL_RE.test(value)) return showError('That doesn’t look like a valid email — try name@company.com.');
+      clearError();
+      btn.disabled = true;
+      btn.classList.add('is-loading');
+      btn.querySelector('use').setAttribute('href', '#i-loader');
+      setTimeout(() => {
+        success.querySelector('[data-email]').textContent = value;
+        form.hidden = true;
+        success.hidden = false;
+        success.focus();
+      }, reduceMQ.matches ? 0 : 750);
+    });
+  });
+
+  /* Pricing toggle */
+  const seg = document.querySelector('.seg');
+  const segBtns = seg.querySelectorAll('button[data-period]');
+  const amounts = document.querySelectorAll('.amount[data-monthly]');
+  const notes = document.querySelectorAll('.price-note');
+  const status = document.getElementById('billing-status');
+  segBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const period = btn.dataset.period;
+      if (seg.dataset.period === period) return;
+      seg.dataset.period = period;
+      segBtns.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+      amounts.forEach((el) => {
+        const next = el.dataset[period];
+        if (el.textContent === next) return;
+        el.classList.remove('flip');
+        void el.offsetWidth;
+        el.textContent = next;
+        el.classList.add('flip');
+      });
+      notes.forEach((n) => { n.textContent = period === 'yearly' ? n.dataset.noteYearly : n.dataset.noteMonthly; });
+      status.textContent = period === 'yearly'
+        ? 'Showing yearly prices: Team $12 and Business $23 per seat per month, billed annually.'
+        : 'Showing monthly prices: Team $15 and Business $29 per seat per month.';
+    });
+  });
+})();
+</script>
+</body>
+</html>
