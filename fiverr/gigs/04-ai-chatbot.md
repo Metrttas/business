@@ -12,7 +12,7 @@
 **Service type & Metadaten** (genaue Namen können leicht abweichen, nimm das Ähnlichste):
 - Service type: **AI Integrations** (wir bauen einen KI-Chatbot in eine bestehende Website ein). Nicht „AI Technology Consulting“, „Custom GPT Apps“ oder „AI Mobile Apps“.
 - AI engine: **Claude.ai, Open AI GPT, Gemini**. Nicht Bild-KIs (DALL·E, MidJourney, Stable Diffusion), Sprach-Bots (Vapi, Retell) oder ManyChat.
-- Tools & frameworks: Node.js, REST API / API Integration, Vercel oder Cloudflare Workers (was davon in der Liste steht)
+- Tools & frameworks (max. 5): **n8n, LangChain, Pinecone**, dazu „Other“/„Custom“, falls es das weiter unten gibt. Keine fertigen Chatbot-Baukästen (Tidio, Intercom, ManyChat, Botpress usw.), wir programmieren selbst.
 - Bot type: Customer Support, FAQ, Lead Generation (Text-Chat, keine Voice-Bots)
 - Platforms: Website, dazu WordPress, Shopify, Wix, Webflow, falls gelistet (das Widget läuft dort überall). Nicht WhatsApp, Messenger, Telegram oder Discord.
 - Programming language: **JavaScript** (dazu TypeScript oder Node.js, falls gelistet). Nicht PHP, Java, C++ usw.
