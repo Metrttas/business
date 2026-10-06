@@ -30,7 +30,7 @@ const GIGS = [
     headline: 'Landing pages that turn visitors into customers',
     bullets: ['Custom design, no templates', 'Perfect on every phone', 'Fast and SEO-friendly'],
     detailLabel: 'Interactive pricing, FAQ and signup',
-    async detail(page) { await scrollToText(page, ['pricing', 'Pricing', 'Simple pricing']); },
+    async detail(page) { await scrollToSelector(page, ['#pricing']); },
   },
   {
     file: '02-business-website',
@@ -40,7 +40,7 @@ const GIGS = [
     headline: 'A website that makes your business look its best',
     bullets: ['Built for local businesses', 'Booking and contact forms', 'Mobile-first and fast'],
     detailLabel: 'Online booking form with validation',
-    async detail(page) { await scrollToSelector(page, ['#booking', '#book', 'form']); },
+    async detail(page) { await scrollToSelector(page, ['#book']); },
   },
   {
     file: '03-shopify-store',
@@ -68,12 +68,11 @@ const GIGS = [
     bullets: ['Answers questions instantly', 'Collects leads for you', 'Works on any website'],
     detailLabel: 'Chat widget answering a visitor',
     async detail(page) {
-      await page.locator('button[aria-label*="chat" i], button[aria-label*="assistant" i], .chat-launcher, #chat-launcher').first().click().catch(() => {});
-      await sleep(900);
-      const input = page.locator('input[type="text"]:visible, textarea:visible').last();
-      await input.fill('How much does a membership cost?').catch(() => {});
-      await input.press('Enter').catch(() => {});
-      await sleep(3500);
+      await page.click('#ivyLauncher');
+      await sleep(2500);
+      await page.fill('#ivyInput', 'How much does a membership cost?');
+      await page.press('#ivyInput', 'Enter');
+      await sleep(4000);
     },
   },
   {
@@ -85,21 +84,11 @@ const GIGS = [
     bullets: ['Make, Zapier and n8n', 'Leads, orders, emails, reports', 'Tested and documented'],
     detailLabel: 'Every new lead handled automatically',
     async detail(page) {
-      const run = page.locator('button:has-text("Run simulation"), button:has-text("Run")').first();
-      await run.scrollIntoViewIfNeeded().catch(() => {});
-      await page.evaluate(() => window.scrollBy(0, -120));
-      await run.click().catch(() => {});
-      await sleep(6000);
+      await page.click('#hero-run');
+      await sleep(10000);
     },
   },
 ];
-
-async function scrollToText(page, texts) {
-  for (const t of texts) {
-    const el = page.locator(`h2:has-text("${t}"), h3:has-text("${t}")`).first();
-    if (await el.count()) { await el.scrollIntoViewIfNeeded(); await page.evaluate(() => window.scrollBy(0, -100)); await sleep(900); return; }
-  }
-}
 
 async function scrollToSelector(page, selectors) {
   for (const s of selectors) {
@@ -148,11 +137,11 @@ function detailHtml(g, shot) {
   return `<!doctype html><html><head><meta charset="utf-8"><style>
   *{box-sizing:border-box;margin:0}
   body{width:1280px;height:769px;overflow:hidden;font-family:Inter,sans-serif;background:linear-gradient(135deg,#0f1117,#1b1f2b);position:relative}
-  .browser{position:absolute;left:70px;top:58px;width:1140px;border-radius:14px;overflow:hidden;background:#1f2330;box-shadow:0 40px 80px -20px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.08)}
+  .browser{position:absolute;left:120px;top:22px;width:1040px;border-radius:14px;overflow:hidden;background:#1f2330;box-shadow:0 40px 80px -20px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.08)}
   .bar{height:34px;display:flex;align-items:center;gap:8px;padding:0 14px;background:#262b38}
   .bar i{width:11px;height:11px;border-radius:50%;background:#4b5263}
   .browser img{display:block;width:100%}
-  .label{position:absolute;left:50%;transform:translateX(-50%);bottom:26px;background:${g.accent};color:#0b0d12;font-weight:800;font-size:26px;padding:12px 26px;border-radius:999px;box-shadow:0 12px 30px -8px rgba(0,0,0,.6);white-space:nowrap}
+  .label{position:absolute;left:50%;transform:translateX(-50%);bottom:14px;background:${g.accent};color:#0b0d12;font-weight:800;font-size:26px;padding:12px 26px;border-radius:999px;box-shadow:0 12px 30px -8px rgba(0,0,0,.6);white-space:nowrap}
   </style></head><body>
   <div class="browser"><div class="bar"><i></i><i></i><i></i></div><img src="${shot}"></div>
   <div class="label">${g.detailLabel}</div>
