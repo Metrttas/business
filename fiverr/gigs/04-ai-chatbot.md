@@ -6,16 +6,16 @@
 > **Basic** ist ein FAQ-Bot ohne KI, also ohne laufende Kosten für den Kunden. So einer läuft in
 > der Demo `portfolio/demos/ironleaf-fitness-chatbot/`.
 
-**Kategorie:** `Programming & Tech` → die Unterkategorie mit **„Chatbot“** im Namen (z. B. „Chatbot Development“ oder „AI Development“ → AI Chatbot).
-> Tipp: Erst den Titel eintragen, dann nimmt man am besten die passende Kategorie aus den Vorschlägen darunter.
+**Kategorie:** `Programming & Tech` → `AI Development`
+> Falls es weiter unten in der Liste etwas mit „Chatbot“ oder „AI Agents“ gibt, nimm das. Sonst gilt die Auswahl unten.
 
 **Service type & Metadaten** (genaue Namen können leicht abweichen, nimm das Ähnlichste):
-- Service type: neuen Chatbot bauen („Custom Chatbot“ / „Chatbot Development“), nicht nur „Consultation“
+- Service type: **AI Integrations** (wir bauen einen KI-Chatbot in eine bestehende Website ein). Nicht „AI Technology Consulting“, „Custom GPT Apps“ oder „AI Mobile Apps“.
 - Plattform / Kanal: **Website** (Webchat). Nicht WhatsApp, Messenger, Telegram oder Discord, das bieten wir (noch) nicht an.
 - Bot-Zweck / Type: Customer Support, FAQ, Lead Generation
-- Technologie (falls gefragt): AI / LLM, JavaScript
+- Technical expertise (falls gefragt): Claude / Anthropic, OpenAI API, JavaScript, Node.js, Prompt Engineering, API Integration. Nur auswählen, was in der Liste steht.
 - Programming language: JavaScript, Node.js (falls gelistet), HTML, CSS. Nichts ankreuzen, was wir nicht nutzen (z. B. PHP).
-- Industry: Health & Wellness, Fitness, Beauty, Real Estate, Education, E-Commerce, Professional Services
+- Industry (bis zu 8): E-Commerce, Health & Wellness, Fitness, Beauty, Real Estate, Education, Marketing, Hospitality / Restaurants (oder das Ähnlichste aus der Liste)
 
 **Galerie-Bilder:** `fiverr/gig-bilder/04-ai-chatbot-*.png`
 **Demo:** `portfolio/demos/ironleaf-fitness-chatbot/`
@@ -26,7 +26,7 @@
 
 ### Titel (max. 80 Zeichen – in Fiverr steht „I will“ schon vor dem Feld, nur den Rest einfügen)
 ```
-I will add an AI chatbot to your website that answers customers and gets leads
+I will build an AI chatbot for your website to answer customers
 ```
 
 ### Suchtags (5)
