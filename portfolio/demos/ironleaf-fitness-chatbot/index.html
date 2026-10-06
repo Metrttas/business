@@ -46,7 +46,7 @@ h1,h2,h3,h4,p{margin:0}
 :focus{outline:none}
 :focus-visible{outline:3px solid var(--lime);outline-offset:3px;border-radius:8px}
 .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-.skip-link{position:fixed;left:16px;top:-80px;z-index:200;background:var(--lime);color:var(--lime-ink);padding:12px 18px;border-radius:12px;font-weight:700;text-decoration:none;transition:top .2s}
+.skip-link{position:fixed;left:16px;top:-120px;z-index:200;background:var(--lime);color:var(--lime-ink);padding:12px 18px;border-radius:12px;font-weight:700;text-decoration:none;transition:top .2s}
 .skip-link:focus{top:12px}
 .container{width:100%;max-width:var(--container);margin:0 auto;padding:0 32px}
 .icon{width:20px;height:20px;flex:none}
@@ -181,7 +181,8 @@ h1,h2,h3,h4,p{margin:0}
 .s-class{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;min-width:0}
 .s-name{font-weight:800;font-size:18px;font-stretch:106%;letter-spacing:-.005em}
 .cat{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);border:1px solid var(--line-2);padding:3px 9px;border-radius:999px;white-space:nowrap}
-.s-meta{display:none;width:100%;font-size:13.5px;color:var(--muted)}
+.s-meta{display:none;width:100%;font-size:13.5px;color:var(--muted);flex-wrap:wrap;gap:2px 12px;align-items:center}
+.s-meta .spots{font-size:13px}
 .s-coach{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:14.5px;min-width:0}
 .mini-av{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:900;font-stretch:115%;color:var(--lime-ink);background:var(--g);flex:none}
 .s-dur{color:var(--muted);font-size:14.5px;font-family:var(--mono)}
@@ -275,7 +276,7 @@ h1,h2,h3,h4,p{margin:0}
 .perks li{display:flex;gap:14px;align-items:flex-start;font-size:16px}
 .perks .tick{width:26px;height:26px;border-radius:9px;background:var(--lime);color:var(--lime-ink);display:grid;place-items:center;flex:none}
 .perks .tick svg{width:15px;height:15px}
-.perks b{display:block;font-weight:700}
+.perks b{display:block;font-weight:700;color:var(--text)}
 .perks span{color:var(--muted);font-size:15px}
 .mock-chat{background:#0f1311;border:1px solid var(--line-2);border-radius:26px;padding:20px 18px;display:flex;flex-direction:column;gap:14px;box-shadow:0 40px 90px -30px rgba(0,0,0,.9);transform:rotate(1.2deg)}
 .mock-top{display:flex;align-items:center;gap:10px;padding-bottom:14px;border-bottom:1px solid var(--line)}
@@ -324,7 +325,7 @@ h1,h2,h3,h4,p{margin:0}
 .contact-info a:hover{color:var(--lime)}
 .map{margin-top:28px;border-radius:24px;overflow:hidden;border:1px solid var(--line);background:#0f1311}
 .map svg{width:100%;height:auto}
-.pin-pulse{transform-origin:330px 118px;animation:pinPulse 2.4s ease-out infinite}
+.pin-pulse{transform-origin:330px 124px;animation:pinPulse 2.4s ease-out infinite}
 @keyframes pinPulse{0%{transform:scale(.6);opacity:.8}100%{transform:scale(1.8);opacity:0}}
 .form-card{background:var(--surface);border:1px solid var(--line-2);border-radius:32px;padding:40px;box-shadow:0 50px 120px -50px rgba(0,0,0,.9);position:relative}
 .form-card h3{font-size:28px;font-weight:900;font-stretch:112%;text-transform:uppercase;letter-spacing:-.01em;line-height:1}
@@ -352,7 +353,7 @@ fieldset.field{border:0;margin:0;padding:0;min-width:0}
 .pill input:hover+span{border-color:rgba(236,245,230,.3);color:var(--text)}
 .pill input:checked+span{background:var(--lime);border-color:var(--lime);color:var(--lime-ink)}
 .pill input:focus-visible+span{outline:3px solid var(--lime);outline-offset:3px}
-.check{display:flex;gap:12px;align-items:flex-start;font-size:14.5px;color:var(--muted);cursor:pointer;line-height:1.5}
+.check{display:flex;gap:12px;align-items:flex-start;font-size:14.5px;color:var(--muted);cursor:pointer;line-height:1.5;font-weight:500!important}
 .check input{width:20px;height:20px;margin:1px 0 0;accent-color:var(--lime);flex:none;cursor:pointer}
 .check input[aria-invalid="true"]{outline:2px solid var(--danger);outline-offset:2px}
 .form-actions{margin-top:28px;display:flex;flex-direction:column;gap:14px}
@@ -383,6 +384,7 @@ fieldset.field{border:0;margin:0;padding:0;min-width:0}
 .footer-grid a{text-decoration:none;color:var(--muted)}
 .footer-grid a:hover{color:var(--lime)}
 .footer-brand p{margin-top:18px;max-width:30ch}
+.footer-grid .logo{color:var(--text)}
 .footer-word{font-size:min(calc((100vw - 64px) / 6.6),178px);font-weight:900;font-stretch:125%;line-height:.8;letter-spacing:-.04em;text-transform:uppercase;color:transparent;-webkit-text-stroke:1.5px rgba(236,245,230,.14);margin:72px 0 0;white-space:nowrap;user-select:none;text-align:center}
 .footer-bottom{display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between;align-items:center;margin-top:36px;padding-top:24px;border-top:1px solid var(--line);font-size:13.5px;color:var(--dim)}
 .disclaimer{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11.5px;letter-spacing:.02em;color:var(--muted);border:1px dashed var(--line-2);padding:6px 12px;border-radius:999px}
@@ -464,7 +466,7 @@ fieldset.field{border:0;margin:0;padding:0;min-width:0}
 .ivy-send{width:50px;height:50px;border-radius:15px;border:0;background:var(--lime);color:var(--lime-ink);display:grid;place-items:center;flex:none;transition:background-color .2s,transform .2s var(--ease),opacity .2s}
 .ivy-send:hover{background:var(--lime-hi)}
 .ivy-send:active{transform:scale(.94)}
-.ivy-send[disabled]{opacity:.45;cursor:default}
+.ivy-send[disabled]{background:var(--surface-2);color:var(--dim);border:1px solid var(--line-2);cursor:default}
 .ivy-send svg{width:21px;height:21px}
 .ivy-send:focus-visible{outline:3px solid var(--text);outline-offset:2px;border-radius:15px}
 .ivy-foot{margin:0;padding:0 12px 11px;text-align:center;font-family:var(--mono);font-size:10.5px;color:var(--dim);background:#0c100e;letter-spacing:.04em;flex:none;display:flex;align-items:center;justify-content:center;gap:8px}
@@ -495,7 +497,7 @@ fieldset.field{border:0;margin:0;padding:0;min-width:0}
   .sched-headrow{display:none}
   .sched-row{grid-template-columns:76px minmax(0,1fr) auto;gap:6px 14px;padding:16px 10px}
   .s-coach,.s-dur,.s-spots{display:none}
-  .s-meta{display:block}
+  .s-meta{display:flex}
   .s-time{font-size:17px;align-self:start;padding-top:2px}
   .s-time small{display:block;margin:2px 0 0}
   .s-name{font-size:16.5px}
@@ -533,8 +535,10 @@ fieldset.field{border:0;margin:0;padding:0;min-width:0}
   .day-tab .d-count{display:none}
   .day-tab .d-today{top:5px;right:50%;transform:translateX(50%);width:5px;height:5px;top:auto;bottom:4px}
   .sched-list{padding:0 4px 4px}
-  .sched-row{grid-template-columns:60px minmax(0,1fr);padding:16px 8px}
-  .s-btn{grid-column:2;justify-self:start;margin-top:6px}
+  .sched-row{grid-template-columns:54px minmax(0,1fr) auto;gap:4px 12px;padding:15px 8px}
+  .s-class .cat{display:none}
+  .s-meta{flex-direction:column;align-items:flex-start;gap:3px}
+  .s-btn{padding:0 13px}
   .sched-foot{padding:14px 12px}
   .plan{padding:32px 22px 24px;border-radius:26px}
   .price .amt{font-size:68px}
@@ -1021,11 +1025,11 @@ fieldset.field{border:0;margin:0;padding:0;min-width:0}
             <text x="24" y="88" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="2" fill="rgba(236,245,230,.4)">EXAMPLE ST</text>
             <text x="462" y="238" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="2" fill="rgba(236,245,230,.4)">RIVERSIDE STN</text>
             <circle cx="474" cy="210" r="6" fill="none" stroke="rgba(236,245,230,.4)" stroke-width="2"/>
-            <circle class="pin-pulse" cx="330" cy="118" r="26" fill="rgba(200,245,60,.25)"/>
+            <circle class="pin-pulse" cx="330" cy="124" r="24" fill="rgba(200,245,60,.25)"/>
             <path d="M330 126s-15-13-15-25a15 15 0 0 1 30 0c0 12-15 25-15 25z" fill="#c8f53c"/>
             <circle cx="330" cy="101" r="5.5" fill="#0b0e05"/>
-            <rect x="196" y="38" width="120" height="30" rx="15" fill="#c8f53c"/>
-            <text x="256" y="58" text-anchor="middle" font-family="Archivo, sans-serif" font-size="12" font-weight="900" fill="#0b0e05" letter-spacing="1">IRONLEAF</text>
+            <rect x="352" y="70" width="112" height="28" rx="14" fill="#c8f53c"/>
+            <text x="408" y="89" text-anchor="middle" font-family="Archivo, sans-serif" font-size="12" font-weight="900" fill="#0b0e05" letter-spacing="1">IRONLEAF</text>
           </svg>
         </div>
       </div>
@@ -1274,7 +1278,7 @@ fieldset.field{border:0;margin:0;padding:0;min-width:0}
       return '<li class="sched-row">' +
         '<div class="s-time">' + tm.main + '<small>' + tm.ap + '</small></div>' +
         '<div class="s-class"><span class="s-name">' + C.name + '</span><span class="cat">' + C.cat + '</span>' +
-        '<span class="s-meta">' + C.coach + ' · ' + C.dur + ' min · <span class="spots ' + sCls + '">' + sTxt + '</span></span></div>' +
+        '<span class="s-meta"><span>' + C.coach + ' · ' + C.dur + ' min</span><span class="spots ' + sCls + '">' + sTxt + '</span></span></div>' +
         '<div class="s-coach"><span class="mini-av" style="--g:' + co.g + '" aria-hidden="true">' + co.ini + '</span>' + C.coach + '</div>' +
         '<div class="s-dur">' + C.dur + ' min</div>' +
         '<div class="s-int" role="img" aria-label="Intensity ' + C.int + ' of 3">' + bars + '</div>' +

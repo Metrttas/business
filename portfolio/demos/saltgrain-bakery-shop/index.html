@@ -90,11 +90,12 @@ p{margin:0}
 @keyframes bump{35%{transform:scale(1.4) rotate(-8deg)}}
 .menu-btn{display:none}
 .search-panel{border-top:1px solid var(--line);background:var(--paper)}
-.search-inner{display:flex;align-items:center;gap:12px;padding-block:14px}
+.search-inner{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;padding-block:14px}
 .search-field{flex:1;display:flex;align-items:center;gap:12px;height:54px;padding:0 8px 0 18px;border:2px solid var(--ink);border-radius:999px;background:var(--card)}
 .search-field:focus-within{box-shadow:4px 4px 0 var(--ink)}
 .search-field input{flex:1;min-width:0;border:0;background:transparent;font-size:1.05rem;outline:none}
 .search-field input::placeholder{color:var(--ink-3)}
+.search-field input::-webkit-search-cancel-button{-webkit-appearance:none;appearance:none}
 .search-hint{font-size:.85rem;color:var(--ink-3);font-weight:600;white-space:nowrap}
 
 /* ---------- Hero ---------- */
@@ -402,7 +403,8 @@ p{margin:0}
   .brand-sub{font-size:.52rem;letter-spacing:.22em}
   .cart-btn{height:44px;padding:0 8px 0 12px;gap:7px}
   .cart-btn .cart-label{display:none}
-  .search-hint{display:none}
+  .search-field{flex:1 1 0}
+  .search-hint{order:3;flex-basis:100%;padding-left:20px;font-size:.8rem}
   .hero{padding:36px 0 64px}
   .hero h1{margin:16px 0 18px}
   .lede{font-size:1.06rem}
@@ -453,7 +455,7 @@ p{margin:0}
   .nl-row .btn{width:100%}
   .site-footer{padding-top:64px}
   .footer-grid{grid-template-columns:1fr 1fr;gap:36px 20px}
-  .footer-grid > :first-child{grid-column:1 / -1}
+  .footer-grid > :first-child,.footer-grid > :last-child{grid-column:1 / -1}
   .footer-bottom{flex-direction:column;align-items:flex-start}
   .drawer-head{padding:16px 14px 12px 20px}
   .ship{margin:0 20px 6px}
@@ -529,8 +531,8 @@ p{margin:0}
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 20 20"/></svg>
         <label for="search-input" class="sr-only">Search the shop</label>
         <input id="search-input" type="search" placeholder="Search sourdough, croissants, honey…" autocomplete="off" aria-describedby="search-hint">
-        <span class="search-hint" id="search-hint" aria-live="polite">Type to filter the shop</span>
       </div>
+      <span class="search-hint" id="search-hint" aria-live="polite">Type to filter the shop</span>
       <button class="icon-btn" id="search-close" type="button" aria-label="Close search">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
       </button>
@@ -853,7 +855,7 @@ p{margin:0}
   const shadow = (cx, cy, rx) => `<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${Math.round(rx * 0.13)}" fill="${INK}" opacity=".16"/>`;
   const dots = (pts, fill = '#FFF8EA') => pts.map(([x, y, r = 2]) => `<circle cx="${x}" cy="${y}" r="${r}" fill="${fill}"/>`).join('');
   const strand = (d, c = '#E0A258', w = 28) => `<path d="${d}" fill="none" stroke="${INK}" stroke-width="${w + 7}" stroke-linecap="round" stroke-linejoin="round"/><path d="${d}" fill="none" stroke="${c}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"/>`;
-  const overStrand = (d, c = '#E0A258', w = 28) => `<path d="${d}" fill="none" stroke="${INK}" stroke-width="${w + 7}"/><path d="${d}" fill="none" stroke="${c}" stroke-width="${w}"/>`;
+  const overStrand = (d, d2, c = '#E0A258', w = 28) => `<path d="${d}" fill="none" stroke="${INK}" stroke-width="${w + 7}"/><path d="${d2}" fill="none" stroke="${c}" stroke-width="${w}"/>`;
   const flakes = (pts) => pts.map(([x, y, a = 0]) => `<rect x="${x - 2.4}" y="${y - 2.4}" width="4.8" height="4.8" rx=".8" transform="rotate(${a} ${x} ${y})" fill="#FFFDF7" stroke="${INK}" stroke-width="1.2"/>`).join('');
 
   const ART = {
@@ -905,7 +907,7 @@ p{margin:0}
     knot: () => `
       ${shadow(100, 158, 64)}
       ${strand('M100 110C118 78 160 80 160 110S118 142 100 110 40 78 40 110 82 142 100 110Z')}
-      ${overStrand('M87.2 127.9L112.8 92.1')}
+      ${overStrand('M87.2 127.9L112.8 92.1', 'M85.8 129.9L114.2 90.1')}
       <path d="M58 93c4-6 10-9 16-9M126 87c6-3 13-3 18 0" fill="none" stroke="#F8D49A" stroke-width="5" stroke-linecap="round"/>
       <path d="M46 104l8 6M54 124l8-3M152 100l-8 6M148 126l-8-4M70 130l2-9M130 130l-2-9" stroke="#9E5A22" stroke-width="2.5" stroke-linecap="round"/>
       ${flakes([[62, 100, 20], [136, 98, -10], [80, 92, 40], [118, 126, 10], [151, 115, 30], [48, 115, 0]])}
