@@ -1,0 +1,550 @@
+{
+  "name": "Lead → CRM → Follow-up (Example Workflow)",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Lead → CRM → Follow-up (example)\nFictional example for **Larkfield Interiors** (concept demo).\n\n**Before activating:**\n1. Connect credentials for Google Sheets, Gmail and Slack.\n2. Replace `YOUR_SHEET_ID` with your Leads spreadsheet ID (sheet tab named `Leads`).\n3. Replace `YOUR_SLACK_CHANNEL_ID` with the channel for new-lead alerts.\n4. Point your website form at the Production webhook URL (POST JSON: name, email, phone, interest, message).\n5. Activate the workflow.",
+        "height": 300,
+        "width": 420,
+        "color": 7
+      },
+      "id": "625bfe9f-8e38-4074-a727-2e9a0a4dc468",
+      "name": "Setup Notes",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -480,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "new-lead",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "0e930bde-2411-485a-906f-819bbcd05d7d",
+      "name": "Website Form (Webhook)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        300
+      ],
+      "webhookId": "83ac402d-3fdf-4e7c-bfd2-19ea6c692412"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a39e0c64-68ec-44f3-8556-aa72c9e256ba",
+              "name": "name",
+              "value": "={{ ($json.body.name || '').trim().replace(/\\s+/g, ' ').toLowerCase().replace(/(^|[\\s'-])([a-z])/g, (m, p, c) => p + c.toUpperCase()) }}",
+              "type": "string"
+            },
+            {
+              "id": "2eff5e57-04c4-476a-b54c-3f6637bfca3b",
+              "name": "first_name",
+              "value": "={{ ($json.body.name || '').trim().split(/\\s+/)[0].toLowerCase().replace(/^./, c => c.toUpperCase()) }}",
+              "type": "string"
+            },
+            {
+              "id": "1ec9dc44-0854-44c2-bb10-33d19bcc8c4d",
+              "name": "email",
+              "value": "={{ ($json.body.email || '').trim().toLowerCase() }}",
+              "type": "string"
+            },
+            {
+              "id": "5352bdaa-c888-46a5-b6f3-fb8519c74995",
+              "name": "email_valid",
+              "value": "={{ /^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$/.test(($json.body.email || '').trim()) }}",
+              "type": "boolean"
+            },
+            {
+              "id": "87f2cbf1-417d-49aa-be6b-78093c073e19",
+              "name": "phone",
+              "value": "={{ ($json.body.phone || '').replace(/[^0-9+]/g, '') }}",
+              "type": "string"
+            },
+            {
+              "id": "bf38450e-6149-4e70-8942-6052a75d81ad",
+              "name": "interest",
+              "value": "={{ ($json.body.interest || 'General enquiry').trim() }}",
+              "type": "string"
+            },
+            {
+              "id": "105d91aa-c7dc-4147-af02-2d1ed7f1ebcc",
+              "name": "message",
+              "value": "={{ ($json.body.message || '').trim() }}",
+              "type": "string"
+            },
+            {
+              "id": "cf1336f4-18ea-49f8-80bf-8c4fab9e3c6b",
+              "name": "source",
+              "value": "Website form",
+              "type": "string"
+            },
+            {
+              "id": "6666df2f-f700-43fa-b66b-d252ad9c287f",
+              "name": "received_at",
+              "value": "={{ $now.toISO() }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "5c54c915-c12d-4609-83ff-7c18ef6b01e8",
+      "name": "Validate & Clean Data",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        220,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "01e7e7cb-db16-49de-acad-7fad907f4604",
+              "leftValue": "={{ $json.email_valid }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "9d567ef3-a821-43a2-a9c5-4c8402313d2b",
+              "leftValue": "={{ $json.name }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "141501f5-e122-4314-9a59-fc8ba863473f",
+      "name": "Keep Valid Leads Only",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [
+        440,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_SHEET_ID",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Leads",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Date": "={{ $json.received_at }}",
+            "Name": "={{ $json.name }}",
+            "Email": "={{ $json.email }}",
+            "Phone": "={{ $json.phone }}",
+            "Interest": "={{ $json.interest }}",
+            "Message": "={{ $json.message }}",
+            "Source": "={{ $json.source }}",
+            "Status": "New"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Date",
+              "displayName": "Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Interest",
+              "displayName": "Interest",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Message",
+              "displayName": "Message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Source",
+              "displayName": "Source",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "8c312e1b-d2fd-489d-ac3e-a1840babf6ad",
+      "name": "Add Lead to CRM Sheet",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        660,
+        300
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "YOUR_GOOGLE_SHEETS_CREDENTIAL_ID",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Validate & Clean Data').first().json.email }}",
+        "subject": "=Thanks for reaching out, {{ $('Validate & Clean Data').first().json.first_name }}!",
+        "emailType": "text",
+        "message": "=Hi {{ $('Validate & Clean Data').first().json.first_name }},\n\nThanks for getting in touch about your {{ $('Validate & Clean Data').first().json.interest.toLowerCase() }} project — we've received your message and a designer will reply personally within one business day.\n\nIn the meantime, feel free to reply to this email with photos, measurements or inspiration links. The more we know, the better our first conversation will be.\n\nWarm regards,\nThe Larkfield Interiors team",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "id": "fe290533-255c-4495-817a-2e56b23f43ac",
+      "name": "Send Welcome Email",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        880,
+        300
+      ],
+      "webhookId": "b6a7f64f-c6f4-4922-8cde-6ae9a5865e78",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "YOUR_GMAIL_CREDENTIAL_ID",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "YOUR_SLACK_CHANNEL_ID",
+          "mode": "id"
+        },
+        "text": "=:sparkles: *New website lead*\n*Name:* {{ $('Validate & Clean Data').first().json.name }}\n*Email:* {{ $('Validate & Clean Data').first().json.email }}\n*Phone:* {{ $('Validate & Clean Data').first().json.phone || '—' }}\n*Interest:* {{ $('Validate & Clean Data').first().json.interest }}\n*Message:* {{ $('Validate & Clean Data').first().json.message || '—' }}\n\nAdded to the CRM sheet and a welcome email has been sent. Follow-up goes out automatically in 2 days if there's no reply.",
+        "otherOptions": {}
+      },
+      "id": "b558b9ad-fdab-45f2-b910-3ea3bdd28a16",
+      "name": "Notify Team in Slack",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.2,
+      "position": [
+        1100,
+        300
+      ],
+      "webhookId": "032830ae-7146-484e-8d87-36a3fb643684",
+      "credentials": {
+        "slackApi": {
+          "id": "YOUR_SLACK_CREDENTIAL_ID",
+          "name": "Slack account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 2,
+        "unit": "days"
+      },
+      "id": "8f3ef890-b07b-4040-8e14-18cb13f11952",
+      "name": "Wait 2 Days",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1320,
+        300
+      ],
+      "webhookId": "166548a2-459e-4a60-8cf5-72cf4c33316e"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "limit": 1,
+        "filters": {
+          "q": "=from:{{ $('Validate & Clean Data').first().json.email }} newer_than:3d"
+        }
+      },
+      "id": "0f48de7c-98a2-43dc-835d-9bfd59c5ca55",
+      "name": "Check Inbox for Reply",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1540,
+        300
+      ],
+      "webhookId": "69ebd190-03ad-4a34-9675-4fbf0b1ac27a",
+      "alwaysOutputData": true,
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "YOUR_GMAIL_CREDENTIAL_ID",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "id": "3dd4be6b-f3b2-4549-809f-1e719eefcbcf",
+              "leftValue": "={{ $json.id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "1e547fe1-1a81-4488-9e30-ac82eadd45a3",
+      "name": "Lead Replied?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1760,
+        300
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "2229742d-b39f-4663-8d34-88e2da92fc77",
+      "name": "Replied - No Follow-up Needed",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1980,
+        180
+      ]
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Validate & Clean Data').first().json.email }}",
+        "subject": "=Quick follow-up on your {{ $('Validate & Clean Data').first().json.interest.toLowerCase() }} project",
+        "emailType": "text",
+        "message": "=Hi {{ $('Validate & Clean Data').first().json.first_name }},\n\nJust checking in on the message you sent us a couple of days ago. Would a short, no-obligation call this week help? You can pick a time that suits you here: YOUR_BOOKING_LINK\n\nIf now isn't the right moment, no worries at all — just reply whenever you're ready.\n\nWarm regards,\nThe Larkfield Interiors team",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "id": "f7872e3a-3d28-4018-a39e-146a56e336af",
+      "name": "Send Follow-up Email",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1980,
+        420
+      ],
+      "webhookId": "65a38686-951b-4630-9d4d-380048c0fd97",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "YOUR_GMAIL_CREDENTIAL_ID",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Website Form (Webhook)": {
+      "main": [
+        [
+          {
+            "node": "Validate & Clean Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate & Clean Data": {
+      "main": [
+        [
+          {
+            "node": "Keep Valid Leads Only",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Keep Valid Leads Only": {
+      "main": [
+        [
+          {
+            "node": "Add Lead to CRM Sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add Lead to CRM Sheet": {
+      "main": [
+        [
+          {
+            "node": "Send Welcome Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Welcome Email": {
+      "main": [
+        [
+          {
+            "node": "Notify Team in Slack",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Notify Team in Slack": {
+      "main": [
+        [
+          {
+            "node": "Wait 2 Days",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait 2 Days": {
+      "main": [
+        [
+          {
+            "node": "Check Inbox for Reply",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Inbox for Reply": {
+      "main": [
+        [
+          {
+            "node": "Lead Replied?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lead Replied?": {
+      "main": [
+        [
+          {
+            "node": "Replied - No Follow-up Needed",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send Follow-up Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "active": false,
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": []
+}

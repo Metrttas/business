@@ -1,0 +1,1642 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Saltgrain Bakery — Slow Sourdough, Pastries &amp; Pantry</title>
+<meta name="description" content="Saltgrain Bakery concept storefront: 48-hour sourdough, laminated pastries, small-batch pantry goods and gift boxes, baked before sunrise and delivered locally. A fictional brand built as a portfolio demo.">
+<meta name="theme-color" content="#2A1C13">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23C2571E'/%3E%3Cpath d='M32 53V21' stroke='%23FFF3DC' stroke-width='3' stroke-linecap='round'/%3E%3Cg fill='%23FFF3DC'%3E%3Cellipse cx='26' cy='39' rx='4.5' ry='8' transform='rotate(-35 26 39)'/%3E%3Cellipse cx='38' cy='39' rx='4.5' ry='8' transform='rotate(35 38 39)'/%3E%3Cellipse cx='26' cy='28' rx='4.5' ry='8' transform='rotate(-35 26 28)'/%3E%3Cellipse cx='38' cy='28' rx='4.5' ry='8' transform='rotate(35 38 28)'/%3E%3Cellipse cx='32' cy='16' rx='4' ry='7.5'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..800,0..100,0..1;1,9..144,300..800,0..100,0..1&family=Figtree:wght@400;500;600;700;800&display=swap">
+<style>
+:root{
+  --paper:#F7EFE1;
+  --paper-2:#EFE2CB;
+  --card:#FFFAF2;
+  --ink:#2A1C13;
+  --ink-2:#4F3B2C;
+  --ink-3:#6E5747;
+  --crust:#C2571E;
+  --crust-deep:#A4461A;
+  --butter:#F2C14E;
+  --sage:#A9B784;
+  --sage-light:#CDD6AC;
+  --berry:#9C3348;
+  --cream:#FFF4E2;
+  --line:rgba(42,28,19,.16);
+  --gutter:40px;
+  --wrap:1240px;
+  --radius:22px;
+  --font-display:"Fraunces","Iowan Old Style","Palatino Linotype",Georgia,serif;
+  --font-body:"Figtree",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --ease:cubic-bezier(.2,.8,.2,1);
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none !important}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:110px}
+html.no-scroll{overflow:hidden}
+body{margin:0;background-color:var(--paper);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .42 0 0 0 0 .3 0 0 0 0 .18 0 0 0 .2 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");color:var(--ink);font-family:var(--font-body);font-size:1.0625rem;line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+img,svg{max-width:100%}
+a{color:inherit}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+h1,h2,h3,h4{margin:0;font-family:var(--font-display);font-optical-sizing:auto}
+p{margin:0}
+:focus-visible{outline:3px solid var(--crust);outline-offset:3px;border-radius:6px}
+.on-dark :focus-visible,.on-crust :focus-visible{outline-color:var(--cream)}
+.sr-only{position:absolute !important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.skip-link{position:absolute;left:16px;top:-80px;z-index:300;background:var(--ink);color:var(--cream);padding:12px 18px;border-radius:999px;font-weight:700;text-decoration:none;transition:top .2s}
+.skip-link:focus{top:12px}
+.wrap{width:min(var(--wrap),100% - var(--gutter)*2);margin-inline:auto}
+
+/* ---------- Buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;border-radius:999px;border:2px solid var(--ink);font-weight:700;font-size:1rem;letter-spacing:.005em;text-decoration:none;background:transparent;color:var(--ink);transition:transform .2s var(--ease),box-shadow .2s var(--ease),background-color .2s,color .2s;white-space:nowrap}
+.btn svg{flex:none}
+.btn-primary{background:var(--crust);color:#FFF8EE;box-shadow:4px 4px 0 var(--ink)}
+.btn-primary:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+.btn-primary:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.btn-ghost:hover{background:var(--ink);color:var(--cream)}
+.btn-ink{background:var(--ink);color:var(--cream)}
+.btn-ink:hover{background:#000}
+.btn-block{width:100%}
+.btn[disabled]{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
+.icon-btn{position:relative;display:inline-grid;place-items:center;width:44px;height:44px;border-radius:999px;border:0;background:transparent;color:var(--ink);transition:background-color .2s}
+.icon-btn:hover{background:var(--paper-2)}
+
+/* ---------- Announcement ---------- */
+.announce{position:relative;z-index:2;background:var(--ink);color:var(--cream);font-size:.8125rem;font-weight:600;letter-spacing:.02em}
+.announce .wrap{display:flex;justify-content:center;align-items:center;gap:22px;min-height:40px;padding-block:8px;text-align:center}
+.announce b{color:var(--butter);font-weight:700}
+.announce .dot{color:var(--butter);opacity:.8}
+
+/* ---------- Header ---------- */
+.site-header{position:sticky;top:0;z-index:50;background:rgba(247,239,225,.9);-webkit-backdrop-filter:saturate(1.3) blur(12px);backdrop-filter:saturate(1.3) blur(12px);border-bottom:1px solid var(--line)}
+.header-inner{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:24px;height:78px}
+.brand{display:inline-flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink);border-radius:12px}
+.brand svg{flex:none}
+.brand-name{display:block;font-family:var(--font-display);font-size:1.6rem;font-weight:650;letter-spacing:-.025em;line-height:1;font-variation-settings:"SOFT" 100}
+.brand-sub{display:block;font-size:.6rem;font-weight:800;letter-spacing:.26em;text-transform:uppercase;color:var(--ink-3);margin-top:4px}
+.nav ul{display:flex;justify-content:center;gap:2px;list-style:none;margin:0;padding:0}
+.nav a{display:inline-block;padding:10px 15px;border-radius:999px;font-weight:600;font-size:.95rem;text-decoration:none;transition:background-color .2s}
+.nav a:hover{background:var(--paper-2)}
+.header-actions{display:flex;align-items:center;gap:6px}
+.cart-btn{display:inline-flex;align-items:center;gap:9px;height:46px;padding:0 10px 0 16px;border-radius:999px;border:2px solid var(--ink);background:var(--ink);color:var(--cream);font-weight:700;font-size:.95rem;transition:background-color .2s,transform .2s}
+.cart-btn:hover{background:#000}
+.cart-count{display:inline-grid;place-items:center;min-width:26px;height:26px;padding:0 7px;border-radius:999px;background:var(--butter);color:var(--ink);font-size:.8rem;font-weight:800;line-height:1}
+.cart-count.bump{animation:bump .55s var(--ease)}
+@keyframes bump{35%{transform:scale(1.4) rotate(-8deg)}}
+.menu-btn{display:none}
+.search-panel{border-top:1px solid var(--line);background:var(--paper)}
+.search-inner{display:flex;align-items:center;gap:12px;padding-block:14px}
+.search-field{flex:1;display:flex;align-items:center;gap:12px;height:54px;padding:0 8px 0 18px;border:2px solid var(--ink);border-radius:999px;background:var(--card)}
+.search-field:focus-within{box-shadow:4px 4px 0 var(--ink)}
+.search-field input{flex:1;min-width:0;border:0;background:transparent;font-size:1.05rem;outline:none}
+.search-field input::placeholder{color:var(--ink-3)}
+.search-hint{font-size:.85rem;color:var(--ink-3);font-weight:600;white-space:nowrap}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;padding:64px 0 104px;overflow:clip}
+.hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:64px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:12px;font-size:.78rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--crust-deep)}
+.eyebrow::before{content:"";width:30px;height:2px;background:currentColor;border-radius:2px}
+.hero h1{font-size:clamp(2.75rem,6.3vw,6.1rem);font-weight:560;line-height:.94;letter-spacing:-.04em;margin:22px 0 26px;font-variation-settings:"SOFT" 60}
+.hero h1 em{display:inline-block;font-style:italic;font-weight:480;color:var(--crust);font-variation-settings:"SOFT" 100,"WONK" 1}
+.lede{font-size:1.2rem;line-height:1.6;color:var(--ink-2);max-width:31em}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
+.hero-facts{display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:36px;margin:44px 0 0;padding:26px 0 0;border-top:1.5px dashed rgba(42,28,19,.3);list-style:none}
+.hero-facts li{font-size:.85rem;font-weight:600;color:var(--ink-2);line-height:1.35}
+.hero-facts b{display:block;font-family:var(--font-display);font-size:2rem;font-weight:600;color:var(--ink);letter-spacing:-.02em;line-height:1.05}
+.hero-art{position:relative;padding:0 18px 18px 0}
+.arch-wrap{position:relative;max-width:540px;margin-inline:auto}
+.arch-wrap::before{content:"";position:absolute;inset:18px -18px -18px 18px;border:2.5px solid var(--ink);border-radius:50% 50% 30px 30px / 41.9% 41.9% 30px 30px;background:var(--sage)}
+.arch{position:relative;aspect-ratio:520/620;border:2.5px solid var(--ink);border-radius:50% 50% 30px 30px / 41.9% 41.9% 30px 30px;background:var(--butter);overflow:hidden}
+.arch > svg{display:block;width:100%;height:100%}
+.stamp{position:absolute;z-index:3;top:4%;left:-46px;width:132px;height:132px}
+.stamp-ring{transform-origin:60px 60px;animation:spin 22s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.steam path{stroke-dasharray:6 10;animation:steam 2.6s linear infinite}
+@keyframes steam{to{stroke-dashoffset:-32}}
+.hero-tag{position:absolute;z-index:3;right:-34px;bottom:-26px;display:flex;align-items:center;gap:14px;padding:10px 18px 10px 10px;background:var(--card);border:2px solid var(--ink);border-radius:20px;box-shadow:5px 5px 0 var(--ink);text-align:left;transition:transform .2s var(--ease),box-shadow .2s var(--ease);max-width:290px}
+.hero-tag:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--ink)}
+.hero-tag-thumb{flex:none;width:62px;height:62px;border-radius:14px;border:2px solid var(--ink);background:#F2C5B0;overflow:hidden}
+.hero-tag-thumb svg{width:100%;height:100%;display:block}
+.hero-tag small{display:block;font-size:.68rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--crust-deep)}
+.hero-tag strong{display:block;font-family:var(--font-display);font-size:1.05rem;font-weight:600;line-height:1.2;margin:2px 0}
+.hero-tag span.tag-price{font-size:.88rem;font-weight:700;color:var(--ink-2)}
+
+/* ---------- Ticker ---------- */
+.ticker{position:relative;background:var(--crust);color:var(--cream);border-block:2.5px solid var(--ink);overflow:hidden;white-space:nowrap}
+.ticker-track{display:inline-flex;animation:ticker 42s linear infinite}
+.ticker-group{display:inline-flex;align-items:center}
+.ticker-group span{display:inline-flex;align-items:center;gap:30px;padding:16px 0 16px 30px;font-family:var(--font-display);font-style:italic;font-size:1.55rem;font-weight:450;font-variation-settings:"SOFT" 100,"WONK" 1}
+.ticker-group span::after{content:"✺";font-style:normal;font-size:1.1rem;color:var(--butter)}
+@keyframes ticker{to{transform:translateX(-50%)}}
+
+/* ---------- Sections ---------- */
+.section{position:relative;padding:104px 0}
+.section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px 40px;flex-wrap:wrap;margin-bottom:36px}
+.h2{font-size:clamp(2.2rem,4.4vw,3.8rem);font-weight:560;line-height:1;letter-spacing:-.035em;margin-top:16px;font-variation-settings:"SOFT" 60}
+.h2 em{font-style:italic;font-weight:460;color:var(--crust);font-variation-settings:"SOFT" 100,"WONK" 1}
+.section-note{max-width:24em;color:var(--ink-2);font-size:1rem}
+.section-note strong{color:var(--ink)}
+
+/* ---------- Shop ---------- */
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:14px 24px;flex-wrap:wrap;padding:16px 0;margin-bottom:36px;border-block:1.5px solid var(--line)}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 18px;border-radius:999px;border:2px solid var(--ink);background:transparent;font-weight:700;font-size:.95rem;transition:background-color .2s,color .2s,transform .2s}
+.chip .n{display:inline-grid;place-items:center;min-width:22px;height:22px;padding:0 6px;border-radius:999px;background:var(--paper-2);font-size:.72rem;font-weight:800;color:var(--ink-2)}
+.chip:hover{background:var(--paper-2)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--cream)}
+.chip[aria-pressed="true"] .n{background:var(--butter);color:var(--ink)}
+.toolbar-status{display:flex;align-items:center;gap:12px;font-size:.92rem;font-weight:600;color:var(--ink-3)}
+.clear-search{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 12px;border-radius:999px;border:1.5px solid var(--ink);background:var(--card);font-size:.82rem;font-weight:700;color:var(--ink)}
+.grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:40px 24px}
+.card{display:flex;flex-direction:column;min-width:0}
+.card-media{position:relative;display:block;width:100%;padding:0;aspect-ratio:1/1;border:2px solid var(--ink);border-radius:var(--radius);background:var(--tile,#EADBC4);overflow:hidden;cursor:zoom-in;transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
+.card-media::after{content:"";position:absolute;inset:auto 0 0 0;height:22%;background:linear-gradient(to top,rgba(42,28,19,.08),transparent);pointer-events:none}
+.card-media svg{display:block;width:100%;height:100%;transition:transform .45s var(--ease)}
+.card:hover .card-media{transform:translate(-3px,-3px);box-shadow:6px 6px 0 var(--ink)}
+.card:hover .card-media svg{transform:scale(1.06) rotate(-2.5deg)}
+.badge{position:absolute;z-index:2;top:14px;left:14px;display:inline-block;padding:5px 11px;border:1.5px solid var(--ink);border-radius:999px;background:var(--card);font-size:.68rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase;line-height:1.4;color:var(--ink)}
+.badge--bestseller{background:var(--butter)}
+.badge--new{background:var(--sage-light)}
+.badge--seasonal{background:#F2C5B0}
+.badge--limited{background:var(--berry);color:#FFF4E2}
+.quick-pill{position:absolute;z-index:2;left:50%;bottom:14px;display:inline-flex;align-items:center;gap:7px;padding:8px 15px;border:1.5px solid var(--ink);border-radius:999px;background:var(--card);font-size:.8rem;font-weight:700;white-space:nowrap;opacity:0;transform:translate(-50%,10px);transition:opacity .2s,transform .25s var(--ease)}
+.card-media:hover .quick-pill,.card-media:focus-visible .quick-pill{opacity:1;transform:translate(-50%,0)}
+.card-body{display:flex;flex-direction:column;flex:1;padding:18px 4px 0}
+.card-meta{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.card-title{font-size:1.32rem;font-weight:600;line-height:1.15;letter-spacing:-.015em;margin:7px 0 7px;cursor:pointer;font-variation-settings:"SOFT" 50}
+.card-title:hover{text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:4px}
+.card-blurb{font-size:.93rem;line-height:1.45;color:var(--ink-2);margin-bottom:16px}
+.card-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto}
+.price{font-family:var(--font-display);font-size:1.3rem;font-weight:600;letter-spacing:-.01em}
+.add-btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;height:44px;padding:0 18px;border-radius:999px;border:2px solid var(--ink);background:transparent;font-weight:700;font-size:.9rem;white-space:nowrap;transition:background-color .2s,color .2s}
+.add-btn:hover{background:var(--ink);color:var(--cream)}
+.add-btn.is-added{background:var(--sage-light)}
+.add-btn.is-added:hover{color:var(--ink)}
+.grid-empty{padding:56px 24px;text-align:center;border:2px dashed rgba(42,28,19,.3);border-radius:var(--radius)}
+.grid-empty h3{font-size:1.6rem;font-weight:600;margin-bottom:8px}
+.grid-empty p{color:var(--ink-2);margin-bottom:18px}
+@media (prefers-reduced-motion:no-preference){
+  .card.pop{animation:pop .5s var(--ease) both;animation-delay:calc(var(--i,0) * 45ms)}
+}
+@keyframes pop{from{opacity:0;transform:translateY(16px)}}
+
+/* ---------- Promo ---------- */
+.promo{padding:0 0 24px}
+.promo-card{position:relative;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:32px;padding:64px 64px 64px 72px;border:2.5px solid var(--ink);border-radius:36px;background:var(--sage);overflow:hidden}
+.promo-card::before{content:"";position:absolute;right:-120px;top:-120px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,#BCC79A 0 55%,transparent 56%);pointer-events:none}
+.promo-copy{position:relative}
+.promo-copy .eyebrow{color:#3E4A27}
+.promo-copy p:not(.eyebrow){max-width:30em;color:#2F2418;margin:18px 0 30px;font-size:1.08rem}
+.promo-art{position:relative;display:flex;justify-content:center;gap:4%}
+.promo-tile{width:48%;max-width:250px;aspect-ratio:1;border:2.5px solid var(--ink);border-radius:28px;background:var(--tile);box-shadow:6px 6px 0 var(--ink);overflow:hidden}
+.promo-tile:nth-child(1){transform:rotate(-5deg) translateY(10px)}
+.promo-tile:nth-child(2){transform:rotate(4deg) translateY(-14px)}
+.promo-tile svg{display:block;width:100%;height:100%}
+
+/* ---------- Story ---------- */
+.story-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:72px;align-items:center}
+.oven{position:relative;border:2.5px solid var(--ink);border-radius:36px;overflow:hidden;background:#3A281C;box-shadow:10px 10px 0 var(--crust)}
+.oven > svg{display:block;width:100%;height:auto}
+.oven .flame{transform-origin:50% 100%;transform-box:fill-box;animation:flicker 1.6s ease-in-out infinite alternate}
+.oven .flame:nth-of-type(2n){animation-duration:1.2s;animation-delay:-.4s}
+@keyframes flicker{to{transform:scaleY(1.12) skewX(3deg)}}
+.story-copy p:not(.eyebrow){color:var(--ink-2);font-size:1.08rem;margin-top:18px}
+.story-copy .h2 + p{margin-top:26px}
+.pull{position:relative;margin:30px 0 0;padding:22px 26px 22px 30px;border-left:4px solid var(--crust);background:var(--card);border-radius:0 18px 18px 0;font-family:var(--font-display);font-style:italic;font-size:1.3rem;line-height:1.4;font-weight:420;font-variation-settings:"SOFT" 100,"WONK" 1}
+.pull footer{margin-top:10px;font-family:var(--font-body);font-style:normal;font-size:.85rem;font-weight:700;color:var(--ink-3)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:34px 0 0;padding:0;list-style:none}
+.stats li{padding:18px 18px 16px;border:2px solid var(--ink);border-radius:18px;background:var(--paper)}
+.stats b{display:block;font-family:var(--font-display);font-size:2.1rem;font-weight:600;line-height:1;letter-spacing:-.03em;color:var(--crust-deep)}
+.stats span{display:block;margin-top:6px;font-size:.85rem;font-weight:600;line-height:1.35;color:var(--ink-2)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin:88px 0 0;padding:0;list-style:none;border:2.5px solid var(--ink);border-radius:28px;background:var(--card);overflow:hidden}
+.steps li{position:relative;padding:34px 34px 36px}
+.steps li+li{border-left:2px dashed rgba(42,28,19,.3)}
+.step-time{display:inline-flex;align-items:center;gap:8px;padding:5px 12px;border-radius:999px;background:var(--paper-2);font-size:.75rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2)}
+.step-num{position:absolute;right:28px;top:22px;font-family:var(--font-display);font-size:3.4rem;font-weight:300;font-style:italic;line-height:1;color:var(--crust);opacity:.9;font-variation-settings:"SOFT" 100,"WONK" 1}
+.steps h3{font-size:1.55rem;font-weight:600;letter-spacing:-.02em;margin:18px 0 8px}
+.steps p{color:var(--ink-2);font-size:.98rem}
+
+/* ---------- Reviews ---------- */
+.reviews{background:var(--paper-2);border-block:2.5px solid var(--ink)}
+.rating-summary{display:flex;align-items:center;gap:16px}
+.rating-summary .big{font-family:var(--font-display);font-size:3.4rem;font-weight:600;line-height:1;letter-spacing:-.03em}
+.rating-summary small{display:block;font-size:.88rem;font-weight:600;color:var(--ink-2)}
+.stars{display:inline-flex;gap:2px;color:var(--crust)}
+.review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;list-style:none;margin:0;padding:0}
+.review{display:flex;flex-direction:column;height:100%;padding:30px 30px 26px;border:2.5px solid var(--ink);border-radius:26px;background:var(--card)}
+.review-grid li:nth-child(1) .review{background:#FBE6AE}
+.review-grid li:nth-child(2) .review{background:#E3E9C9}
+.review-grid li:nth-child(3) .review{background:#F6D3C2}
+.review blockquote{margin:16px 0 24px;font-family:var(--font-display);font-size:1.28rem;line-height:1.38;font-weight:450;letter-spacing:-.01em;font-variation-settings:"SOFT" 80}
+.reviewer{display:flex;align-items:center;gap:12px;margin-top:auto;padding-top:18px;border-top:1.5px dashed rgba(42,28,19,.3)}
+.avatar{display:grid;place-items:center;flex:none;width:44px;height:44px;border-radius:50%;border:2px solid var(--ink);background:var(--card);font-weight:800;font-size:.9rem}
+.reviewer strong{display:block;font-size:.95rem}
+.reviewer-who span{display:block;font-size:.82rem;color:var(--ink-2);font-weight:600}
+
+/* ---------- Newsletter ---------- */
+.newsletter-card{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;padding:72px;border:2.5px solid var(--ink);border-radius:40px;background:var(--crust);color:var(--cream);overflow:hidden;box-shadow:10px 10px 0 var(--ink)}
+.newsletter-card .eyebrow{color:var(--butter)}
+.newsletter-card .h2{color:#FFF8EE}
+.newsletter-card .h2 em{color:var(--butter)}
+.newsletter-card p.nl-copy{margin-top:18px;font-size:1.08rem;color:#FFE9D2;max-width:28em}
+.nl-cookie{position:absolute;width:230px;right:-40px;bottom:-70px;transform:rotate(-14deg);pointer-events:none}
+.nl-form{position:relative}
+.nl-label{display:block;font-size:.85rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px;color:#FFF4E2}
+.nl-row{display:flex;gap:10px;padding:6px;background:var(--cream);border:2.5px solid var(--ink);border-radius:999px}
+.nl-row:focus-within{box-shadow:5px 5px 0 var(--ink)}
+.nl-row input{flex:1;min-width:0;height:50px;padding:0 18px;border:0;background:transparent;color:var(--ink);font-size:1.05rem;outline:none}
+.nl-row input::placeholder{color:#7C6655}
+.nl-row .btn{min-height:50px}
+.nl-row.is-invalid{border-color:var(--ink);box-shadow:0 0 0 3px var(--butter)}
+.nl-error{display:flex;align-items:center;gap:8px;margin-top:12px;font-weight:700;font-size:.95rem;color:#FFF4E2}
+.nl-error::before{content:"!";display:inline-grid;place-items:center;flex:none;width:22px;height:22px;border-radius:50%;background:var(--butter);color:var(--ink);font-weight:900;font-size:.8rem}
+.nl-fine{margin-top:14px;font-size:.85rem;color:#FFE1C4}
+.nl-success{display:flex;gap:18px;align-items:flex-start;padding:26px;border:2.5px solid var(--ink);border-radius:26px;background:var(--cream);color:var(--ink);box-shadow:6px 6px 0 var(--ink)}
+.nl-success:focus{outline:3px solid var(--cream);outline-offset:4px}
+.nl-success .tick{display:grid;place-items:center;flex:none;width:48px;height:48px;border-radius:50%;background:var(--sage);border:2px solid var(--ink)}
+.nl-success h3{font-size:1.5rem;font-weight:600;letter-spacing:-.02em}
+.nl-success p{margin-top:6px;color:var(--ink-2);font-size:.98rem}
+@media (prefers-reduced-motion:no-preference){.nl-success:not([hidden]){animation:pop .5s var(--ease)}}
+
+/* ---------- Footer ---------- */
+.site-footer{position:relative;background:var(--ink);color:#E9DCC8;padding:84px 0 32px}
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.2fr;gap:40px}
+.site-footer .brand{color:var(--cream)}
+.site-footer .brand-sub{color:#BFAE98}
+.footer-about{margin-top:18px;max-width:22em;font-size:.95rem;color:#D8C8B2}
+.site-footer h2{font-family:var(--font-body);font-size:.75rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--butter);margin-bottom:16px}
+.site-footer ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.site-footer a,.footer-link{color:#F2E6D4;text-decoration:none;font-size:.95rem;background:none;border:0;padding:2px 0;text-align:left;border-radius:4px}
+.site-footer a:hover,.footer-link:hover{color:var(--butter);text-decoration:underline;text-underline-offset:3px}
+.site-footer address{font-style:normal;font-size:.95rem;line-height:1.7;color:#D8C8B2}
+.footer-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:14px 24px;margin-top:64px;padding-top:24px;border-top:1px solid rgba(255,244,226,.16);font-size:.85rem;color:#BFAE98}
+.demo-line{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border:1px solid rgba(255,244,226,.3);border-radius:999px;color:#F2E6D4;font-weight:600}
+.demo-line::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--butter)}
+
+/* ---------- Overlay / drawer ---------- */
+.overlay{position:fixed;inset:0;z-index:180;background:rgba(42,28,19,.5);opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s}
+.overlay.is-open{opacity:1;visibility:visible}
+.drawer{position:fixed;z-index:200;top:0;right:0;display:flex;flex-direction:column;width:min(450px,100%);height:100vh;height:100dvh;background:var(--paper);border-left:2.5px solid var(--ink);transform:translateX(100%);visibility:hidden;transition:transform .45s var(--ease),visibility .45s}
+.drawer.is-open{transform:none;visibility:visible}
+.drawer-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:20px 20px 16px 26px}
+.drawer-title{font-size:1.7rem;font-weight:600;letter-spacing:-.025em}
+.drawer-title span{font-family:var(--font-body);font-size:1rem;font-weight:700;color:var(--ink-3);letter-spacing:0}
+.ship{margin:0 26px 8px;padding:14px 16px;border:2px solid var(--ink);border-radius:16px;background:var(--card)}
+.ship-msg{display:flex;align-items:center;gap:10px;font-size:.92rem;font-weight:600}
+.ship-msg svg{flex:none;color:var(--crust)}
+.ship-msg strong{color:var(--crust-deep)}
+.ship-bar{position:relative;height:10px;margin-top:10px;border-radius:999px;background:var(--paper-2);overflow:hidden;border:1.5px solid var(--ink)}
+.ship-bar span{position:absolute;inset:0 auto 0 0;width:0;border-radius:999px;background:repeating-linear-gradient(-45deg,var(--crust) 0 8px,#D4692D 8px 16px);transition:width .5s var(--ease)}
+.ship.is-free{background:#E3E9C9}
+.ship.is-free .ship-bar span{background:var(--sage)}
+.drawer-body{flex:1;overflow-y:auto;overscroll-behavior:contain;padding:8px 26px 20px}
+.lines{list-style:none;margin:0;padding:0}
+.line{display:grid;grid-template-columns:84px 1fr auto;gap:16px;padding:18px 0;border-bottom:1.5px dashed rgba(42,28,19,.22)}
+.line-thumb{width:84px;height:84px;border:2px solid var(--ink);border-radius:16px;background:var(--tile);overflow:hidden}
+.line-thumb svg{display:block;width:100%;height:100%}
+.line-name{font-family:var(--font-display);font-size:1.08rem;font-weight:600;line-height:1.2;letter-spacing:-.01em}
+.line-meta{font-size:.8rem;color:var(--ink-3);font-weight:600;margin-top:2px}
+.line-controls{display:flex;align-items:center;gap:12px;margin-top:10px;flex-wrap:wrap}
+.stepper{display:inline-flex;align-items:center;height:38px;border:2px solid var(--ink);border-radius:999px;background:var(--card)}
+.stepper button{display:grid;place-items:center;width:36px;height:100%;border:0;background:transparent;border-radius:999px}
+.stepper button:hover{background:var(--paper-2)}
+.stepper output,.stepper .qty{min-width:28px;text-align:center;font-weight:800;font-size:.95rem}
+.link-btn{border:0;background:none;padding:4px 2px;font-size:.82rem;font-weight:700;color:var(--ink-3);text-decoration:underline;text-underline-offset:3px;border-radius:4px}
+.link-btn:hover{color:var(--crust-deep)}
+.line-price{font-family:var(--font-display);font-weight:600;font-size:1.08rem;text-align:right}
+.cart-empty{padding:28px 0 8px;text-align:center}
+.cart-empty .empty-art{width:170px;height:170px;margin:0 auto 6px;border:2px solid var(--ink);border-radius:50%;background:#F2DDB0;overflow:hidden}
+.cart-empty .empty-art svg{display:block;width:100%;height:100%}
+.cart-empty h3{font-size:1.5rem;font-weight:600;margin:14px 0 6px}
+.cart-empty p{color:var(--ink-2);margin-bottom:20px;font-size:.98rem}
+.upsell{margin-top:22px;padding:16px;border:2px solid var(--ink);border-radius:18px;background:var(--paper-2)}
+.upsell h3{font-family:var(--font-body);font-size:.72rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin-bottom:10px}
+.upsell-item{display:grid;grid-template-columns:56px 1fr auto;align-items:center;gap:12px}
+.upsell-item .line-thumb{width:56px;height:56px;border-radius:12px}
+.upsell-item strong{display:block;font-family:var(--font-display);font-weight:600;font-size:1rem;line-height:1.2}
+.upsell-item span{font-size:.85rem;font-weight:600;color:var(--ink-2)}
+.upsell-add{display:inline-flex;align-items:center;gap:6px;height:38px;padding:0 14px;border:2px solid var(--ink);border-radius:999px;background:var(--card);font-weight:700;font-size:.85rem}
+.upsell-add:hover{background:var(--ink);color:var(--cream)}
+.drawer-foot{padding:18px 26px 24px;border-top:2px solid var(--ink);background:var(--card)}
+.subtotal-row{display:flex;justify-content:space-between;align-items:baseline;font-weight:700}
+.subtotal-row strong{font-family:var(--font-display);font-size:1.6rem;font-weight:600;letter-spacing:-.02em}
+.fine{font-size:.82rem;color:var(--ink-3);margin:4px 0 16px}
+.demo-notice{display:flex;gap:12px;margin-top:14px;padding:14px 16px;border:2px solid var(--ink);border-radius:16px;background:#FBE6AE;font-size:.9rem;line-height:1.45}
+.demo-notice svg{flex:none;margin-top:2px}
+.demo-notice strong{display:block}
+
+/* ---------- Quick view modal ---------- */
+.modal{position:fixed;inset:0;z-index:220;display:grid;place-items:center;padding:28px;visibility:hidden;opacity:0;transition:opacity .3s,visibility .3s}
+.modal.is-open{visibility:visible;opacity:1}
+.modal-backdrop{position:absolute;inset:0;background:rgba(42,28,19,.58)}
+.modal-dialog{position:relative;display:grid;grid-template-columns:1fr 1fr;width:min(980px,100%);max-height:calc(100dvh - 56px);overflow:auto;background:var(--paper);border:2.5px solid var(--ink);border-radius:30px;box-shadow:10px 10px 0 var(--ink);transform:translateY(24px) scale(.98);transition:transform .4s var(--ease)}
+.modal.is-open .modal-dialog{transform:none}
+.modal-close{position:absolute;z-index:2;top:14px;right:14px;background:var(--card);border:2px solid var(--ink)}
+.modal-close:hover{background:var(--ink);color:var(--cream)}
+.qv-media{position:relative;display:grid;place-items:center;min-height:460px;background:var(--tile);border-right:2.5px solid var(--ink)}
+.qv-media svg{width:88%;height:auto;display:block}
+.qv-media .badge{top:20px;left:20px}
+.qv-body{padding:48px 44px 40px}
+.qv-title{font-size:clamp(1.9rem,3.2vw,2.6rem);font-weight:580;line-height:1.02;letter-spacing:-.03em;margin:10px 0 12px;font-variation-settings:"SOFT" 60}
+.qv-price{font-family:var(--font-display);font-size:1.6rem;font-weight:600}
+.qv-desc{margin-top:16px;color:var(--ink-2);font-size:1.02rem}
+.qv-specs{display:grid;grid-template-columns:auto 1fr;gap:8px 18px;margin:22px 0 26px;padding:16px 0;border-block:1.5px dashed rgba(42,28,19,.25);font-size:.92rem}
+.qv-specs dt{font-weight:800;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);padding-top:3px}
+.qv-specs dd{margin:0;font-weight:600}
+.qv-buy{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.qv-buy .stepper{height:52px}
+.qv-buy .stepper button{width:44px}
+.qv-buy .btn{flex:1;min-width:200px}
+.qv-note{display:flex;align-items:center;gap:8px;margin-top:16px;font-size:.85rem;font-weight:600;color:var(--ink-3)}
+
+/* ---------- Toast ---------- */
+.toast{position:fixed;z-index:150;left:50%;bottom:24px;display:flex;align-items:center;gap:14px;max-width:calc(100% - 32px);padding:9px 9px 9px 20px;border:2px solid var(--ink);border-radius:999px;background:var(--ink);color:var(--cream);font-weight:600;font-size:.95rem;box-shadow:0 18px 40px rgba(42,28,19,.28);transform:translate(-50%,160%);visibility:hidden;transition:transform .4s var(--ease),visibility .4s}
+.toast.is-show{transform:translate(-50%,0);visibility:visible}
+.toast .tick{display:grid;place-items:center;flex:none;width:26px;height:26px;border-radius:50%;background:var(--butter);color:var(--ink)}
+.toast-text{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.toast button{flex:none;height:38px;padding:0 16px;border-radius:999px;border:0;background:var(--cream);color:var(--ink);font-weight:800;font-size:.85rem}
+.toast button:hover{background:var(--butter)}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1180px){
+  .grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .hero-tag{right:-10px}
+  .stamp{left:-18px}
+}
+@media (max-width:980px){
+  .nav{display:none;position:absolute;top:100%;left:0;right:0;background:var(--paper);border-bottom:2px solid var(--ink);box-shadow:0 20px 30px rgba(42,28,19,.12)}
+  .nav.is-open{display:block}
+  .nav ul{flex-direction:column;align-items:stretch;gap:0;padding:8px var(--gutter) 18px}
+  .nav li+li{border-top:1px dashed var(--line)}
+  .nav a{display:block;padding:14px 4px;border-radius:8px;font-family:var(--font-display);font-size:1.45rem;font-weight:560;letter-spacing:-.02em}
+  .nav a:hover{background:transparent;color:var(--crust-deep)}
+  .menu-btn{display:inline-grid;margin-left:-8px}
+  .header-inner{grid-template-columns:auto 1fr auto;gap:8px}
+  .hero-grid{grid-template-columns:1fr;gap:56px}
+  .hero-art{max-width:560px;width:100%;margin-inline:auto}
+  .promo-card{grid-template-columns:1fr;padding:48px 40px}
+  .story-grid{grid-template-columns:1fr;gap:56px}
+  .oven{max-width:560px;width:100%;margin-inline:auto}
+  .review-grid{grid-template-columns:1fr;max-width:640px}
+  .newsletter-card{grid-template-columns:1fr;padding:56px 44px;gap:32px}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .modal-dialog{grid-template-columns:1fr}
+  .qv-media{min-height:0;aspect-ratio:16/11;border-right:0;border-bottom:2.5px solid var(--ink)}
+  .qv-media svg{width:auto;height:92%}
+}
+@media (max-width:760px){
+  :root{--gutter:16px}
+  body{font-size:1rem}
+  .announce{font-size:.75rem}
+  .announce .wrap{min-height:36px;gap:10px}
+  .hide-sm{display:none}
+  .header-inner{height:66px}
+  .brand svg{width:34px;height:34px}
+  .brand-name{font-size:1.3rem}
+  .brand-sub{font-size:.52rem;letter-spacing:.22em}
+  .cart-btn{height:44px;padding:0 8px 0 12px;gap:7px}
+  .cart-btn .cart-label{display:none}
+  .search-hint{display:none}
+  .hero{padding:36px 0 64px}
+  .hero h1{margin:16px 0 18px}
+  .lede{font-size:1.06rem}
+  .hero-ctas .btn{flex:1 1 auto}
+  .hero-facts{grid-template-columns:repeat(3,1fr);gap:12px;margin-top:34px}
+  .hero-facts li{font-size:.76rem}
+  .hero-facts b{font-size:1.5rem}
+  .hero-art{padding:0 12px 12px 0}
+  .arch-wrap::before{inset:12px -12px -12px 12px}
+  .stamp{width:96px;height:96px;left:-6px;top:2%}
+  .hero-tag{right:-8px;bottom:-22px;padding:8px 14px 8px 8px;gap:10px;max-width:240px}
+  .hero-tag-thumb{width:50px;height:50px}
+  .hero-tag strong{font-size:.95rem}
+  .ticker-group span{font-size:1.2rem;padding:12px 0 12px 22px;gap:22px}
+  .section{padding:72px 0}
+  .section-head{margin-bottom:26px}
+  .toolbar{margin-bottom:26px}
+  .chip{height:40px;padding:0 14px;font-size:.88rem}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 12px}
+  .card-media{border-radius:18px}
+  .badge{top:9px;left:9px;padding:4px 8px;font-size:.58rem;letter-spacing:.1em}
+  .quick-pill{display:none}
+  .card-body{padding:12px 2px 0}
+  .card-meta{font-size:.62rem;letter-spacing:.1em}
+  .card-title{font-size:1.06rem;margin:5px 0 10px}
+  .card-blurb{display:none}
+  .card-foot{flex-direction:column;align-items:stretch;gap:8px}
+  .price{font-size:1.1rem}
+  .add-btn{height:42px;padding:0 10px;font-size:.85rem}
+  .promo-card{padding:36px 24px 40px;border-radius:28px;gap:36px}
+  .promo-card::before{width:340px;height:340px;right:-140px;top:-140px}
+  .stats{grid-template-columns:repeat(3,1fr);gap:8px}
+  .stats li{padding:14px 12px}
+  .stats b{font-size:1.6rem}
+  .stats span{font-size:.74rem}
+  .oven{box-shadow:6px 6px 0 var(--crust);border-radius:28px}
+  .pull{font-size:1.15rem;padding:18px 18px 18px 22px}
+  .steps{grid-template-columns:1fr;margin-top:64px}
+  .steps li{padding:28px 24px}
+  .steps li+li{border-left:0;border-top:2px dashed rgba(42,28,19,.3)}
+  .rating-summary .big{font-size:2.8rem}
+  .review{padding:24px 22px 22px}
+  .review blockquote{font-size:1.15rem}
+  .newsletter-card{padding:44px 22px 30px;border-radius:30px;box-shadow:6px 6px 0 var(--ink)}
+  .nl-cookie{width:130px;right:-34px;bottom:auto;top:-40px;transform:rotate(18deg)}
+  .nl-row{flex-direction:column;border-radius:24px;padding:6px}
+  .nl-row input{height:50px}
+  .nl-row .btn{width:100%}
+  .site-footer{padding-top:64px}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:36px 20px}
+  .footer-grid > :first-child{grid-column:1 / -1}
+  .footer-bottom{flex-direction:column;align-items:flex-start}
+  .drawer-head{padding:16px 14px 12px 20px}
+  .ship{margin:0 20px 6px}
+  .drawer-body{padding:4px 20px 16px}
+  .drawer-foot{padding:16px 20px 20px}
+  .line{grid-template-columns:72px 1fr auto;gap:12px}
+  .line-thumb{width:72px;height:72px}
+  .modal{padding:10px;align-items:end}
+  .modal-dialog{max-height:calc(100dvh - 20px);border-radius:26px;box-shadow:none}
+  .qv-body{padding:26px 22px 26px}
+  .qv-buy .btn{min-width:0}
+  .toast{bottom:16px;padding-left:14px;gap:10px;font-size:.88rem}
+}
+@media (max-width:380px){
+  .hero-facts b{font-size:1.3rem}
+  .brand-sub{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
+  .stamp-ring,.steam path,.ticker-track,.oven .flame{animation:none !important}
+}
+</style>
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<div class="announce" role="region" aria-label="Announcement">
+  <div class="wrap">
+    <p><b>Free local delivery</b> on orders over $40</p>
+    <span class="dot hide-sm" aria-hidden="true">✺</span>
+    <p class="hide-sm">Order by 2pm for tomorrow's 4am bake</p>
+  </div>
+</div>
+
+<header class="site-header" id="site-header">
+  <div class="wrap header-inner">
+    <button class="icon-btn menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path class="m-open" d="M4 7h16M4 12h16M4 17h10"/></svg>
+    </button>
+    <a class="brand" href="#top" aria-label="Saltgrain Bakery — home">
+      <svg width="42" height="42" viewBox="0 0 64 64" aria-hidden="true">
+        <circle cx="32" cy="32" r="29.5" fill="#C2571E" stroke="#2A1C13" stroke-width="3"/>
+        <path d="M32 52V21" stroke="#FFF3DC" stroke-width="3" stroke-linecap="round"/>
+        <g fill="#FFF3DC"><ellipse cx="26" cy="39" rx="4.5" ry="8" transform="rotate(-35 26 39)"/><ellipse cx="38" cy="39" rx="4.5" ry="8" transform="rotate(35 38 39)"/><ellipse cx="26" cy="28" rx="4.5" ry="8" transform="rotate(-35 26 28)"/><ellipse cx="38" cy="28" rx="4.5" ry="8" transform="rotate(35 38 28)"/><ellipse cx="32" cy="16" rx="4" ry="7.5"/></g>
+        <g fill="#F2C14E"><rect x="45" y="14" width="4" height="4" transform="rotate(45 47 16)"/><rect x="49.5" y="22" width="3" height="3" transform="rotate(45 51 23.5)"/></g>
+      </svg>
+      <span><span class="brand-name">Saltgrain</span><span class="brand-sub">Bakery &amp; Pantry</span></span>
+    </a>
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="#shop" data-filter-link="all">Shop all</a></li>
+        <li><a href="#shop" data-filter-link="pastries">Pastries</a></li>
+        <li><a href="#shop" data-filter-link="gifts">Gift boxes</a></li>
+        <li><a href="#story">Our story</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-btn" id="search-btn" type="button" aria-expanded="false" aria-controls="search-panel" aria-label="Search products">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 20 20"/></svg>
+      </button>
+      <button class="cart-btn" id="cart-btn" type="button" aria-controls="cart-drawer" aria-label="Open cart, 0 items">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8Z"/><path d="M9 10V7a3 3 0 0 1 6 0v3"/></svg>
+        <span class="cart-label">Cart</span>
+        <span class="cart-count" id="cart-count" aria-hidden="true">0</span>
+      </button>
+    </div>
+  </div>
+  <div class="search-panel" id="search-panel" hidden>
+    <div class="wrap search-inner">
+      <div class="search-field">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 20 20"/></svg>
+        <label for="search-input" class="sr-only">Search the shop</label>
+        <input id="search-input" type="search" placeholder="Search sourdough, croissants, honey…" autocomplete="off" aria-describedby="search-hint">
+        <span class="search-hint" id="search-hint" aria-live="polite">Type to filter the shop</span>
+      </div>
+      <button class="icon-btn" id="search-close" type="button" aria-label="Close search">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <!-- Hero -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow"><span>The Autumn Bake<span class="hide-sm"> · Collection</span> No.&nbsp;07</span></p>
+        <h1 id="hero-title">Warm crusts for <em>cold mornings.</em></h1>
+        <p class="lede">Pumpkin-spice morning buns, cardamom knots and a fig &amp; black pepper jam join the 48-hour sourdough our neighbours queue for. Baked before sunrise, on your doorstep by nine.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#shop" data-filter-link="all">Shop the autumn bake
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="btn btn-ghost" href="#story">Meet the bakers</a>
+        </div>
+        <ul class="hero-facts">
+          <li><b>48h</b>slow, cold<br>ferment</li>
+          <li><b>4am</b>in the oven,<br>every day</li>
+          <li><b>$40</b>free local<br>delivery from</li>
+        </ul>
+      </div>
+      <div class="hero-art">
+        <div class="arch-wrap">
+          <div class="arch" id="hero-art"></div>
+          <svg class="stamp" viewBox="0 0 120 120" aria-hidden="true">
+            <defs><path id="stamp-path" d="M60 60m-43 0a43 43 0 1 1 86 0a43 43 0 1 1-86 0"/></defs>
+            <circle cx="60" cy="60" r="57" fill="#2A1C13"/>
+            <g class="stamp-ring"><text fill="#FFF4E2" font-family="Figtree, sans-serif" font-size="10.5" font-weight="800" letter-spacing="2"><textPath href="#stamp-path" textLength="268" lengthAdjust="spacing">BAKED BEFORE SUNRISE ✺ SALTGRAIN ✺</textPath></text></g>
+            <circle cx="60" cy="60" r="27" fill="#F2C14E" stroke="#FFF4E2" stroke-width="2"/>
+            <g transform="translate(60 63)" fill="#2A1C13"><path d="M0 14V-12" stroke="#2A1C13" stroke-width="2.4" stroke-linecap="round"/><ellipse cx="-4.5" cy="5" rx="3.6" ry="6.5" transform="rotate(-35 -4.5 5)"/><ellipse cx="4.5" cy="5" rx="3.6" ry="6.5" transform="rotate(35 4.5 5)"/><ellipse cx="-4.5" cy="-4" rx="3.6" ry="6.5" transform="rotate(-35 -4.5 -4)"/><ellipse cx="4.5" cy="-4" rx="3.6" ry="6.5" transform="rotate(35 4.5 -4)"/><ellipse cx="0" cy="-13" rx="3.2" ry="6"/></g>
+          </svg>
+          <button class="hero-tag" type="button" data-quick="pumpkin-buns" aria-label="New this week: Pumpkin Spice Morning Buns, $13.00. Open quick view">
+            <span class="hero-tag-thumb" id="hero-tag-thumb"></span>
+            <span><small>New this week</small><strong>Pumpkin Spice Morning Buns</strong><span class="tag-price">$13.00 · Quick view →</span></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <div class="ticker-group"><span>Country sourdough</span><span>Cardamom knots</span><span>Cultured sea-salt butter</span><span>Fig &amp; black pepper jam</span><span>Laminated croissants</span><span>Wildflower honey</span><span>Seeded rye</span></div>
+      <div class="ticker-group"><span>Country sourdough</span><span>Cardamom knots</span><span>Cultured sea-salt butter</span><span>Fig &amp; black pepper jam</span><span>Laminated croissants</span><span>Wildflower honey</span><span>Seeded rye</span></div>
+    </div>
+  </div>
+
+  <!-- Shop -->
+  <section class="section shop" id="shop" aria-labelledby="shop-title">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">The daily bake</p>
+          <h2 class="h2" id="shop-title">Fresh from <em>this morning's</em> oven</h2>
+        </div>
+        <p class="section-note">Everything is baked to order in small batches. <strong>Order by 2pm</strong> and it leaves our oven at 4am tomorrow.</p>
+      </div>
+      <div class="toolbar">
+        <div class="chips" id="chips" role="group" aria-label="Filter products by category"></div>
+        <div class="toolbar-status">
+          <span id="result-count" aria-live="polite">Showing 12 items</span>
+          <button class="clear-search" id="clear-search" type="button" hidden>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+            Clear search
+          </button>
+        </div>
+      </div>
+      <ul class="grid" id="product-grid" aria-label="Products"></ul>
+      <div class="grid-empty" id="grid-empty" hidden>
+        <h3>No bakes match that search</h3>
+        <p>Try “sourdough”, “butter” or browse everything we baked today.</p>
+        <button class="btn btn-ink" type="button" id="reset-filters">Show all bakes</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gift promo -->
+  <section class="promo" aria-labelledby="promo-title">
+    <div class="wrap">
+      <div class="promo-card">
+        <div class="promo-copy">
+          <p class="eyebrow">Gifting season</p>
+          <h2 class="h2" id="promo-title">Send a <em>warm</em> hello.</h2>
+          <p>Keepsake boxes packed the morning they ship, tied by hand and finished with a note from our bakers. Order by Thursday for weekend delivery.</p>
+          <a class="btn btn-ink" href="#shop" data-filter-link="gifts">Shop gift boxes
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+        <div class="promo-art" id="promo-art" aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Story -->
+  <section class="section story" id="story" aria-labelledby="story-title">
+    <div class="wrap">
+      <div class="story-grid">
+        <div class="oven" id="oven-art"></div>
+        <div class="story-copy">
+          <p class="eyebrow">Our story</p>
+          <h2 class="h2" id="story-title">A tiny bakery with a <em>very old</em> starter.</h2>
+          <p>Saltgrain began in 2014 with a borrowed deck oven, a sack of stone-milled flour and a jar of sourdough starter we named Old Gus. We still feed him twice a day.</p>
+          <p>Every loaf is mixed by hand, rested for two nights and baked hot on stone before the street wakes up. No shortcuts, no preservatives — just flour, water, salt and time.</p>
+          <blockquote class="pull">“Good bread is mostly patience. The rest is butter.”
+            <footer>— Mara &amp; Theo, founders</footer>
+          </blockquote>
+          <ul class="stats">
+            <li><b>11 yrs</b><span>of feeding Old Gus, our starter</span></li>
+            <li><b>2,400</b><span>loaves shaped by hand each week</span></li>
+            <li><b>0</b><span>preservatives or improvers. Ever.</span></li>
+          </ul>
+        </div>
+      </div>
+      <ol class="steps" aria-label="From dough to door">
+        <li>
+          <span class="step-num" aria-hidden="true">01</span>
+          <span class="step-time">Day one · 2pm</span>
+          <h3>Mix &amp; rest</h3>
+          <p>Stone-milled flour, water, sea salt and a scoop of Old Gus. Then a long, cold, 48-hour nap.</p>
+        </li>
+        <li>
+          <span class="step-num" aria-hidden="true">02</span>
+          <span class="step-time">Day three · 4am</span>
+          <h3>Shape &amp; bake</h3>
+          <p>Hand-shaped, scored with a razor and baked hot on stone until the crust sings as it cools.</p>
+        </li>
+        <li>
+          <span class="step-num" aria-hidden="true">03</span>
+          <span class="step-time">By 9am</span>
+          <h3>To your door</h3>
+          <p>Wrapped in compostable paper and pedalled over by cargo bike, often still a little warm.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section class="section reviews" id="reviews" aria-labelledby="reviews-title">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Kind words</p>
+          <h2 class="h2" id="reviews-title">Notes from <em>the queue</em></h2>
+        </div>
+        <div class="rating-summary">
+          <span class="big">4.9</span>
+          <div>
+            <span class="stars" role="img" aria-label="Rated 4.9 out of 5">
+              <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4L2.8 9.5l6.4-.8Z"/></svg><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4L2.8 9.5l6.4-.8Z"/></svg><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4L2.8 9.5l6.4-.8Z"/></svg><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4L2.8 9.5l6.4-.8Z"/></svg><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4L2.8 9.5l6.4-.8Z"/></svg>
+            </span>
+            <small>from 1,280 reviews</small>
+          </div>
+        </div>
+      </div>
+      <ul class="review-grid" id="review-grid"></ul>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="section newsletter" id="newsletter" aria-labelledby="nl-title">
+    <div class="wrap">
+      <div class="newsletter-card on-crust">
+        <div id="nl-cookie" class="nl-cookie" aria-hidden="true"></div>
+        <div>
+          <p class="eyebrow">The Crumb Letter</p>
+          <h2 class="h2" id="nl-title">First dibs on <em>the good stuff.</em></h2>
+          <p class="nl-copy">One short email on Fridays: next week's bake schedule, early access to seasonal drops and the occasional recipe. No spam — only crumbs.</p>
+        </div>
+        <div>
+          <form class="nl-form" id="nl-form" novalidate>
+            <label class="nl-label" for="nl-email">Email address</label>
+            <div class="nl-row" id="nl-row">
+              <input id="nl-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" aria-describedby="nl-fine" required>
+              <button class="btn btn-ink" type="submit">Subscribe</button>
+            </div>
+            <p class="nl-error" id="nl-error" role="alert" hidden></p>
+            <p class="nl-fine" id="nl-fine">One email a week. Unsubscribe anytime.</p>
+          </form>
+          <div class="nl-success" id="nl-success" tabindex="-1" role="status" hidden>
+            <span class="tick" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2A1C13" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span>
+            <div>
+              <h3>You're on the list!</h3>
+              <p>We'll send the first Crumb Letter to <strong id="nl-success-email"></strong> this Friday. (Demo only — no email is actually sent.)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer on-dark">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="#top" aria-label="Saltgrain Bakery — back to top">
+          <svg width="42" height="42" viewBox="0 0 64 64" aria-hidden="true">
+            <circle cx="32" cy="32" r="29.5" fill="#C2571E" stroke="#FFF4E2" stroke-width="2"/>
+            <path d="M32 52V21" stroke="#FFF3DC" stroke-width="3" stroke-linecap="round"/>
+            <g fill="#FFF3DC"><ellipse cx="26" cy="39" rx="4.5" ry="8" transform="rotate(-35 26 39)"/><ellipse cx="38" cy="39" rx="4.5" ry="8" transform="rotate(35 38 39)"/><ellipse cx="26" cy="28" rx="4.5" ry="8" transform="rotate(-35 26 28)"/><ellipse cx="38" cy="28" rx="4.5" ry="8" transform="rotate(35 38 28)"/><ellipse cx="32" cy="16" rx="4" ry="7.5"/></g>
+          </svg>
+          <span><span class="brand-name">Saltgrain</span><span class="brand-sub">Bakery &amp; Pantry</span></span>
+        </a>
+        <p class="footer-about">Slow bread and good butter since 2014. Baked in small batches before sunrise and delivered by cargo bike.</p>
+      </div>
+      <div>
+        <h2>Shop</h2>
+        <ul>
+          <li><a href="#shop" data-filter-link="bread">Bread</a></li>
+          <li><a href="#shop" data-filter-link="pastries">Pastries</a></li>
+          <li><a href="#shop" data-filter-link="pantry">Pantry</a></li>
+          <li><a href="#shop" data-filter-link="gifts">Gift boxes</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Bakery</h2>
+        <ul>
+          <li><a href="#story">Our story</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="#newsletter">The Crumb Letter</a></li>
+          <li><button class="footer-link" type="button" id="footer-cart">Your cart</button></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Visit &amp; delivery</h2>
+        <address>14 Millrace Lane<br>Harbourtown<br>Tue–Sun · 7am–2pm<br>Delivery Tue–Sun by 9am</address>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© <span id="year">2026</span> Saltgrain Bakery. Baked with patience.</p>
+      <p class="demo-line">Fictional brand · Concept storefront demo</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Cart drawer -->
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+  <div class="drawer-head">
+    <h2 class="drawer-title" id="cart-title">Your cart <span id="drawer-count">(0)</span></h2>
+    <button class="icon-btn" id="cart-close" type="button" aria-label="Close cart">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+  </div>
+  <div class="ship" id="ship">
+    <p class="ship-msg" id="ship-msg"></p>
+    <div class="ship-bar" id="ship-bar" role="progressbar" aria-label="Progress towards free local delivery" aria-valuemin="0" aria-valuemax="40" aria-valuenow="0"><span id="ship-fill"></span></div>
+  </div>
+  <div class="drawer-body">
+    <ul class="lines" id="cart-lines" aria-label="Items in your cart"></ul>
+    <div class="cart-empty" id="cart-empty">
+      <div class="empty-art" id="empty-art" aria-hidden="true"></div>
+      <h3>Your cart is empty</h3>
+      <p>Nothing in the basket yet — the croissants are calling.</p>
+      <button class="btn btn-primary" type="button" id="empty-shop">Browse the daily bake</button>
+    </div>
+    <div class="upsell" id="upsell" hidden></div>
+  </div>
+  <div class="drawer-foot" id="drawer-foot">
+    <div class="subtotal-row"><span>Subtotal</span><strong id="subtotal">$0.00</strong></div>
+    <p class="fine">Taxes and delivery calculated at checkout.</p>
+    <button class="btn btn-primary btn-block" type="button" id="checkout-btn">Checkout
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </button>
+    <div class="demo-notice" id="demo-notice" role="status" hidden>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.01"/></svg>
+      <span><strong>This is a concept storefront.</strong>Checkout is disabled in this portfolio demo — no order is placed and no payment is taken.</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Quick view -->
+<div class="modal" id="qv">
+  <div class="modal-backdrop" data-close-modal></div>
+  <div class="modal-dialog" id="qv-dialog" role="dialog" aria-modal="true" aria-labelledby="qv-title" aria-describedby="qv-desc">
+    <button class="icon-btn modal-close" type="button" data-close-modal aria-label="Close quick view">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+    <div class="qv-media" id="qv-media"></div>
+    <div class="qv-body">
+      <p class="card-meta" id="qv-meta"></p>
+      <h2 class="qv-title" id="qv-title">Product</h2>
+      <p class="qv-price" id="qv-price"></p>
+      <p class="qv-desc" id="qv-desc"></p>
+      <dl class="qv-specs" id="qv-specs"></dl>
+      <div class="qv-buy">
+        <div class="stepper" role="group" aria-label="Quantity">
+          <button type="button" id="qv-minus" aria-label="Decrease quantity"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg></button>
+          <output id="qv-qty" aria-live="polite">1</output>
+          <button type="button" id="qv-plus" aria-label="Increase quantity"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+        <button class="btn btn-primary" type="button" id="qv-add">Add to cart</button>
+      </div>
+      <p class="qv-note">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="17" r="3"/><circle cx="18" cy="17" r="3"/><path d="M6 17l4-8h5l3 8M10 9 8.5 6H6M15 9h3"/></svg>
+        Baked to order · delivered by cargo bike before 9am
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast">
+  <span class="tick" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span>
+  <span class="toast-text" id="toast-text">Added to cart</span>
+  <button type="button" id="toast-view">View cart</button>
+</div>
+<div class="sr-only" id="sr-status" role="status" aria-live="polite"></div>
+
+<script>
+(() => {
+  'use strict';
+
+  /* ================= Illustrations ================= */
+  const INK = '#2A1C13';
+  const st = (w = 3.5) => `stroke="${INK}" stroke-width="${w}" stroke-linejoin="round" stroke-linecap="round"`;
+  const shadow = (cx, cy, rx) => `<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${Math.round(rx * 0.13)}" fill="${INK}" opacity=".16"/>`;
+  const dots = (pts, fill = '#FFF8EA') => pts.map(([x, y, r = 2]) => `<circle cx="${x}" cy="${y}" r="${r}" fill="${fill}"/>`).join('');
+  const strand = (d, c = '#E0A258', w = 28) => `<path d="${d}" fill="none" stroke="${INK}" stroke-width="${w + 7}" stroke-linecap="round" stroke-linejoin="round"/><path d="${d}" fill="none" stroke="${c}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"/>`;
+  const overStrand = (d, c = '#E0A258', w = 28) => `<path d="${d}" fill="none" stroke="${INK}" stroke-width="${w + 7}"/><path d="${d}" fill="none" stroke="${c}" stroke-width="${w}"/>`;
+  const flakes = (pts) => pts.map(([x, y, a = 0]) => `<rect x="${x - 2.4}" y="${y - 2.4}" width="4.8" height="4.8" rx=".8" transform="rotate(${a} ${x} ${y})" fill="#FFFDF7" stroke="${INK}" stroke-width="1.2"/>`).join('');
+
+  const ART = {
+    boule: () => `
+      ${shadow(100, 160, 68)}
+      <path d="M32 120C32 78 62 56 100 56s68 22 68 64c0 26-30 40-68 40s-68-14-68-40Z" fill="#D88A40" ${st()}/>
+      <path d="M46 110c4-22 22-37 48-40" fill="none" stroke="#F7DCA8" stroke-width="6" stroke-linecap="round" opacity=".8"/>
+      <path d="M55 104c22-21 68-21 90 0c-22-7-68-7-90 0Z" fill="#F5D59C" ${st(3)}/>
+      <path d="M62 128l7 8M80 133l5 9M100 135v10M120 133l-5 9M138 128l-7 8" fill="none" ${st(3)}/>
+      ${dots([[78, 74], [92, 67, 1.6], [113, 70], [127, 77, 1.5], [70, 87, 1.4], [134, 88, 1.8], [104, 82, 1.3], [150, 104, 1.5], [48, 118, 1.3]])}`,
+
+    rye: () => `
+      ${shadow(100, 166, 76)}
+      <path d="M26 134c0-36 30-62 74-62s74 26 74 62c0 16-12 26-30 26H56c-18 0-30-10-30-26Z" fill="#7A4A2B" ${st()}/>
+      <path d="M44 116c8-20 28-33 52-35" fill="none" stroke="#B5845A" stroke-width="5" stroke-linecap="round" opacity=".85"/>
+      <path d="M84 92l14 22M112 88l14 24M140 98l12 20" fill="none" stroke="#3E2414" stroke-width="3.5" stroke-linecap="round"/>
+      ${[[96, 82, -20], [120, 80, 10], [146, 92, -30], [130, 104, 20], [104, 104, -10], [160, 116, 30], [74, 92, 15], [150, 132, -15]].map(([x, y, a], i) => `<ellipse cx="${x}" cy="${y}" rx="3.6" ry="1.8" transform="rotate(${a} ${x} ${y})" fill="${i % 3 === 0 ? '#3B2416' : '#F3E6C4'}"/>`).join('')}
+      <g transform="rotate(-6 70 136)">
+        <path d="M38 166v-40c0-16 13-26 32-26s32 10 32 26v40Z" fill="#4E2E1A" ${st()}/>
+        <path d="M45 160v-33c0-11 10-19 25-19s25 8 25 19v33Z" fill="#9A6842"/>
+        ${[[56, 124], [76, 118], [84, 138], [62, 146], [70, 132], [88, 152], [52, 156]].map(([x, y], i) => `<ellipse cx="${x}" cy="${y}" rx="3" ry="1.6" transform="rotate(${i * 40} ${x} ${y})" fill="${i % 2 ? '#F3E6C4' : '#3B2416'}"/>`).join('')}
+        ${[[64, 120], [80, 128], [58, 136], [74, 146], [86, 142], [66, 156], [80, 158]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="1.6" fill="#6E4127"/>`).join('')}
+      </g>`,
+
+    fougasse: (tile) => `
+      ${shadow(100, 168, 62)}
+      <path d="M100 34c40 16 62 54 58 92-3 24-26 38-58 38s-55-14-58-38c-4-38 18-76 58-92Z" fill="#E2A24F" ${st()}/>
+      <path d="M58 116c5-30 20-52 38-64" fill="none" stroke="#F8D99B" stroke-width="6" stroke-linecap="round" opacity=".8"/>
+      <path d="M100 58c5 11 5 23 0 34c-5-11-5-23 0-34Z" fill="${tile}" ${st(3)}/>
+      <path d="M100 106c5 13 5 27 0 40c-5-13-5-27 0-40Z" fill="${tile}" ${st(3)}/>
+      <path d="M86 80C74 82 64 88 58 100C70 100 80 94 86 80Z" fill="${tile}" ${st(3)}/>
+      <path d="M86 116C74 116 62 120 54 130C66 134 78 128 86 116Z" fill="${tile}" ${st(3)}/>
+      <path d="M114 80C126 82 136 88 142 100C130 100 120 94 114 80Z" fill="${tile}" ${st(3)}/>
+      <path d="M114 116C126 116 138 120 146 130C134 134 122 128 114 116Z" fill="${tile}" ${st(3)}/>
+      ${[[76, 106], [125, 106], [72, 146], [128, 146], [100, 98]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="4.6" fill="#55603A" stroke="${INK}" stroke-width="2"/>`).join('')}
+      <path d="M116 50l9-7M121 59l10-3M78 60l-9-6M84 52l-6-8M126 128l8 4M70 120l-8 3" stroke="#5F7A3C" stroke-width="3.5" stroke-linecap="round"/>`,
+
+    croissant: () => `
+      ${shadow(100, 148, 78)}
+      <ellipse cx="42" cy="122" rx="20" ry="13" transform="rotate(-38 42 122)" fill="#C9772F" ${st()}/>
+      <ellipse cx="158" cy="122" rx="20" ry="13" transform="rotate(38 158 122)" fill="#C9772F" ${st()}/>
+      <ellipse cx="66" cy="107" rx="28" ry="23" transform="rotate(-24 66 107)" fill="#DE913E" ${st()}/>
+      <ellipse cx="134" cy="107" rx="28" ry="23" transform="rotate(24 134 107)" fill="#DE913E" ${st()}/>
+      <ellipse cx="100" cy="99" rx="36" ry="31" fill="#EBA650" ${st()}/>
+      <path d="M80 85c8-8 22-11 34-8" fill="none" stroke="#FCE2AE" stroke-width="5" stroke-linecap="round" opacity=".9"/>
+      <path d="M54 99c6-6 14-8 20-7M146 99c-6-6-14-8-20-7M34 116c4-3 9-4 13-3M166 116c-4-3-9-4-13-3" stroke="#F6C987" stroke-width="4" fill="none" stroke-linecap="round" opacity=".85"/>
+      <path d="M86 118c9 4 19 4 28 0" fill="none" stroke="#B9682A" stroke-width="3" stroke-linecap="round"/>`,
+
+    knot: () => `
+      ${shadow(100, 158, 64)}
+      ${strand('M100 110C118 78 160 80 160 110S118 142 100 110 40 78 40 110 82 142 100 110Z')}
+      ${overStrand('M87.2 127.9L112.8 92.1')}
+      <path d="M58 93c4-6 10-9 16-9M126 87c6-3 13-3 18 0" fill="none" stroke="#F8D49A" stroke-width="5" stroke-linecap="round"/>
+      <path d="M46 104l8 6M54 124l8-3M152 100l-8 6M148 126l-8-4M70 130l2-9M130 130l-2-9" stroke="#9E5A22" stroke-width="2.5" stroke-linecap="round"/>
+      ${flakes([[62, 100, 20], [136, 98, -10], [80, 92, 40], [118, 126, 10], [151, 115, 30], [48, 115, 0]])}
+      <ellipse cx="160" cy="152" rx="10" ry="5.5" transform="rotate(-30 160 152)" fill="#9DAF6A" ${st(2.5)}/>
+      <ellipse cx="173" cy="140" rx="9" ry="5" transform="rotate(20 173 140)" fill="#B3C27E" ${st(2.5)}/>`,
+
+    bun: () => `
+      ${shadow(100, 168, 54)}
+      <path d="M56 112h88l-11 50a6 6 0 0 1-6 5H73a6 6 0 0 1-6-5Z" fill="#FFF6E4" ${st()}/>
+      <path d="M72 114l5 50M86 114l2 52M100 114v52M114 114l-2 52M128 114l-5 50" stroke="${INK}" stroke-width="2" opacity=".3"/>
+      <path d="M48 112c-4-32 22-56 52-56s56 24 52 56c-1 6-5 9-11 9H59c-6 0-10-3-11-9Z" fill="#E08A3C" ${st()}/>
+      <path d="M100 95c7 0 10 6 8 11s-9 8-15 6-11-8-9-15 9-13 19-13 21 7 23 19" fill="none" stroke="#8E4418" stroke-width="3.5" stroke-linecap="round"/>
+      <path d="M62 90c6-14 18-24 32-27" fill="none" stroke="#F9C98A" stroke-width="5" stroke-linecap="round"/>
+      ${dots([[70, 104, 1.8], [132, 98, 1.8], [84, 76, 1.5], [122, 76, 1.6], [140, 110, 1.4], [62, 116, 1.4], [108, 66, 1.3]], '#FFF1DA')}`,
+
+    cookie: () => `
+      ${shadow(100, 164, 72)}
+      <ellipse cx="124" cy="92" rx="46" ry="42" fill="#B5743E" ${st()}/>
+      ${[[136, 66], [154, 92], [118, 80]].map(([x, y]) => `<path d="M${x} ${y}l9 2-2 9-9-2Z" fill="#4A2B1A"/>`).join('')}
+      <ellipse cx="84" cy="116" rx="54" ry="47" fill="#CE9155" ${st()}/>
+      <path d="M50 96c6-12 18-22 32-25" fill="none" stroke="#E8B47C" stroke-width="5" stroke-linecap="round"/>
+      ${[[60, 100], [96, 90], [106, 124], [68, 132], [86, 110], [118, 104], [90, 142]].map(([x, y], i) => `<path d="M${x} ${y}l${10 + (i % 3)} -3 3 ${9 + (i % 2)} -10 3Z" fill="#4A2B1A" stroke="${INK}" stroke-width="1.5" stroke-linejoin="round"/>`).join('')}
+      ${flakes([[78, 120, 15], [112, 112, -20], [74, 98, 30], [100, 136, 5], [126, 130, 40]])}
+      <path d="M44 120c6 2 10 7 12 13M112 152c4-6 10-8 16-8" stroke="#9A5E2E" stroke-width="2.5" fill="none" stroke-linecap="round"/>`,
+
+    honey: () => `
+      ${shadow(100, 170, 58)}
+      <path d="M66 82h68c7 0 12 5 12 12v60c0 9-7 14-16 14H70c-9 0-16-5-16-14V94c0-7 5-12 12-12Z" fill="#EFA72F" ${st()}/>
+      <rect x="61" y="96" width="7" height="58" rx="3.5" fill="#FFE3A0" opacity=".9"/>
+      <rect x="73" y="108" width="56" height="38" rx="8" fill="#FFF6E4" ${st(3)}/>
+      <path d="M101 115l7.5 4.3v8.6L101 132.2l-7.5-4.3v-8.6Z" fill="#EFA72F" ${st(2.5)}/>
+      <path d="M58 70c0-8 84-8 84 0l6 16c-28 6-68 6-96 0Z" fill="#C2571E" ${st()}/>
+      <path d="M74 64v20M88 63v22M102 63v23M116 63v22M130 65v19" stroke="#FFE9D2" stroke-width="3" opacity=".55"/>
+      <path d="M54 83c30 6 62 6 92 0" fill="none" ${st(3)}/>
+      <path d="M146 83c8-8 15-3 12 3s-9 4-12-3Zm0 0c4 8 2 15-3 15" fill="none" ${st(2.5)}/>
+      <g transform="translate(160 50) rotate(-12)">
+        <ellipse cx="-3" cy="-10" rx="6" ry="7.5" transform="rotate(-25 -3 -10)" fill="#FFFFFF" fill-opacity=".85" ${st(2)}/>
+        <ellipse cx="5" cy="-10" rx="5" ry="6.5" transform="rotate(25 5 -10)" fill="#FFFFFF" fill-opacity=".85" ${st(2)}/>
+        <ellipse cx="0" cy="0" rx="11" ry="8" fill="#F2C14E" ${st(2.5)}/>
+        <path d="M-3-7v14M3-7v14" stroke="${INK}" stroke-width="2.5"/>
+        <circle cx="9" cy="-1" r="1.6" fill="${INK}"/>
+      </g>
+      <path d="M118 46c8-12 22-14 30-8" fill="none" stroke="${INK}" stroke-width="2" stroke-dasharray="2 6" stroke-linecap="round"/>`,
+
+    butter: () => `
+      ${shadow(100, 162, 76)}
+      <path d="M26 128l74-30 76 28-74 32Z" fill="#FFF6E4" ${st()}/>
+      <path d="M44 128l56-22 58 21-56 23Z" fill="none" stroke="${INK}" stroke-width="1.8" stroke-dasharray="3 6" opacity=".35"/>
+      <path d="M56 100l44-17 46 15-44 17Z" fill="#FCEAA8" ${st()}/>
+      <path d="M56 100l46 15v30l-46-15Z" fill="#F4D47C" ${st()}/>
+      <path d="M102 115l44-17v30l-44 17Z" fill="#E6BB57" ${st()}/>
+      <ellipse cx="101" cy="99" rx="15" ry="6" fill="none" stroke="#C99A38" stroke-width="2.5"/>
+      <path d="M95 99h12" stroke="#C99A38" stroke-width="2.5" stroke-linecap="round"/>
+      ${flakes([[78, 96, 20], [124, 96, -15], [88, 106, 40], [116, 104, 5], [104, 88, 30]])}
+      <path d="M66 112v14M76 116v12" stroke="#FFF2C4" stroke-width="3" stroke-linecap="round" opacity=".9"/>`,
+
+    jam: () => `
+      ${shadow(102, 170, 72)}
+      <path d="M54 84h60c7 0 12 5 12 12v58c0 9-7 14-16 14H58c-9 0-16-5-16-14V96c0-7 5-12 12-12Z" fill="#74294A" ${st()}/>
+      <rect x="49" y="98" width="6" height="54" rx="3" fill="#B8577D" opacity=".9"/>
+      <rect x="57" y="112" width="54" height="32" rx="16" fill="#FFF6E4" ${st(3)}/>
+      <path d="M84 120c3 0 4 2 4 3 4 1 6 5 6 9 0 4-4 7-10 7s-10-3-10-7c0-4 2-8 6-9 0-1 1-3 4-3Z" fill="#74294A"/>
+      <path d="M46 72c0-8 76-8 76 0l6 16c-26 6-62 6-88 0Z" fill="#D8B888" ${st()}/>
+      <path d="M58 66l4 18M74 64l2 21M92 64v21M108 64l-2 21" stroke="#B89466" stroke-width="2.5" opacity=".8"/>
+      <path d="M42 85c28 6 56 6 84 0" fill="none" ${st(3)}/>
+      <path d="M152 100c4 0 6 4 6 8 10 4 18 14 18 28 0 14-10 26-24 26s-24-12-24-26c0-14 8-24 18-28 0-4 2-8 6-8Z" fill="#6A2D4E" ${st()}/>
+      <path d="M152 116c10 2 15 11 15 21 0 10-7 17-15 17s-15-7-15-17c0-10 5-19 15-21Z" fill="#E7898A"/>
+      <path d="M152 124c5 2 7 7 7 12s-3 9-7 9-7-4-7-9 2-10 7-12Z" fill="#F7C0A8"/>
+      ${dots([[148, 130, 1.4], [156, 132, 1.4], [150, 140, 1.4], [157, 142, 1.3], [145, 138, 1.2], [153, 124, 1.2]], '#8E3B52')}
+      <path d="M152 100v-8" ${st(3)}/>
+      <path d="M152 94c6-6 14-6 18-2-6 4-12 4-18 2Z" fill="#6E8B47" ${st(2)}/>`,
+
+    giftbox: () => `
+      ${shadow(100, 170, 70)}
+      <rect x="46" y="98" width="108" height="68" rx="6" fill="#C99C6E" ${st()}/>
+      <rect x="40" y="80" width="120" height="26" rx="6" fill="#B88758" ${st()}/>
+      <path d="M48 87h30" stroke="#DDB88E" stroke-width="4" stroke-linecap="round"/>
+      <rect x="92" y="80" width="16" height="86" fill="#9C3348" ${st(3)}/>
+      <path d="M100 80c-6-20-34-30-38-14-3 12 22 16 38 14Z" fill="#B8435A" ${st(3)}/>
+      <path d="M100 80c6-20 34-30 38-14 3 12-22 16-38 14Z" fill="#B8435A" ${st(3)}/>
+      <path d="M95 82l-12 18M105 82l12 18" ${st(3)} fill="none"/>
+      <circle cx="100" cy="80" r="7.5" fill="#9C3348" ${st(3)}/>
+      <circle cx="68" cy="134" r="14" fill="#FFF6E4" ${st(3)}/>
+      <path d="M68 143v-15" stroke="#C2571E" stroke-width="2.4" stroke-linecap="round"/>
+      <g fill="#C2571E"><ellipse cx="65" cy="138" rx="2.2" ry="3.8" transform="rotate(-35 65 138)"/><ellipse cx="71" cy="138" rx="2.2" ry="3.8" transform="rotate(35 71 138)"/><ellipse cx="68" cy="128" rx="2" ry="3.5"/></g>
+      <path d="M120 122h20l8 9-8 9h-20Z" fill="#FFF6E4" ${st(2.5)}/>
+      <circle cx="141" cy="131" r="2" fill="${INK}"/>
+      <path d="M126 128h10M126 134h7" stroke="${INK}" stroke-width="2" stroke-linecap="round" opacity=".5"/>`,
+
+    basket: () => `
+      ${shadow(100, 170, 70)}
+      <path d="M56 110c0-58 88-58 88 0" fill="none" stroke="${INK}" stroke-width="11" stroke-linecap="round"/>
+      <path d="M56 110c0-58 88-58 88 0" fill="none" stroke="#B9874F" stroke-width="5" stroke-linecap="round"/>
+      <g transform="rotate(28 136 70)">
+        <rect x="124" y="22" width="24" height="98" rx="12" fill="#E2A24F" ${st()}/>
+        <path d="M130 40l12 7M130 58l12 7M130 76l12 7" fill="none" stroke="${INK}" stroke-width="3" stroke-linecap="round"/>
+      </g>
+      <ellipse cx="78" cy="100" rx="34" ry="24" fill="#8C5632" ${st()}/>
+      <path d="M58 96c12-9 28-9 40 0" fill="none" stroke="#3E2414" stroke-width="3" stroke-linecap="round"/>
+      ${[[68, 88], [82, 84], [92, 92], [70, 104], [88, 106]].map(([x, y]) => `<ellipse cx="${x}" cy="${y}" rx="3" ry="1.5" fill="#F3E6C4"/>`).join('')}
+      <path d="M42 106h116l-6 14H48Z" fill="#FFF6E4" ${st(3)}/>
+      <path d="M58 106l-2 14M76 106l-1 14M94 106v14M112 106v14M130 106l1 14M146 106l2 14" stroke="#C2571E" stroke-width="3" opacity=".75"/>
+      <path d="M45 113h110" stroke="#C2571E" stroke-width="3" opacity=".45"/>
+      <path d="M44 118h112l-12 48H56Z" fill="#C08B52" ${st()}/>
+      <path d="M48 134h104M52 150h96" stroke="${INK}" stroke-width="2.5" opacity=".45"/>
+      <path d="M70 118l2 48M88 118l1 48M106 118v48M124 118l-1 48M140 118l-2 48" stroke="${INK}" stroke-width="2" opacity=".3"/>
+      <rect x="38" y="112" width="124" height="12" rx="6" fill="#A87440" ${st(3)}/>`
+  };
+
+  const svgArt = (p, extra = '') => `<svg viewBox="0 0 200 200" aria-hidden="true" focusable="false"${extra}>${ART[p.art](p.tile)}</svg>`;
+
+  /* ================= Data ================= */
+  const CATS = { all: 'All', bread: 'Bread', pastries: 'Pastries', pantry: 'Pantry', gifts: 'Gift boxes' };
+  const PRODUCTS = [
+    { id: 'country-boule', name: 'Country Sourdough Boule', cat: 'bread', price: 9, unit: '900 g loaf', badge: 'Bestseller', tile: '#F3D79B', art: 'boule',
+      blurb: '48-hour ferment, blistered crust, custardy crumb.',
+      desc: 'Our everyday loaf: a 48-hour cold ferment, a deeply caramelised, blistered crust and a glossy, custardy crumb. Stone-milled wheat and a starter we have fed every day since 2014.',
+      specs: { Size: '900 g loaf', Keeps: '4 days in a linen bag', Allergens: 'Wheat (gluten)' } },
+    { id: 'seeded-rye', name: 'Seeded Rye Tin', cat: 'bread', price: 10, unit: '1 kg loaf', tile: '#DCE0C0', art: 'rye',
+      blurb: 'Whole rye, toasted seeds, a whisper of molasses.',
+      desc: 'Dense, dark and deeply savoury. Whole rye with sunflower, flax and pumpkin seeds and a whisper of blackstrap molasses. Slice thin, toast hard, butter generously.',
+      specs: { Size: '1 kg tin loaf', Keeps: '7 days wrapped', Allergens: 'Rye, wheat (gluten)' } },
+    { id: 'fougasse', name: 'Olive & Rosemary Fougasse', cat: 'bread', price: 8, unit: '450 g', badge: 'New', tile: '#EAD9C0', art: 'fougasse',
+      blurb: 'Tear-and-share leaf with olives & rosemary.',
+      desc: 'A Provençal-style leaf of crisp, olive-oil-rich dough, studded with green olives and fresh rosemary. Made for tearing at the table.',
+      specs: { Size: '450 g', Keeps: 'Best on the day', Allergens: 'Wheat (gluten)' } },
+    { id: 'butter-croissant', name: 'Laminated Butter Croissants', cat: 'pastries', price: 14, unit: 'Box of 4', badge: 'Bestseller', tile: '#F6D7A8', art: 'croissant',
+      blurb: 'Three-day lamination, 81 buttery layers.',
+      desc: 'Eighty-one layers of cultured butter, laminated over three days. Shatteringly crisp outside, honeycombed and tender within. Refresh for 4 minutes at 180°C.',
+      specs: { Size: 'Box of 4', Keeps: '2 days', Allergens: 'Wheat, milk, egg' } },
+    { id: 'cardamom-knots', name: 'Cardamom Knots', cat: 'pastries', price: 12, unit: 'Box of 4', tile: '#E3E7C9', art: 'knot',
+      blurb: 'Green cardamom, brown sugar, pearl sugar.',
+      desc: 'Nordic-style knots rolled with freshly cracked green cardamom, brown sugar and butter, then finished with crunchy pearl sugar.',
+      specs: { Size: 'Box of 4', Keeps: '2 days', Allergens: 'Wheat, milk, egg' } },
+    { id: 'pumpkin-buns', name: 'Pumpkin Spice Morning Buns', cat: 'pastries', price: 13, unit: 'Box of 4', badge: 'Seasonal', tile: '#F2C5B0', art: 'bun',
+      blurb: 'Roasted pumpkin, orange zest, spiced sugar.',
+      desc: 'Our autumn special: croissant dough rolled with roasted pumpkin, cinnamon, nutmeg and orange zest, baked in paper and tossed in spiced sugar while warm.',
+      specs: { Size: 'Box of 4', Keeps: '2 days', Allergens: 'Wheat, milk, egg' } },
+    { id: 'salt-cookies', name: 'Brown Butter Sea-Salt Cookies', cat: 'pastries', price: 11, unit: 'Half dozen', badge: 'Bestseller', tile: '#EBD3B5', art: 'cookie',
+      blurb: 'Dark chocolate, brown butter, flaky salt.',
+      desc: 'Chewy at the edge, gooey in the middle: brown butter, dark chocolate chunks and a pinch of flaky sea salt from up the coast.',
+      specs: { Size: '6 cookies', Keeps: '5 days', Allergens: 'Wheat, milk, egg, soy' } },
+    { id: 'wildflower-honey', name: 'Wildflower Honey', cat: 'pantry', price: 13, unit: '340 g jar', tile: '#F7E2A6', art: 'honey',
+      blurb: 'Raw & unfiltered, from a local meadow.',
+      desc: 'Raw, unfiltered honey from hives on a meadow farm twenty minutes from the bakery. Floral, a little wild and exceptional on warm toast.',
+      specs: { Size: '340 g jar', Keeps: '2 years', Allergens: 'None' } },
+    { id: 'cultured-butter', name: 'Cultured Sea-Salt Butter', cat: 'pantry', price: 7, unit: '250 g block', tile: '#D7E0EA', art: 'butter',
+      blurb: 'The butter in our croissants, salted.',
+      desc: 'Slow-cultured cream churned in small batches and folded with crunchy sea salt. The very same butter that goes into our croissants.',
+      specs: { Size: '250 g block', Keeps: '3 weeks, refrigerated', Allergens: 'Milk' } },
+    { id: 'fig-jam', name: 'Fig & Black Pepper Jam', cat: 'pantry', price: 9, unit: '220 g jar', badge: 'New', tile: '#EBCFD3', art: 'jam',
+      blurb: 'Jammy figs, cracked pepper, a hint of balsamic.',
+      desc: 'Black figs cooked down with a crack of black pepper and a splash of aged balsamic. Superb with sharp cheese and our seeded rye.',
+      specs: { Size: '220 g jar', Keeps: '12 months (refrigerate once open)', Allergens: 'None' } },
+    { id: 'sunday-box', name: 'The Sunday Table Box', cat: 'gifts', price: 48, unit: 'Serves 4', badge: 'Limited', tile: '#F1D9B6', art: 'giftbox',
+      blurb: 'Boule, croissants, butter, honey & jam.',
+      desc: 'Everything for a slow Sunday: a Country Boule, four croissants, cultured butter, wildflower honey and fig jam, packed in a kraft keepsake box with a hand-tied ribbon.',
+      specs: { Contents: '5 bakery & pantry favourites', Serves: '4 for breakfast', Allergens: 'Wheat, milk, egg' } },
+    { id: 'hearth-basket', name: 'Hearth Sampler Basket', cat: 'gifts', price: 36, unit: 'Serves 2', tile: '#DCE0C0', art: 'basket',
+      blurb: 'Rye, baguette, cookies & a willow basket.',
+      desc: 'A smaller hello: our seeded rye, a fresh baguette, half a dozen sea-salt cookies and a handwritten note, nestled in a reusable willow basket.',
+      specs: { Contents: 'Rye, baguette, 6 cookies, note', Serves: '2', Allergens: 'Wheat, rye, milk, egg, soy' } }
+  ];
+  const byId = Object.fromEntries(PRODUCTS.map(p => [p.id, p]));
+  const FREE_SHIP = 40;
+  const STORE_KEY = 'saltgrain.cart.v1';
+  const money = n => '$' + n.toFixed(2);
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const $ = id => document.getElementById(id);
+
+  const ICON = {
+    eye: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>',
+    plus: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>',
+    minus: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg>',
+    check: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>',
+    bike: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="17" r="3"/><circle cx="18" cy="17" r="3"/><path d="M6 17l4-8h5l3 8M10 9 8.5 6H6M15 9h3"/></svg>',
+    star: '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4L2.8 9.5l6.4-.8Z"/></svg>'
+  };
+
+  /* ================= Scenes ================= */
+  function wheat(x, y, s, rot, color = '#E9B85A') {
+    let grains = '';
+    for (let i = 0; i < 4; i++) {
+      const yy = -40 - i * 17;
+      grains += `<ellipse cx="-7" cy="${yy}" rx="6" ry="11" transform="rotate(-28 -7 ${yy})" fill="${color}"/><ellipse cx="7" cy="${yy}" rx="6" ry="11" transform="rotate(28 7 ${yy})" fill="${color}"/>`;
+    }
+    return `<g transform="translate(${x} ${y}) rotate(${rot}) scale(${s})" stroke="${INK}" stroke-width="2.4" stroke-linejoin="round">
+      <path d="M0 0V-112" fill="none" stroke-linecap="round"/>${grains}
+      <ellipse cx="0" cy="-114" rx="5.5" ry="11" fill="${color}"/>
+      <path d="M0-124l-5-20M0-124l5-20M-7-60l-12-16M7-60l12-16" fill="none" stroke-linecap="round" stroke-width="1.6"/></g>`;
+  }
+  const sparkle = (x, y, s) => `<path transform="translate(${x} ${y}) scale(${s})" d="M0-14C2-4 4-2 14 0 4 2 2 4 0 14-2 4-4 2-14 0-4-2-2-4 0-14Z" fill="#FFF8EA" stroke="${INK}" stroke-width="2" stroke-linejoin="round"/>`;
+
+  $('hero-art').innerHTML = `
+    <svg viewBox="0 0 520 620" role="img" aria-label="Illustration: a sourdough boule, croissants and a jar of wildflower honey on a wooden bread board">
+      <circle cx="260" cy="330" r="236" fill="#F5CB62"/>
+      <circle cx="260" cy="330" r="176" fill="#F8D67C"/>
+      <circle cx="260" cy="330" r="114" fill="#FBE19A"/>
+      ${wheat(150, 478, 1.5, -24)}
+      ${wheat(372, 478, 1.5, 22)}
+      ${wheat(116, 478, 1.2, -42, '#E2A24F')}
+      ${wheat(410, 478, 1.15, 40, '#E2A24F')}
+      ${sparkle(96, 196, 1.1)}${sparkle(438, 170, .8)}${sparkle(388, 108, .55)}
+      <g class="steam" fill="none" stroke="${INK}" stroke-width="3.5" stroke-linecap="round" opacity=".5">
+        <path d="M218 290c-14-16 14-28 0-48"/><path d="M260 274c-14-16 14-28 0-48"/><path d="M302 290c-14-16 14-28 0-48"/>
+      </g>
+      <rect x="-10" y="500" width="540" height="140" fill="#8A5530" stroke="${INK}" stroke-width="3.5"/>
+      <rect x="-10" y="474" width="540" height="40" rx="20" fill="#B07642" stroke="${INK}" stroke-width="3.5"/>
+      <path d="M30 490h110M190 487h80M330 491h120" stroke="#D29B65" stroke-width="3" stroke-linecap="round"/>
+      <path d="M40 540h70M200 556h120M380 534h60" stroke="#6E4127" stroke-width="3" stroke-linecap="round"/>
+      <svg x="88" y="210" width="344" height="344" viewBox="0 0 200 200">${ART.boule()}</svg>
+      <svg x="316" y="300" width="210" height="210" viewBox="0 0 200 200">${ART.honey()}</svg>
+      <svg x="-14" y="292" width="256" height="256" viewBox="0 0 200 200">${ART.croissant()}</svg>
+    </svg>`;
+  $('hero-tag-thumb').innerHTML = svgArt(byId['pumpkin-buns']);
+
+  $('promo-art').innerHTML = ['sunday-box', 'hearth-basket'].map(id => {
+    const p = byId[id];
+    return `<div class="promo-tile" style="--tile:${p.tile}">${svgArt(p)}</div>`;
+  }).join('');
+
+  (function buildOven() {
+    let vous = '';
+    for (let i = 0; i <= 12; i++) {
+      const a = Math.PI - i * Math.PI / 12, c = Math.cos(a), s = Math.sin(a);
+      vous += `M${(240 + 140 * c).toFixed(1)} ${(270 - 140 * s).toFixed(1)}L${(240 + 190 * c).toFixed(1)} ${(270 - 190 * s).toFixed(1)}`;
+    }
+    $('oven-art').innerHTML = `
+      <svg viewBox="0 0 480 540" role="img" aria-label="Illustration: a glowing wood-fired oven with a sourdough loaf on a baker's peel">
+        <defs>
+          <pattern id="sg-bricks" width="64" height="32" patternUnits="userSpaceOnUse">
+            <rect width="64" height="32" fill="#4A3122"/>
+            <path d="M0 1.5H64M0 17.5H64M32 1.5V17.5M1.5 17.5V32M62.5 17.5V32" stroke="${INK}" stroke-width="3"/>
+          </pattern>
+          <radialGradient id="sg-glow" cx="50%" cy="92%" r="85%">
+            <stop offset="0" stop-color="#FFE7A6"/><stop offset=".3" stop-color="#F9AE52"/><stop offset=".65" stop-color="#D4642A"/><stop offset="1" stop-color="#5E220B"/>
+          </radialGradient>
+        </defs>
+        <rect width="480" height="540" fill="url(#sg-bricks)"/>
+        <path d="M50 470V270a190 190 0 0 1 380 0v200Z" fill="#A65A2C" stroke="${INK}" stroke-width="4"/>
+        <path d="${vous}M50 320h50M50 370h50M50 420h50M380 320h50M380 370h50M380 420h50" stroke="${INK}" stroke-width="3"/>
+        <path d="M100 470V270a140 140 0 0 1 280 0v200Z" fill="url(#sg-glow)" stroke="${INK}" stroke-width="4"/>
+        <g stroke="${INK}" stroke-width="3" stroke-linejoin="round">
+          <path class="flame" d="M118 466c-8-30 10-44 8-74 20 20 32 46 22 74Z" fill="#FFC861"/>
+          <path class="flame" d="M140 466c-4-20 6-30 6-48 12 14 18 32 12 48Z" fill="#FFE7A6"/>
+          <path class="flame" d="M330 466c-6-26 10-40 10-64 18 18 26 42 18 64Z" fill="#FFC861"/>
+          <path class="flame" d="M352 466c-2-16 6-26 8-40 10 12 14 28 8 40Z" fill="#FFE7A6"/>
+        </g>
+        <rect x="112" y="452" width="56" height="16" rx="8" fill="#6B3A1E" stroke="${INK}" stroke-width="3"/>
+        <rect x="318" y="452" width="56" height="16" rx="8" fill="#6B3A1E" stroke="${INK}" stroke-width="3"/>
+        <rect x="30" y="466" width="420" height="80" fill="#6B3A1E" stroke="${INK}" stroke-width="4"/>
+        <path d="M30 490h420" stroke="${INK}" stroke-width="3" opacity=".5"/>
+        <g transform="rotate(-8 240 430)">
+          <rect x="300" y="420" width="220" height="18" rx="9" fill="#C9965E" stroke="${INK}" stroke-width="3.5"/>
+          <ellipse cx="236" cy="429" rx="80" ry="17" fill="#D9AE78" stroke="${INK}" stroke-width="3.5"/>
+          <path d="M176 426h110" stroke="#F0CFA0" stroke-width="3" stroke-linecap="round"/>
+        </g>
+        <svg x="150" y="282" width="180" height="180" viewBox="0 0 200 200">${ART.boule()}</svg>
+        <g transform="translate(240 64)">
+          <path d="M-60-34v-30M60-34v-30" stroke="#CDB797" stroke-width="3"/>
+          <rect x="-96" y="-34" width="192" height="58" rx="12" fill="#FFF4E2" stroke="${INK}" stroke-width="3.5"/>
+          <text x="0" y="-4" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="24" font-weight="600" fill="${INK}">Old Gus</text>
+          <text x="0" y="15" text-anchor="middle" font-family="Figtree, sans-serif" font-size="10" font-weight="800" letter-spacing="2.5" fill="#A4461A">STARTER · EST. 2014</text>
+        </g>
+      </svg>`;
+  })();
+
+  $('empty-art').innerHTML = svgArt({ art: 'basket', tile: '#F2DDB0' });
+  $('nl-cookie').innerHTML = svgArt({ art: 'cookie', tile: '' });
+
+  /* ================= Reviews ================= */
+  const REVIEWS = [
+    { q: 'The country boule is the best bread I have bought outside of a Paris holiday. It arrives faintly warm and my Saturday mornings are ruined for anything else.', n: 'Priya N.', i: 'PN', item: 'Country Sourdough Boule' },
+    { q: 'Sent the Sunday Table Box to my parents for their anniversary. The hand-tied ribbon and the little note made my mum cry — in the good way.', n: 'Daniel R.', i: 'DR', item: 'The Sunday Table Box' },
+    { q: 'Cardamom knots and a flat white are now my entire personality. Delivery lands before nine, like clockwork, every single Saturday.', n: 'Hannah K.', i: 'HK', item: 'Cardamom Knots' }
+  ];
+  $('review-grid').innerHTML = REVIEWS.map(r => `
+    <li><figure class="review" style="margin:0">
+      <span class="stars" role="img" aria-label="5 out of 5 stars">${ICON.star.repeat(5)}</span>
+      <blockquote>“${esc(r.q)}”</blockquote>
+      <figcaption class="reviewer"><span class="avatar" aria-hidden="true">${r.i}</span><span class="reviewer-who"><strong>${r.n}</strong><span>Ordered: ${r.item}</span></span></figcaption>
+    </figure></li>`).join('');
+
+  /* ================= Product grid & filters ================= */
+  const grid = $('product-grid');
+  grid.innerHTML = PRODUCTS.map(p => `
+    <li class="card" data-id="${p.id}" data-cat="${p.cat}">
+      <button class="card-media" type="button" style="--tile:${p.tile}" data-quick="${p.id}" aria-label="Quick view: ${esc(p.name)}${p.badge ? ' (' + p.badge + ')' : ''}">
+        ${p.badge ? `<span class="badge badge--${p.badge.toLowerCase()}" aria-hidden="true">${p.badge}</span>` : ''}
+        ${svgArt(p)}
+        <span class="quick-pill" aria-hidden="true">${ICON.eye} Quick view</span>
+      </button>
+      <div class="card-body">
+        <p class="card-meta">${CATS[p.cat]} · ${p.unit}</p>
+        <h3 class="card-title" data-quick="${p.id}">${esc(p.name)}</h3>
+        <p class="card-blurb">${esc(p.blurb)}</p>
+        <div class="card-foot">
+          <span class="price">${money(p.price)}</span>
+          <button class="add-btn" type="button" data-add="${p.id}"><span class="add-label">Add to cart</span><span class="sr-only">: ${esc(p.name)}</span></button>
+        </div>
+      </div>
+    </li>`).join('');
+
+  const chipsEl = $('chips');
+  chipsEl.innerHTML = Object.entries(CATS).map(([key, label]) => {
+    const n = key === 'all' ? PRODUCTS.length : PRODUCTS.filter(p => p.cat === key).length;
+    return `<button class="chip" type="button" data-filter="${key}" aria-pressed="${key === 'all'}">${label}<span class="n" aria-hidden="true">${n}</span><span class="sr-only">(${n} products)</span></button>`;
+  }).join('');
+
+  let activeFilter = 'all';
+  let query = '';
+
+  function applyFilter(animate = true) {
+    const q = query.trim().toLowerCase();
+    let shown = 0;
+    grid.querySelectorAll('.card').forEach(card => {
+      const p = byId[card.dataset.id];
+      const hay = `${p.name} ${p.blurb} ${CATS[p.cat]} ${p.desc}`.toLowerCase();
+      const visible = (activeFilter === 'all' || p.cat === activeFilter) && (!q || hay.includes(q));
+      card.hidden = !visible;
+      card.classList.remove('pop');
+      if (visible) {
+        card.style.setProperty('--i', shown);
+        shown++;
+        if (animate && !reduceMotion) { void card.offsetWidth; card.classList.add('pop'); }
+      }
+    });
+    chipsEl.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', String(c.dataset.filter === activeFilter)));
+    const label = activeFilter === 'all' ? '' : ` in ${CATS[activeFilter]}`;
+    $('result-count').textContent = `Showing ${shown} ${shown === 1 ? 'item' : 'items'}${label}${q ? ` for “${query.trim()}”` : ''}`;
+    $('grid-empty').hidden = shown > 0;
+    $('clear-search').hidden = !q;
+    const hint = $('search-hint');
+    if (hint) hint.textContent = q ? `${shown} ${shown === 1 ? 'match' : 'matches'} · press Enter` : 'Type to filter the shop';
+  }
+
+  function setFilter(key, { scroll = false } = {}) {
+    activeFilter = CATS[key] ? key : 'all';
+    applyFilter();
+    if (scroll) $('shop').scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+  }
+
+  chipsEl.addEventListener('click', e => {
+    const chip = e.target.closest('.chip');
+    if (chip) setFilter(chip.dataset.filter);
+  });
+
+  function clearSearch() {
+    query = '';
+    $('search-input').value = '';
+    applyFilter();
+  }
+  $('clear-search').addEventListener('click', clearSearch);
+  $('reset-filters').addEventListener('click', () => { query = ''; $('search-input').value = ''; setFilter('all'); });
+
+  /* ================= Cart state ================= */
+  function loadCart() {
+    try {
+      const raw = window.localStorage.getItem(STORE_KEY);
+      if (!raw) return {};
+      const data = JSON.parse(raw);
+      const clean = {};
+      if (data && typeof data === 'object') {
+        for (const [id, q] of Object.entries(data)) {
+          const n = Math.floor(Number(q));
+          if (byId[id] && n > 0) clean[id] = Math.min(n, 99);
+        }
+      }
+      return clean;
+    } catch (err) { return {}; }
+  }
+  function saveCart() {
+    try { window.localStorage.setItem(STORE_KEY, JSON.stringify(cart)); } catch (err) { /* storage unavailable: cart stays in memory */ }
+  }
+  let cart = loadCart();
+  const cartCount = () => Object.values(cart).reduce((a, b) => a + b, 0);
+  const cartSubtotal = () => Object.entries(cart).reduce((s, [id, q]) => s + byId[id].price * q, 0);
+
+  function announce(msg) {
+    const el = $('sr-status');
+    el.textContent = '';
+    window.setTimeout(() => { el.textContent = msg; }, 60);
+  }
+
+  function renderCart() {
+    const count = cartCount();
+    const sub = cartSubtotal();
+    const countEl = $('cart-count');
+    countEl.textContent = count;
+    $('cart-btn').setAttribute('aria-label', `Open cart, ${count} ${count === 1 ? 'item' : 'items'}`);
+    $('drawer-count').textContent = `(${count})`;
+    $('subtotal').textContent = money(sub);
+
+    const ship = $('ship');
+    const left = Math.max(0, FREE_SHIP - sub);
+    const pct = Math.min(100, (sub / FREE_SHIP) * 100);
+    $('ship-fill').style.width = pct + '%';
+    $('ship-bar').setAttribute('aria-valuenow', String(Math.min(sub, FREE_SHIP)));
+    $('ship-bar').setAttribute('aria-valuetext', left > 0 ? `${money(sub)} of ${money(FREE_SHIP)}` : 'Free delivery unlocked');
+    ship.classList.toggle('is-free', left === 0 && count > 0);
+    $('ship-msg').innerHTML = count === 0
+      ? `${ICON.bike}<span>Free local delivery on orders over <strong>${money(FREE_SHIP)}</strong></span>`
+      : left > 0
+        ? `${ICON.bike}<span>You're <strong>${money(left)}</strong> away from free local delivery</span>`
+        : `${ICON.bike}<span><strong>Free local delivery unlocked.</strong> Lovely.</span>`;
+
+    const lines = $('cart-lines');
+    const ids = Object.keys(cart);
+    lines.innerHTML = ids.map(id => {
+      const p = byId[id], q = cart[id];
+      return `<li class="line" data-line="${id}">
+        <div class="line-thumb" style="--tile:${p.tile}">${svgArt(p)}</div>
+        <div>
+          <p class="line-name">${esc(p.name)}</p>
+          <p class="line-meta">${p.unit} · ${money(p.price)} each</p>
+          <div class="line-controls">
+            <div class="stepper" role="group" aria-label="Quantity for ${esc(p.name)}">
+              <button type="button" data-dec="${id}" aria-label="Decrease quantity of ${esc(p.name)}">${ICON.minus}</button>
+              <span class="qty" aria-live="polite">${q}</span>
+              <button type="button" data-inc="${id}" aria-label="Increase quantity of ${esc(p.name)}">${ICON.plus}</button>
+            </div>
+            <button class="link-btn" type="button" data-remove="${id}">Remove<span class="sr-only"> ${esc(p.name)}</span></button>
+          </div>
+        </div>
+        <p class="line-price">${money(p.price * q)}</p>
+      </li>`;
+    }).join('');
+    $('cart-empty').hidden = count > 0;
+    lines.hidden = count === 0;
+    $('checkout-btn').disabled = count === 0;
+    if (count === 0) $('demo-notice').hidden = true;
+
+    const upsell = $('upsell');
+    const pick = ['cultured-butter', 'wildflower-honey', 'fig-jam', 'salt-cookies'].find(id => !cart[id]);
+    if (count > 0 && pick) {
+      const p = byId[pick];
+      upsell.hidden = false;
+      upsell.innerHTML = `<h3>Pairs beautifully with</h3>
+        <div class="upsell-item">
+          <div class="line-thumb" style="--tile:${p.tile}">${svgArt(p)}</div>
+          <div><strong>${esc(p.name)}</strong><span>${money(p.price)} · ${p.unit}</span></div>
+          <button class="upsell-add" type="button" data-add="${p.id}" data-from="upsell">${ICON.plus} Add<span class="sr-only"> ${esc(p.name)}</span></button>
+        </div>`;
+    } else {
+      upsell.hidden = true;
+      upsell.innerHTML = '';
+    }
+  }
+
+  function bumpBadge() {
+    const el = $('cart-count');
+    el.classList.remove('bump');
+    void el.offsetWidth;
+    el.classList.add('bump');
+  }
+
+  let toastTimer;
+  function showToast(text) {
+    const t = $('toast');
+    $('toast-text').textContent = text;
+    t.classList.add('is-show');
+    window.clearTimeout(toastTimer);
+    toastTimer = window.setTimeout(() => t.classList.remove('is-show'), 3800);
+  }
+
+  function addToCart(id, qty = 1, { quiet = false } = {}) {
+    const p = byId[id];
+    if (!p) return;
+    cart[id] = Math.min((cart[id] || 0) + qty, 99);
+    saveCart();
+    renderCart();
+    bumpBadge();
+    const msg = `Added ${qty > 1 ? qty + ' × ' : ''}${p.name} to your cart`;
+    announce(`${msg}. Cart now has ${cartCount()} items.`);
+    if (!quiet) showToast(msg);
+  }
+
+  function setQty(id, q) {
+    if (q <= 0) delete cart[id]; else cart[id] = Math.min(q, 99);
+    saveCart();
+    renderCart();
+  }
+
+  /* ================= Focus management ================= */
+  const FOCUSABLE = 'a[href],button:not([disabled]),input:not([disabled]),select,textarea,[tabindex]:not([tabindex="-1"])';
+  let activeLayer = null;   // element currently trapping focus
+  let returnFocus = null;
+
+  function trapTab(e, container) {
+    const items = [...container.querySelectorAll(FOCUSABLE)].filter(el => !el.closest('[hidden]') && el.getClientRects().length);
+    if (!items.length) return;
+    const first = items[0], last = items[items.length - 1];
+    if (e.shiftKey && (document.activeElement === first || !container.contains(document.activeElement))) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && (document.activeElement === last || !container.contains(document.activeElement))) { e.preventDefault(); first.focus(); }
+  }
+
+  function lockScroll(on) {
+    const root = document.documentElement;
+    if (on) {
+      const sbw = window.innerWidth - root.clientWidth;
+      if (sbw > 0) document.body.style.paddingRight = sbw + 'px';
+      root.classList.add('no-scroll');
+    } else {
+      root.classList.remove('no-scroll');
+      document.body.style.paddingRight = '';
+    }
+  }
+
+  /* ----- Drawer ----- */
+  const drawer = $('cart-drawer'), overlay = $('overlay');
+  function openCart() {
+    if (drawer.classList.contains('is-open')) return;
+    closeNav(); closeSearch(false);
+    returnFocus = document.activeElement;
+    drawer.classList.add('is-open');
+    overlay.classList.add('is-open');
+    $('cart-btn').setAttribute('aria-expanded', 'true');
+    lockScroll(true);
+    activeLayer = drawer;
+    window.setTimeout(() => $('cart-close').focus(), reduceMotion ? 0 : 80);
+  }
+  function closeCart() {
+    if (!drawer.classList.contains('is-open')) return;
+    drawer.classList.remove('is-open');
+    overlay.classList.remove('is-open');
+    $('cart-btn').setAttribute('aria-expanded', 'false');
+    lockScroll(false);
+    activeLayer = null;
+    if (returnFocus && document.contains(returnFocus)) returnFocus.focus();
+  }
+  $('cart-btn').addEventListener('click', openCart);
+  $('footer-cart').addEventListener('click', openCart);
+  $('toast-view').addEventListener('click', () => { $('toast').classList.remove('is-show'); openCart(); });
+  $('cart-close').addEventListener('click', closeCart);
+  overlay.addEventListener('click', closeCart);
+  $('empty-shop').addEventListener('click', () => { closeCart(); setFilter('all', { scroll: true }); });
+  $('checkout-btn').addEventListener('click', () => {
+    const n = $('demo-notice');
+    n.hidden = false;
+    n.animate && !reduceMotion && n.animate([{ transform: 'translateY(6px)', opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: 300, easing: 'ease-out' });
+  });
+
+  drawer.addEventListener('click', e => {
+    const inc = e.target.closest('[data-inc]'), dec = e.target.closest('[data-dec]'), rem = e.target.closest('[data-remove]');
+    if (inc) { const id = inc.dataset.inc; setQty(id, cart[id] + 1); refocus(`[data-inc="${id}"]`); announce(`${byId[id].name}: quantity ${cart[id]}`); }
+    else if (dec) { const id = dec.dataset.dec; const next = cart[id] - 1; setQty(id, next); if (next > 0) { refocus(`[data-dec="${id}"]`); announce(`${byId[id].name}: quantity ${next}`); } else { announce(`${byId[id].name} removed from cart`); focusAfterRemoval(); } }
+    else if (rem) { const id = rem.dataset.remove; setQty(id, 0); announce(`${byId[id].name} removed from cart`); focusAfterRemoval(); }
+  });
+  function refocus(sel) { const el = drawer.querySelector(sel); if (el) el.focus(); }
+  function focusAfterRemoval() {
+    const next = drawer.querySelector('.line [data-dec]') || $('empty-shop');
+    if (next && next.getClientRects().length) next.focus(); else $('cart-close').focus();
+  }
+
+  /* ----- Quick view ----- */
+  const modal = $('qv'), dialog = $('qv-dialog');
+  let qvProduct = null, qvQty = 1;
+  function updateQvButton() {
+    $('qv-qty').textContent = qvQty;
+    $('qv-add').textContent = `Add to cart · ${money(qvProduct.price * qvQty)}`;
+    $('qv-minus').disabled = qvQty <= 1;
+  }
+  function openQuickView(id, trigger) {
+    const p = byId[id];
+    if (!p) return;
+    qvProduct = p; qvQty = 1;
+    $('qv-media').style.setProperty('--tile', p.tile);
+    $('qv-media').innerHTML = `${p.badge ? `<span class="badge badge--${p.badge.toLowerCase()}">${p.badge}</span>` : ''}${svgArt(p)}`;
+    $('qv-meta').textContent = `${CATS[p.cat]} · ${p.unit}`;
+    $('qv-title').textContent = p.name;
+    $('qv-price').textContent = money(p.price);
+    $('qv-desc').textContent = p.desc;
+    $('qv-specs').innerHTML = Object.entries(p.specs).map(([k, v]) => `<dt>${k}</dt><dd>${esc(v)}</dd>`).join('');
+    updateQvButton();
+    returnFocus = trigger || document.activeElement;
+    modal.classList.add('is-open');
+    lockScroll(true);
+    activeLayer = dialog;
+    dialog.scrollTop = 0;
+    window.setTimeout(() => modal.querySelector('.modal-close').focus(), reduceMotion ? 0 : 60);
+  }
+  function closeQuickView() {
+    if (!modal.classList.contains('is-open')) return;
+    modal.classList.remove('is-open');
+    lockScroll(false);
+    activeLayer = null;
+    if (returnFocus && document.contains(returnFocus)) returnFocus.focus();
+  }
+  modal.addEventListener('click', e => { if (e.target.closest('[data-close-modal]')) closeQuickView(); });
+  $('qv-minus').addEventListener('click', () => { qvQty = Math.max(1, qvQty - 1); updateQvButton(); });
+  $('qv-plus').addEventListener('click', () => { qvQty = Math.min(20, qvQty + 1); updateQvButton(); $('qv-minus').disabled = false; });
+  $('qv-add').addEventListener('click', () => {
+    const id = qvProduct.id, q = qvQty;
+    closeQuickView();
+    addToCart(id, q);
+    flashAddButton(id);
+  });
+
+  /* ----- Global delegation ----- */
+  function flashAddButton(id) {
+    document.querySelectorAll(`.add-btn[data-add="${id}"]`).forEach(btn => {
+      const label = btn.querySelector('.add-label');
+      btn.classList.add('is-added');
+      label.innerHTML = `${ICON.check} Added`;
+      window.clearTimeout(btn._t);
+      btn._t = window.setTimeout(() => { btn.classList.remove('is-added'); label.textContent = 'Add to cart'; }, 1600);
+    });
+  }
+
+  document.addEventListener('click', e => {
+    const add = e.target.closest('[data-add]');
+    if (add) {
+      const fromUpsell = add.dataset.from === 'upsell';
+      addToCart(add.dataset.add, 1, { quiet: fromUpsell });
+      if (fromUpsell) { const first = drawer.querySelector(`[data-inc="${add.dataset.add}"]`); if (first) first.focus(); }
+      else flashAddButton(add.dataset.add);
+      return;
+    }
+    const quick = e.target.closest('[data-quick]');
+    if (quick) {
+      const trigger = quick.matches('button') ? quick : quick.closest('.card')?.querySelector('.card-media');
+      openQuickView(quick.dataset.quick, trigger);
+      return;
+    }
+    const fl = e.target.closest('[data-filter-link]');
+    if (fl) {
+      e.preventDefault();
+      closeNav();
+      query = ''; $('search-input').value = '';
+      setFilter(fl.dataset.filterLink, { scroll: true });
+    }
+  });
+
+  /* ----- Mobile nav ----- */
+  const nav = $('site-nav'), menuBtn = $('menu-btn');
+  function closeNav() {
+    if (!nav.classList.contains('is-open')) return;
+    nav.classList.remove('is-open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+    menuBtn.setAttribute('aria-label', 'Open menu');
+    menuBtn.querySelector('path').setAttribute('d', 'M4 7h16M4 12h16M4 17h10');
+  }
+  menuBtn.addEventListener('click', () => {
+    const open = !nav.classList.contains('is-open');
+    if (!open) { closeNav(); return; }
+    closeSearch(false);
+    nav.classList.add('is-open');
+    menuBtn.setAttribute('aria-expanded', 'true');
+    menuBtn.setAttribute('aria-label', 'Close menu');
+    menuBtn.querySelector('path').setAttribute('d', 'M6 6l12 12M18 6 6 18');
+    const firstLink = nav.querySelector('a'); if (firstLink) firstLink.focus();
+  });
+  nav.addEventListener('click', e => { if (e.target.closest('a')) closeNav(); });
+  document.addEventListener('click', e => {
+    if (nav.classList.contains('is-open') && !e.target.closest('#site-nav') && !e.target.closest('#menu-btn')) closeNav();
+  });
+  window.matchMedia('(min-width: 981px)').addEventListener('change', ev => { if (ev.matches) closeNav(); });
+
+  /* ----- Search ----- */
+  const searchPanel = $('search-panel'), searchBtn = $('search-btn'), searchInput = $('search-input');
+  function openSearch() {
+    closeNav();
+    searchPanel.hidden = false;
+    searchBtn.setAttribute('aria-expanded', 'true');
+    searchInput.focus();
+  }
+  function closeSearch(restore = true) {
+    if (searchPanel.hidden) return;
+    searchPanel.hidden = true;
+    searchBtn.setAttribute('aria-expanded', 'false');
+    if (restore) searchBtn.focus();
+  }
+  searchBtn.addEventListener('click', () => (searchPanel.hidden ? openSearch() : closeSearch()));
+  $('search-close').addEventListener('click', () => closeSearch());
+  searchInput.addEventListener('input', () => {
+    query = searchInput.value;
+    if (query.trim() && activeFilter !== 'all') activeFilter = 'all';
+    applyFilter(false);
+  });
+  searchInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      closeSearch(false);
+      $('shop').scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+      const firstVisible = grid.querySelector('.card:not([hidden]) .card-media') || $('reset-filters');
+      window.setTimeout(() => firstVisible && firstVisible.focus({ preventScroll: true }), reduceMotion ? 0 : 450);
+    }
+  });
+
+  /* ----- Keyboard ----- */
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      if (modal.classList.contains('is-open')) { closeQuickView(); return; }
+      if (drawer.classList.contains('is-open')) { closeCart(); return; }
+      if (!searchPanel.hidden) { closeSearch(); return; }
+      if (nav.classList.contains('is-open')) { closeNav(); menuBtn.focus(); return; }
+    }
+    if (e.key === 'Tab' && activeLayer) trapTab(e, activeLayer);
+  });
+
+  /* ----- Newsletter ----- */
+  const form = $('nl-form'), email = $('nl-email'), err = $('nl-error'), row = $('nl-row');
+  const validEmail = v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+  function setError(msg) {
+    err.textContent = msg;
+    err.hidden = !msg;
+    row.classList.toggle('is-invalid', !!msg);
+    if (msg) { email.setAttribute('aria-invalid', 'true'); email.setAttribute('aria-describedby', 'nl-error nl-fine'); }
+    else { email.removeAttribute('aria-invalid'); email.setAttribute('aria-describedby', 'nl-fine'); }
+  }
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const v = email.value.trim();
+    if (!v) { setError('Please enter your email address.'); email.focus(); return; }
+    if (!validEmail(v)) { setError('That email doesn’t look quite right — check for typos.'); email.focus(); return; }
+    setError('');
+    $('nl-success-email').textContent = v;
+    form.hidden = true;
+    const ok = $('nl-success');
+    ok.hidden = false;
+    ok.focus();
+  });
+  email.addEventListener('input', () => { if (email.getAttribute('aria-invalid') === 'true' && validEmail(email.value.trim())) setError(''); });
+
+  /* ----- Init ----- */
+  $('year').textContent = new Date().getFullYear();
+  $('cart-btn').setAttribute('aria-expanded', 'false');
+  applyFilter(false);
+  renderCart();
+})();
+</script>
+</body>
+</html>
