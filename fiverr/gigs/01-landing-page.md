@@ -50,6 +50,24 @@ landing page, landing page design, sales page, responsive website, lead generati
 > Startpreise sind bewusst niedrig, damit du die ersten Bewertungen bekommst.
 > Nach 5–10 guten Bewertungen erhöhen auf ca. $149 / $299 / $549.
 
+### Fiverr-Pakettabelle (Häkchen und Auswahlfelder)
+| Feld | Basic | Standard | Premium |
+|---|---|---|---|
+| Number of pages | 1 | 1 | 1 |
+| Revisions | 1 | 3 | 5 |
+| Content upload | ✔ | ✔ | ✔ |
+| Plugins/extensions installation | 0 | 0 | 0 |
+| E-commerce functionality | – | – | – |
+| Number of products | 0 | 0 | 0 |
+| Payment Integration | – | – | – |
+| Opt-in form | – | ✔ | ✔ |
+| Autoresponder integration | – | – | ✔ |
+| Speed optimization | – | ✔ | ✔ |
+| Hosting setup | ✔ | ✔ | ✔ |
+| Social media icons | ✔ | ✔ | ✔ |
+
+„Functional website“ ist von Fiverr schon vorausgewählt.
+
 ### Beschreibung (max. 1.200 Zeichen)
 ```
 Need a landing page that turns visitors into customers? I design and build fast, modern, mobile-first landing pages, ready to launch in days, not weeks.

@@ -53,6 +53,24 @@ shopify store, shopify website, shopify design, ecommerce store, online store
 
 > Nach 5–10 guten Bewertungen erhöhen auf ca. $199 / $449 / $899.
 
+### Fiverr-Pakettabelle (Häkchen und Auswahlfelder)
+| Feld | Basic | Standard | Premium |
+|---|---|---|---|
+| Number of pages | 1 | 5 | 8 |
+| Revisions | 2 | 3 | 5 |
+| Content upload | ✔ | ✔ | ✔ |
+| Plugins/extensions installation | 0 | 2 | 5 |
+| E-commerce functionality | ✔ | ✔ | ✔ |
+| Number of products | 5 | 20 | 50 |
+| Payment Integration | – | ✔ | ✔ |
+| Opt-in form | – | ✔ | ✔ |
+| Autoresponder integration | – | – | ✔ |
+| Speed optimization | – | ✔ | ✔ |
+| Hosting setup (= Domain verbinden) | – | ✔ | ✔ |
+| Social media icons | ✔ | ✔ | ✔ |
+
+„Functional website“ ist von Fiverr schon vorausgewählt.
+
 ### Beschreibung (max. 1.200 Zeichen)
 ```
 Want a Shopify store that looks professional and is ready to take orders? I set up and design Shopify stores that build trust and make buying easy, on desktop and mobile.

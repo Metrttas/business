@@ -47,6 +47,24 @@ business website, small business, website design, responsive website, local busi
 
 > Nach 5–10 guten Bewertungen erhöhen auf ca. $299 / $599 / $999.
 
+### Fiverr-Pakettabelle (Häkchen und Auswahlfelder)
+| Feld | Basic | Standard | Premium |
+|---|---|---|---|
+| Number of pages | 3 | 6 | 10 |
+| Revisions | 2 | 3 | 5 |
+| Content upload | ✔ | ✔ | ✔ |
+| Plugins/extensions installation | 0 | 0 | 0 |
+| E-commerce functionality | – | – | – |
+| Number of products | 0 | 0 | 0 |
+| Payment Integration | – | – | – |
+| Opt-in form | ✔ | ✔ | ✔ |
+| Autoresponder integration | – | – | ✔ |
+| Speed optimization | – | ✔ | ✔ |
+| Hosting setup | ✔ | ✔ | ✔ |
+| Social media icons | ✔ | ✔ | ✔ |
+
+„Functional website“ ist von Fiverr schon vorausgewählt.
+
 ### Beschreibung (max. 1.200 Zeichen)
 ```
 Your website is often the first thing customers see. I build modern, fast and mobile-friendly websites that make small businesses look professional and bring in more calls and bookings.
