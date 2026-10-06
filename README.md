@@ -20,6 +20,8 @@ fiverr/
     04-ai-chatbot.md         ← Gig 4: KI-Chatbot          ($99–449)
     05-automation.md         ← Gig 5: Automatisierungen   ($59–349)
   gig-bilder/                ← fertige Galerie-Bilder (1280×769) zum Hochladen
+  portfolio-projekte.md      ← Texte für Fiverrs Portfolio-Formular (5 Projekte)
+  portfolio-bilder/          ← Bilder dafür (1024×768, 3 pro Projekt)
 portfolio/
   index.html                 ← Portfolio-Übersicht
   demos/                     ← 5 Demo-Projekte (fiktive Firmen, klar als Demo markiert)
@@ -88,7 +90,11 @@ Zahl Gigs haben, 5 passen aber.
 **Galerie:** Die Bilder aus `fiverr/gig-bilder/` hochladen. Zu jedem Gig gehören 2 Bilder
 (z. B. `01-landing-page-1.png` als Titelbild und `01-landing-page-2.png`).
 
-### Schritt 4: Portfolio online stellen (optional, aber hilfreich)
+### Schritt 4: Fiverr-Portfolio ausfüllen
+Im Profil unter „Portfolio“ → „Add a new project“ legst du 5 Projekte an. Alle Felder und Texte stehen
+in [`fiverr/portfolio-projekte.md`](fiverr/portfolio-projekte.md), die Bilder in `fiverr/portfolio-bilder/`.
+
+### Schritt 5: Portfolio als Website online stellen (optional)
 Damit kannst du Kunden die Demos live zeigen, vor allem den Chatbot zum Ausprobieren.
 1. **Ordner auf deinen Computer holen.** Am einfachsten lässt du dir von mir die fertige
    `portfolio.zip` schicken. Alternativ auf GitHub: Branch auswählen → grüner Button **„Code“** →
@@ -105,9 +111,7 @@ Damit kannst du Kunden die Demos live zeigen, vor allem den Chatbot zum Ausprobi
 > Build command leer lassen, Publish directory `portfolio` eintragen. Dann aktualisiert sich die Seite
 > automatisch, sobald ich etwas ändere.
 
-Auf Fiverr selbst nutzt du die **Portfolio-Funktion** im Profil (Bilder + Beschreibung).
-
-### Schritt 5: Täglich (10–20 Minuten)
+### Schritt 6: Täglich (10–20 Minuten)
 - In der App online sein und Nachrichten **innerhalb von 1–2 Stunden** beantworten.
 - Laufende Aufträge vorantreiben (siehe unten).
 - Nach den ersten 5–10 Bewertungen: **Preise erhöhen** (Zielpreise stehen in jeder Gig-Datei).
