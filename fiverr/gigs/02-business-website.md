@@ -3,7 +3,7 @@
 > **Für dich (Deutsch):** Websites für kleine Firmen wie Zahnärzte, Handwerker, Restaurants oder Coaches.
 > Auch hier baue ich fast alles. Die Aufträge sind größer als beim Landing-Page-Gig.
 
-**Kategorie:** Programming & Tech → Website Development (Typ: Business Website)
+**Kategorie:** `Programming & Tech` → `Website Development`. Wenn danach ein „Service Type“ abgefragt wird: Business Website.
 **Galerie-Bilder:** `fiverr/gig-bilder/02-business-website-*.png`
 **Demo:** `portfolio/demos/harborview-dental/`
 

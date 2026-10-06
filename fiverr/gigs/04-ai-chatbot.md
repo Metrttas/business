@@ -6,7 +6,8 @@
 > **Basic** ist ein FAQ-Bot ohne KI, also ohne laufende Kosten für den Kunden. So einer läuft in
 > der Demo `portfolio/demos/ironleaf-fitness-chatbot/`.
 
-**Kategorie:** Programming & Tech → AI Development / Chatbot Development
+**Kategorie:** `Programming & Tech` → die Unterkategorie mit **„Chatbot“** im Namen (z. B. „Chatbot Development“ oder „AI Development“ → AI Chatbot).
+> Tipp: Erst den Titel eintragen, dann nimmt man am besten die passende Kategorie aus den Vorschlägen darunter.
 **Galerie-Bilder:** `fiverr/gig-bilder/04-ai-chatbot-*.png`
 **Demo:** `portfolio/demos/ironleaf-fitness-chatbot/`
 

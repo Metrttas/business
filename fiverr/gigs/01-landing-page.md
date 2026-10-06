@@ -3,7 +3,8 @@
 > **Für dich (Deutsch):** Das ist dein wichtigstes Gig, hier kann ich fast alles allein bauen.
 > Alles unterhalb von „Zum Kopieren“ ist auf Englisch und kommt 1:1 in Fiverr.
 
-**Kategorie:** Programming & Tech → Website Development (Typ: Landing Page)
+**Kategorie:** `Programming & Tech` → `Website Development`. Wenn danach ein „Service Type“ abgefragt wird: Landing Page.
+> Nicht „Graphics & Design → Landing Page Design“ nehmen: Dort erwarten Käufer nur eine Design-Datei, keine fertige Seite.
 **Galerie-Bilder:** `fiverr/gig-bilder/01-landing-page-*.png`
 **Demo:** `portfolio/demos/lumora-saas-landing/`
 

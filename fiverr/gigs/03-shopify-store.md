@@ -7,7 +7,8 @@
 > Zugriff auf Kunden-Shops anfragen, ohne dass sie dir ihr Passwort geben.
 > **Tipp:** Starte dieses Gig erst, wenn die Website-Gigs laufen.
 
-**Kategorie:** Programming & Tech → Website Development (Plattform: Shopify)
+**Kategorie:** `Programming & Tech` → `Website Development`. Wenn nach einer Plattform gefragt wird: Shopify.
+> Schlägt Fiverr bei diesem Titel eine eigene E-Commerce-/Shopify-Unterkategorie vor, nimm die.
 **Galerie-Bilder:** `fiverr/gig-bilder/03-shopify-store-*.png`
 **Demo:** `portfolio/demos/saltgrain-bakery-shop/` (Design-Konzept, kein echter Shopify-Shop)
 

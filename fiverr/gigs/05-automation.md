@@ -6,7 +6,8 @@
 > Bei **Make/Zapier** schreibe ich dir genaue Klick-Anleitungen. Du baust es dann im Account des Kunden nach.
 > Meistens lädt der Kunde dich in sein Make-/Zapier-Team ein, oder er gibt dir Zugang zu einem eigenen Arbeitsbereich.
 
-**Kategorie:** Programming & Tech → (Workflow-) Automation / Zapier, Make, n8n
+**Kategorie:** `Programming & Tech` → die Unterkategorie mit **„Automation“** bzw. **„Integrations“** im Namen.
+> Tipp: Erst den Titel eintragen, dann nimmt man am besten die passende Kategorie aus den Vorschlägen darunter.
 **Galerie-Bilder:** `fiverr/gig-bilder/05-automation-*.png`
 **Demo:** `portfolio/demos/lead-automation-workflow/`
 
